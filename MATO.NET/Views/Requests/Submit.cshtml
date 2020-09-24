@@ -1,0 +1,1464 @@
+﻿@model MATO.NET.ViewModels.SubmitRequestViewModel
+@{
+    ViewBag.Title = "Submit";
+}
+
+<script src="~/Scripts/airportScript.js"></script>
+
+<style>
+    .ui-autocomplete {
+        z-index: 1100 !important;
+    }
+</style>
+
+<div class="row m-b-md ibox-content ibox-heading" id="clickWebinarButton" style="cursor: pointer;">
+    <div class="col-md-12">
+        <img src="~/Content/Images/clickmeeting.png" alt="Click Webinar Meeting" width="200" style="display: block; margin: 10px auto;" />
+        <h2 class="text-center">Book a Click Webinar Request</h2>
+    </div>
+</div>
+
+<div class="row m-b-md ibox-content ibox-heading hidden" id="authorRequestButton" style="cursor: pointer;">
+    <div class="col-md-12">
+        <h2 class="text-center">Revert to standard author request form.</h2>
+    </div>
+</div>
+
+<div id="authorRequestForm">
+    @using (Html.BeginForm("Submit", "Requests", FormMethod.Post, new { enctype = "multipart/form-data", id = "newRequest" }))
+    {
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+        if (Model.CurrentUser.Region == 0)
+        {
+            <div class="alert alert-danger ">
+                You have no region set against your user profile. You will be unable to create requests until this is added.
+            </div>
+        }
+
+        if (Model.UserRegion != null)
+        {
+            if (Model.UserRegion.RegionalManagerId == null)
+            {
+                <div class="alert alert-danger mt10">
+                    You have no regional manager - requests will not work until this is fixed by the System Administrator.
+                </div>
+            }
+        }
+
+        <div id="authorForm">
+            <fieldset class="mt20">
+                <legend>Request details</legend>
+                <div class="my-custom-container">
+                    <div class="row">
+                        <div class="clearfix" style="margin-bottom:10px;"></div>
+
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.SelectedAuthorId)
+                            <br>
+                            @Html.DropDownListFor(m => m.SelectedAuthorId, new SelectList(Model.Authors, "Id", "FullName"), "", new { @class = "form-control", @onchange = "updateDetails(this.value)", id = "authorSelect" })
+                            <br>
+                            @Html.LabelFor(m => m.TitlePromotedId)
+                            <br>
+                            @Html.DropDownListFor(m => m.TitlePromotedId, new SelectList(Model.PromotedTitle, "Id", "Name"), "", new { @class = "form-control", @onchange = "showForecasts(this.value)", id = "titleSelected" })
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label>Author's Details</label>
+                            <br>
+                            @if (!User.IsInRole("SuperAdmin"))
+                            {
+                                @Html.TextArea("Person's Details", null, new { @class = "form-control", @id = "personDetails", @rows = 5, @readonly = "readonly" })
+                            }
+                            else
+                            {
+                                @Html.TextArea("Person's Details", null, new { @class = "form-control", @id = "personDetails", @rows = 5 })
+                            }
+                        </div>
+                        <div class="clearfix" style="margin-bottom:10px;"></div>
+                    </div>
+                    <div class="row" id="forecasts" style="display: none">
+                        <div class="col-md-4">
+                            @Html.LabelFor(m => m.Forecast.Year1) (&pound;)
+                            <br>
+                            @Html.TextBoxFor(model => Model.Forecast.Year1, null, new { @class = "form-control", autocomplete = "off", id = "forecast1" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(m => m.Forecast.Year2) (&pound;)
+                            <br>
+                            @Html.TextBoxFor(model => Model.Forecast.Year2, null, new { @class = "form-control", autocomplete = "off", id = "forecast2" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(m => m.Forecast.Year3) (&pound;)
+                            <br>
+                            @Html.TextBoxFor(model => Model.Forecast.Year3, null, new { @class = "form-control", autocomplete = "off", id = "forecast3" })
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="mt20">
+                <legend>Travel Details</legend>
+                <div class="my-custom-container">
+                    <div class="row">
+                        <div class="clearfix" style="margin-bottom:10px;"></div>
+
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.Outbound)
+                            <br>
+                            @Html.TextBoxFor(model => Model.Outbound, null, new { @class = "form-control departFrom", id = "outboundAirport" })
+                        </div>
+
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.OutboundDate)
+                            <br>
+                            @Html.TextBoxFor(model => Model.OutboundDate, null, new { @class = "form-control datepicker", autocomplete = "off", id = "outboundDate" })
+                        </div>
+
+                        <div class="clearfix" style="margin-bottom:10px;"></div>
+
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.Inbound)
+                            <br>
+                            @Html.TextBoxFor(model => Model.Inbound, null, new { @class = "form-control arriveAt", id = "inboundAirport" })
+                        </div>
+
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.InboundDate)
+                            <br>
+                            @Html.TextBoxFor(model => Model.InboundDate, null, new { @class = "form-control datepicker", autocomplete = "off", id = "inboundDate" })
+                        </div>
+
+                    </div>
+                </div>
+            </fieldset>
+
+
+            <fieldset class="mt20">
+                <legend>Events</legend>
+                <div class="my-custom-container" id="eventLists">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="hidden table table-striped" id="BookedEvents">
+                                <thead>
+                                    <tr>
+                                        <td> Event Name </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody id="AppendEvents"></tbody>
+                            </table>
+                        </div>
+
+                        <div class="col-md-12" id="NewEventTrigger">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventOne">
+                                Add Event
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="mt20">
+                <legend>Notes</legend>
+                <div class="my-custom-container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(m => m.AuthorNotesBySalesRep)
+                            <br>
+                            @Html.TextAreaFor(m => m.AuthorNotesBySalesRep, new { @class = "form-control", @id = "authorVisibleNotes" })
+                            <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(m => m.NonAuthorNotesBySalesRep)
+                            <br>
+                            @Html.TextAreaFor(m => m.NonAuthorNotesBySalesRep, new { @class = "form-control", @id = "authorInvisibleNotes" })
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            @if (Model.CurrentUser.Region != 0 && Model.UserRegion.RegionalManagerId != null)
+            {
+                <button type="submit" class="btn btn-danger right">Submit</button>
+            }
+        </div>
+
+        <div class="modal inmodal" id="eventOne" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                @Html.LabelFor(m => m.EventOne.EventName)
+                                @Html.TextBoxFor(model => Model.EventOne.EventName, null, new { @class = "form-control", @id = "EventOneName" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.EventOne.EventCity)
+                                <br />
+                                @Html.TextBoxFor(model => Model.EventOne.EventCity, null, new { @class = "form-control", @id = "EventOneCity" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.EventOne.SelectedEventId)
+                                <br>
+                                @Html.DropDownListFor(m => m.EventOne.SelectedEventId, new SelectList(Model.EventOne.EventType, "Id", "Name"), "", new { @class = "form-control", @id = "EventOneEventType" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt10">
+                                @Html.LabelFor(m => m.EventOne.EventDate)
+                                <br />
+                                @Html.TextBoxFor(model => Model.EventOne.EventDate, null, new { @class = "form-control datepicker", autocomplete = "off", @id = "EventOneDate" })
+                            </div>
+                            <div class="col-md-6 mt10">
+                                @Html.LabelFor(m => m.EventOne.SectorTargetedId)
+                                <br />
+                                @Html.DropDownListFor(m => m.EventOne.SectorTargetedId, new SelectList(Model.EventOne.TargetSector, "Id", "Name"), "", new { @class = "form-control", @id = "EventOneTargetSector" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt10">
+                                @Html.LabelFor(m => m.EventOne.ExpectedTurnout)
+                                <br />
+                                @Html.TextBoxFor(model => Model.EventOne.ExpectedTurnout, null, new { @class = "form-control", autocomplete = "off", @id = "EventOneExpectedTurnout", onkeypress = "return isNumberKey(event)" })
+                            </div>
+                            <div class="col-md-6 mt10">
+                                @Html.LabelFor(m => m.EventOne.TalkTypeId)
+                                <br />
+                                @Html.DropDownListFor(m => m.EventOne.TalkTypeId, new SelectList(Model.EventOne.TalkType, "Id", "Name"), "", new { @class = "form-control", @id = "EventOneTalkType" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix" style="margin-bottom: 10px;"></div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="EventOneSave" data-dismiss="modal">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal inmodal" id="eventTwo" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <i class="fa fa-laptop modal-icon"></i>
+                                @Html.LabelFor(m => m.EventTwo.EventName)
+                                <br />
+                                @Html.TextBoxFor(model => Model.EventTwo.EventName, null, new { @class = "form-control", @id = "EventTwoName" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.EventTwo.EventCity)
+                                <br />
+                                @Html.TextBoxFor(model => Model.EventTwo.EventCity, null, new { @class = "form-control", @id = "EventTwoCity" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.EventTwo.SelectedEventId)
+                                <br>
+                                @Html.DropDownListFor(m => m.EventTwo.SelectedEventId, new SelectList(Model.EventTwo.EventType, "Id", "Name"), "", new { @class = "form-control", @id = "EventTwoEventType" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt10">
+                                @Html.LabelFor(m => m.EventTwo.EventDate)
+                                <br />
+                                @Html.TextBoxFor(model => Model.EventTwo.EventDate, null, new { @class = "form-control datepicker", @id = "EventTwoDate", autocomplete = "off" })
+                            </div>
+                            <div class="col-md-6 mt10">
+                                @Html.LabelFor(m => m.EventTwo.SectorTargetedId)
+                                <br />
+                                @Html.DropDownListFor(m => m.EventTwo.SectorTargetedId, new SelectList(Model.EventTwo.TargetSector, "Id", "Name"), "", new { @class = "form-control", @id = "EventTwoTargetSector" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt10">
+                                @Html.LabelFor(m => m.EventTwo.ExpectedTurnout)
+                                <br />
+                                @Html.TextBoxFor(model => Model.EventTwo.ExpectedTurnout, null, new { @class = "form-control", autocomplete = "off", @id = "EventTwoExpectedTurnout", onkeypress = "return isNumberKey(event)" })
+                            </div>
+                            <div class="col-md-6 mt10">
+                                @Html.LabelFor(m => m.EventTwo.TalkTypeId)
+                                <br />
+                                @Html.DropDownListFor(m => m.EventTwo.TalkTypeId, new SelectList(Model.EventTwo.TalkType, "Id", "Name"), "", new { @class = "form-control", @id = "EventTwoTalkType" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix" style="margin-bottom: 10px;"></div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="EventTwoSave" data-dismiss="modal">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal inmodal" id="eventThree" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <i class="fa fa-laptop modal-icon"></i>
+                                @Html.LabelFor(m => m.EventThree.EventName)
+                                <br />
+                                @Html.TextBoxFor(model => Model.EventThree.EventName, null, new { @class = "form-control", @id = "EventThreeName" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.EventThree.EventCity)
+                                <br />
+                                @Html.TextBoxFor(model => Model.EventThree.EventCity, null, new { @class = "form-control", @id = "EventThreeCity" })
+                            </div>
+                            <div class="col-md-6">
+                                @Html.LabelFor(m => m.EventThree.SelectedEventId)
+                                <br>
+                                @Html.DropDownListFor(m => m.EventThree.SelectedEventId, new SelectList(Model.EventThree.EventType, "Id", "Name"), "", new { @class = "form-control", @id = "EventThreeEventType" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt10">
+                                @Html.LabelFor(m => m.EventThree.EventDate)
+                                <br />
+                                @Html.TextBoxFor(model => Model.EventThree.EventDate, null, new { @class = "form-control datepicker", autocomplete = "off", @id = "EventThreeDate" })
+                            </div>
+                            <div class="col-md-6 mt10">
+                                @Html.LabelFor(m => m.EventThree.SectorTargetedId)
+                                <br />
+                                @Html.DropDownListFor(m => m.EventThree.SectorTargetedId, new SelectList(Model.EventThree.TargetSector, "Id", "Name"), "", new { @class = "form-control", @id = "EventThreeTargetSector" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mt10">
+                                @Html.LabelFor(m => m.EventThree.ExpectedTurnout)
+                                <br />
+                                @Html.TextBoxFor(model => Model.EventThree.ExpectedTurnout, null, new { @class = "form-control", autocomplete = "off", @id = "EventThreeExpectedTurnout", onkeypress = "return isNumberKey(event)" })
+                            </div>
+                            <div class="col-md-6 mt10">
+                                @Html.LabelFor(m => m.EventThree.TalkTypeId)
+                                <br />
+                                @Html.DropDownListFor(m => m.EventThree.TalkTypeId, new SelectList(Model.EventThree.TalkType, "Id", "Name"), "", new { @class = "form-control", @id = "EventThreeTalkType" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix" style="margin-bottom: 10px;"></div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="EventThreeSave" data-dismiss="modal">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div id="webinarRequest" style="display: none;">
+    @using (Html.BeginForm("Webinar", "Requests", FormMethod.Post, new { enctype = "multipart/form-data", id = "newWebRequest" }))
+    {
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+        if (Model.CurrentUser.Region == 0)
+        {
+            <div class="alert alert-danger ">
+                You have no region set against your user profile. You will be unable to create requests until this is added.
+            </div>
+        }
+
+        if (Model.UserRegion != null)
+        {
+            if (Model.UserRegion.RegionalManagerId == null)
+            {
+                <div class="alert alert-danger mt10">
+                    You have no regional manager - requests will not work until this is fixed by the System Administrator.
+                </div>
+            }
+        }
+
+        <div id="authorForm">
+            <fieldset class="mt20">
+                <legend>Request details</legend>
+                <div class="my-custom-container">
+                    <div class="row">
+                        <div class="clearfix" style="margin-bottom:10px;"></div>
+
+                        <div class="col-md-6">
+                            @Html.LabelFor(m => m.SelectedAuthorId)
+                            <br>
+                            @Html.DropDownListFor(m => m.SelectedAuthorId, new SelectList(Model.Authors, "Id", "FullName"), "", new { @class = "form-control", @onchange = "updateDetailsWebinar(this.value)", id = "authorSelectWebinar" })
+                            <br>
+                            @Html.LabelFor(m => m.TitlePromotedId)
+                            <br>
+                            @Html.DropDownListFor(m => m.TitlePromotedId, new SelectList(Model.PromotedTitle, "Id", "Name"), "", new { @class = "form-control", @onchange = "showForecastsWebinar(this.value)", id = "titleSelectedWebinar" })
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label>Author's Details</label>
+                            <br>
+                            @if (!User.IsInRole("SuperAdmin"))
+                            {
+                                @Html.TextArea("Person's Details", null, new { @class = "form-control", @id = "personDetailsWebinar", @rows = 5, @readonly = "readonly" })
+                            }
+                            else
+                            {
+                                @Html.TextArea("Person's Details", null, new { @class = "form-control", @id = "personDetailsWebinar", @rows = 5 })
+                            }
+
+                            @*@Html.TextArea("Person's Details", null, new { @class = "form-control", @id = "personDetailsWebinar", @rows = 5 })*@
+                        </div>
+                        <div class="clearfix" style="margin-bottom:10px;"></div>
+                    </div>
+                    <div class="row" id="forecastsWebinar" style="display: none">
+                        <div class="col-md-4">
+                            @Html.LabelFor(m => m.Forecast.Year1) (&pound;)
+                            <br>
+                            @Html.TextBoxFor(model => Model.Forecast.Year1, null, new { @class = "form-control", autocomplete = "off", id = "forecast1Webinar" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(m => m.Forecast.Year2) (&pound;)
+                            <br>
+                            @Html.TextBoxFor(model => Model.Forecast.Year2, null, new { @class = "form-control", autocomplete = "off", id = "forecast2Webinar" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.LabelFor(m => m.Forecast.Year3) (&pound;)
+                            <br>
+                            @Html.TextBoxFor(model => Model.Forecast.Year3, null, new { @class = "form-control", autocomplete = "off", id = "forecast3Webinar" })
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="mt20">
+                <legend>Webinar Details</legend>
+                <div class="my-custom-container" id="eventLists">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(m => m.EventOne.EventName)
+                            <br />
+                            @Html.TextBoxFor(model => Model.EventOne.EventName, null, new { @class = "form-control", @id = "EventOneNameWebinar" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(m => m.EventOne.SelectedEventId)
+                            <br>
+                            @Html.DropDownListFor(m => m.EventOne.SelectedEventId, new SelectList(Model.EventOne.EventType, "Id", "Name"), "", new { @class = "form-control", @id = "EventOneEventTypeWebinar" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6 mt10">
+                            @Html.LabelFor(m => m.EventOne.EventDate)
+                            <br />
+                            @Html.TextBoxFor(model => Model.EventOne.EventDate, null, new { @class = "form-control datepicker", autocomplete = "off", @id = "EventOneDateWebinar" })
+                        </div>
+                        <div class="col-md-6 mt10">
+                            @Html.LabelFor(m => m.EventOne.SectorTargetedId)
+                            <br />
+                            @Html.DropDownListFor(m => m.EventOne.SectorTargetedId, new SelectList(Model.EventOne.TargetSector, "Id", "Name"), "", new { @class = "form-control", @id = "EventOneTargetSectorWebinar" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6 mt10">
+                            @Html.LabelFor(m => m.EventOne.ExpectedTurnout)
+                            <br />
+                            @Html.TextBoxFor(model => Model.EventOne.ExpectedTurnout, null, new { @class = "form-control", autocomplete = "off", @id = "EventOneExpectedTurnoutWebinar", onkeypress = "return isNumberKey(event)" })
+                        </div>
+                        <div class="col-md-6 mt10">
+                            @Html.LabelFor(m => m.EventOne.TalkTypeId)
+                            <br />
+                            @Html.DropDownListFor(m => m.EventOne.TalkTypeId, new SelectList(Model.EventOne.TalkType, "Id", "Name"), "", new { @class = "form-control", @id = "EventOneTalkTypeWebinar" })
+                        </div>
+                    </div>
+
+                </div>
+            </fieldset>
+
+            <fieldset class="mt20">
+                <legend>Notes</legend>
+                <div class="my-custom-container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(m => m.AuthorNotesBySalesRep)
+                            <br>
+                            @Html.TextAreaFor(m => m.AuthorNotesBySalesRep, new { @class = "form-control", @id = "authorVisibleNotesWebinar" })
+                            <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(m => m.NonAuthorNotesBySalesRep)
+                            <br>
+                            @Html.TextAreaFor(m => m.NonAuthorNotesBySalesRep, new { @class = "form-control", @id = "authorInvisibleNotesWebinar" })
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            @if (Model.CurrentUser.Region != 0 && Model.UserRegion.RegionalManagerId != null)
+            {
+                <button type="submit" class="btn btn-danger right">Submit</button>
+            }
+        </div>
+
+    }
+</div>
+
+@section Scripts {
+
+    <script>
+        $('#newRequest').submit(function () {
+            if ($.trim($("#authorSelect").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'No Author selected',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            //} else if ($.trim($("#authorSelectWebinar").val()) === "") {
+            //    $.toast({
+            //        heading: 'Error',
+            //        text: 'No Author selected',
+            //        showHideTransition: 'fade',
+            //        icon: 'error'
+            //    });
+            //    return false;
+            } else if ($.trim($("#titleSelected").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'No title to be promoted has been chosen',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#forecast1").val()) === "" ||
+                $.trim($("#forecast2").val()) === "" ||
+                $.trim($("#forecast3").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Please ensure all forecasts are populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($("#forecast1").val().indexOf(",") >= 0 || $("#forecast1").val().indexOf(".") >= 0) {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Please ensure all forecasts are whole numbers only and exclude comma\'s and decimals. ',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($("#forecast2").val().indexOf(",") >= 0 || $("#forecast2").val().indexOf(".") >= 0) {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Please ensure all forecasts are whole numbers only and exclude comma\'s and decimals. ',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($("#forecast3").val().indexOf(",") >= 0 || $("#forecast3").val().indexOf(".") >= 0) {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Please ensure all forecasts are whole numbers only and exclude comma\'s and decimals. ',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.isNumeric($("#forecast1").val()) == false || $.isNumeric($("#forecast2").val()) == false || $.isNumeric($("#forecast3").val()) == false) {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Please ensure all forecasts are whole numbers only and exclude comma\'s and decimals. ',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#inboundAirport").val()) === "" || $.trim($("#outboundAirport").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Inbound and Outbound airports must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#inboundDate").val()) === "" || $.trim($("#outboundDate").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Date of departures must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            //} else if ($.trim($("#inboundDate").val()) < $.trim($("#outboundDate").val())) {
+            //    $.toast({
+            //        heading: 'Error',
+            //        text: 'Outbound date must be before inbound date',
+            //        showHideTransition: 'fade',
+            //        icon: 'error'
+            //    });
+            //    return false;
+            } else if ($.trim($("#EventOneName").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event One must have a name',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+             //} else if ($.trim($("#EventOneNameWebinar").val()) === "") {
+             //   $.toast({
+             //       heading: 'Error',
+             //       text: 'Event One must have a name',
+             //       showHideTransition: 'fade',
+             //       icon: 'error'
+             //   });
+             //   return false;
+            } else if ($.trim($("#EventOneCity").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event One\'s city must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#EventOneEventType").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event One must have an event type',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#EventOneDate").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event One\'s date must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            //} else if ($.trim($("#EventOneDateWebinar").val()) === "") {
+            //    $.toast({
+            //        heading: 'Error',
+            //        text: 'Event One\'s date must be populated',
+            //        showHideTransition: 'fade',
+            //        icon: 'error'
+            //    });
+            //    return false;
+            } else if ($.trim($("#EventOneTargetSector").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event One\'s Target Sector must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#EventOneExpectedTurnout").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event One\'s Expected Turnout must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#EventOneTalkType").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event One\'s Talk Type must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#EventTwoName").val()) !== "") {
+                if ($.trim($("#EventTwoCity").val()) === "") {
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Event Two\'s city must be populated',
+                        showHideTransition: 'fade',
+                        icon: 'error'
+                    });
+                    return false;
+                } else if ($.trim($("#EventTwoEventType").val()) === "") {
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Event Two must have an event type',
+                        showHideTransition: 'fade',
+                        icon: 'error'
+                    });
+                    return false;
+                } else if ($.trim($("#EventTwoDate").val()) === "") {
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Event Two\'s date must be populated',
+                        showHideTransition: 'fade',
+                        icon: 'error'
+                    });
+                    return false;
+                } else if ($.trim($("#EventTwoTargetSector").val()) === "") {
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Event Two\'s Target Sector must be populated',
+                        showHideTransition: 'fade',
+                        icon: 'error'
+                    });
+                    return false;
+                } else if ($.trim($("#EventTwoExpectedTurnout").val()) === "") {
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Event Two\'s Expected Turnout must be populated',
+                        showHideTransition: 'fade',
+                        icon: 'error'
+                    });
+                    return false;
+                } else if ($.trim($("#EventTwoTalkType").val()) === "") {
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Event Two\'s Talk Type must be populated',
+                        showHideTransition: 'fade',
+                        icon: 'error'
+                    });
+                    return false;
+                }
+                if ($.trim($("#EventThreeName").val()) !== "") {
+                    if ($.trim($("#EventThreeCity").val()) === "") {
+                        $.toast({
+                            heading: 'Error',
+                            text: 'Event Three\'s city must be populated',
+                            showHideTransition: 'fade',
+                            icon: 'error'
+                        });
+                        return false;
+                    } else if ($.trim($("#EventThreeEventType").val()) === "") {
+                        $.toast({
+                            heading: 'Error',
+                            text: 'Event Three must have an event type',
+                            showHideTransition: 'fade',
+                            icon: 'error'
+                        });
+                        return false;
+                    } else if ($.trim($("#EventThreeDate").val()) === "") {
+                        $.toast({
+                            heading: 'Error',
+                            text: 'Event Three\'s date must be populated',
+                            showHideTransition: 'fade',
+                            icon: 'error'
+                        });
+                        return false;
+                    } else if ($.trim($("#EventThreeTargetSector").val()) === "") {
+                        $.toast({
+                            heading: 'Error',
+                            text: 'Event Three\'s Target Sector must be populated',
+                            showHideTransition: 'fade',
+                            icon: 'error'
+                        });
+                        return false;
+                    } else if ($.trim($("#EventThreeExpectedTurnout").val()) === "") {
+                        $.toast({
+                            heading: 'Error',
+                            text: 'Event Three\'s Expected Turnout must be populated',
+                            showHideTransition: 'fade',
+                            icon: 'error'
+                        });
+                        return false;
+                    } else if ($.trim($("#EventThreeTalkType").val()) === "") {
+                        $.toast({
+                            heading: 'Error',
+                            text: 'Event Three\'s Talk Type must be populated',
+                            showHideTransition: 'fade',
+                            icon: 'error'
+                        });
+                        return false;
+                    }
+                }
+            }
+            return true;
+        });
+    </script>
+
+    <script>
+        $('#newWebRequest').submit(function () {
+            //if ($.trim($("#authorSelect").val()) === "") {
+            //    $.toast({
+            //        heading: 'Error',
+            //        text: 'No Author selected',
+            //        showHideTransition: 'fade',
+            //        icon: 'error'
+            //    });
+            //    return false;
+            if ($.trim($("#authorSelectWebinar").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'No Author selected',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            //} else if ($.trim($("#titleSelected").val()) === "") {
+            //    $.toast({
+            //        heading: 'Error',
+            //        text: 'No title to be promoted has been chosen',
+            //        showHideTransition: 'fade',
+            //        icon: 'error'
+            //    });
+            //    return false;
+            } else if ($.trim($("#titleSelectedWebinar").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'No title to be promoted has been chosen',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#forecast1Webinar").val()) === "" ||
+                $.trim($("#forecast2Webinar").val()) === "" ||
+                $.trim($("#forecast3Webinar").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Please ensure all forecasts are populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($("#forecast1Webinar").val().indexOf(",") >= 0 || $("#forecast1Webinar").val().indexOf(".") >= 0) {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Please ensure all forecasts are whole numbers only and exclude comma\'s and decimals. ',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($("#forecast2Webinar").val().indexOf(",") >= 0 || $("#forecast2Webinar").val().indexOf(".") >= 0) {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Please ensure all forecasts are whole numbers only and exclude comma\'s and decimals. ',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($("#forecast3Webinar").val().indexOf(",") >= 0 || $("#forecast3Webinar").val().indexOf(".") >= 0) {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Please ensure all forecasts are whole numbers only and exclude comma\'s and decimals. ',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.isNumeric($("#forecast1Webinar").val()) == false || $.isNumeric($("#forecast2Webinar").val()) == false || $.isNumeric($("#forecast3Webinar").val()) == false) {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Please ensure all forecasts are whole numbers only and exclude comma\'s and decimals. ',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#EventOneNameWebinar").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event One must have a name',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            //} else if ($.trim($("#EventOneCityWebinar").val()) === "") {
+            //    $.toast({
+            //        heading: 'Error',
+            //        text: 'Event One\'s city must be populated',
+            //        showHideTransition: 'fade',
+            //        icon: 'error'
+            //    });
+            //    return false;
+            } else if ($.trim($("#EventOneEventTypeWebinar").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event One must have an event type',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#EventOneDateWebinar").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event One\'s date must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#EventOneTargetSectorWebinar").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event One\'s Target Sector must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#EventOneExpectedTurnoutWebinar").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event One\'s Expected Turnout must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#EventOneTalkTypeWebinar").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event One\'s Talk Type must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            //} else if ($.trim($("#EventTwoName").val()) !== "") {
+            //    if ($.trim($("#EventTwoCity").val()) === "") {
+            //        $.toast({
+            //            heading: 'Error',
+            //            text: 'Event Two\'s city must be populated',
+            //            showHideTransition: 'fade',
+            //            icon: 'error'
+            //        });
+            //        return false;
+            //    } else if ($.trim($("#EventTwoEventType").val()) === "") {
+            //        $.toast({
+            //            heading: 'Error',
+            //            text: 'Event Two must have an event type',
+            //            showHideTransition: 'fade',
+            //            icon: 'error'
+            //        });
+            //        return false;
+            //    } else if ($.trim($("#EventTwoDate").val()) === "") {
+            //        $.toast({
+            //            heading: 'Error',
+            //            text: 'Event Two\'s date must be populated',
+            //            showHideTransition: 'fade',
+            //            icon: 'error'
+            //        });
+            //        return false;
+            //    } else if ($.trim($("#EventTwoTargetSector").val()) === "") {
+            //        $.toast({
+            //            heading: 'Error',
+            //            text: 'Event Two\'s Target Sector must be populated',
+            //            showHideTransition: 'fade',
+            //            icon: 'error'
+            //        });
+            //        return false;
+            //    } else if ($.trim($("#EventTwoExpectedTurnout").val()) === "") {
+            //        $.toast({
+            //            heading: 'Error',
+            //            text: 'Event Two\'s Expected Turnout must be populated',
+            //            showHideTransition: 'fade',
+            //            icon: 'error'
+            //        });
+            //        return false;
+            //    } else if ($.trim($("#EventTwoTalkType").val()) === "") {
+            //        $.toast({
+            //            heading: 'Error',
+            //            text: 'Event Two\'s Talk Type must be populated',
+            //            showHideTransition: 'fade',
+            //            icon: 'error'
+            //        });
+            //        return false;
+            //    }
+            //    if ($.trim($("#EventThreeName").val()) !== "") {
+            //        if ($.trim($("#EventThreeCity").val()) === "") {
+            //            $.toast({
+            //                heading: 'Error',
+            //                text: 'Event Three\'s city must be populated',
+            //                showHideTransition: 'fade',
+            //                icon: 'error'
+            //            });
+            //            return false;
+            //        } else if ($.trim($("#EventThreeEventType").val()) === "") {
+            //            $.toast({
+            //                heading: 'Error',
+            //                text: 'Event Three must have an event type',
+            //                showHideTransition: 'fade',
+            //                icon: 'error'
+            //            });
+            //            return false;
+            //        } else if ($.trim($("#EventThreeDate").val()) === "") {
+            //            $.toast({
+            //                heading: 'Error',
+            //                text: 'Event Three\'s date must be populated',
+            //                showHideTransition: 'fade',
+            //                icon: 'error'
+            //            });
+            //            return false;
+            //        } else if ($.trim($("#EventThreeTargetSector").val()) === "") {
+            //            $.toast({
+            //                heading: 'Error',
+            //                text: 'Event Three\'s Target Sector must be populated',
+            //                showHideTransition: 'fade',
+            //                icon: 'error'
+            //            });
+            //            return false;
+            //        } else if ($.trim($("#EventThreeExpectedTurnout").val()) === "") {
+            //            $.toast({
+            //                heading: 'Error',
+            //                text: 'Event Three\'s Expected Turnout must be populated',
+            //                showHideTransition: 'fade',
+            //                icon: 'error'
+            //            });
+            //            return false;
+            //        } else if ($.trim($("#EventThreeTalkType").val()) === "") {
+            //            $.toast({
+            //                heading: 'Error',
+            //                text: 'Event Three\'s Talk Type must be populated',
+            //                showHideTransition: 'fade',
+            //                icon: 'error'
+            //            });
+            //            return false;
+            //        }
+            //    }
+            }
+            return true;
+        });
+    </script>
+
+    <script>
+        $("#outboundDate").change(function () {
+            $("#EventOneDate").datepicker("destroy");
+            $("#EventTwoDate").datepicker("destroy");
+            $("#EventThreeDate").datepicker("destroy");
+            var outbound = $("#outboundDate").val();
+            var inbound = $("#inboundDate").val();
+            $("#inboundDate").datepicker("destroy");
+
+            $("#EventOneDate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-mm-yy',
+                defaultDate: outbound,
+                minDate: outbound,
+                maxDate: inbound
+            });
+
+            $("#EventTwoDate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-mm-yy',
+                defaultDate: outbound,
+                minDate: outbound,
+                maxDate: inbound
+            });
+
+            $("#EventThreeDate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-mm-yy',
+                defaultDate: outbound,
+                minDate: outbound,
+                maxDate: inbound
+            });
+
+            $("#inboundDate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-mm-yy',
+                defaultDate: outbound,
+                minDate: outbound
+            });
+        });
+
+        $("#inboundDate").change(function () {
+            $("#EventOneDate").datepicker("destroy");
+            $("#EventTwoDate").datepicker("destroy");
+            $("#EventThreeDate").datepicker("destroy");
+            var outbound = $("#outboundDate").val();
+            var inbound = $("#inboundDate").val();
+
+            $("#EventOneDate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-mm-yy',
+                defaultDate: outbound,
+                minDate: outbound,
+                maxDate: inbound
+            });
+
+            $("#EventTwoDate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-mm-yy',
+                defaultDate: outbound,
+                minDate: outbound,
+                maxDate: inbound
+            });
+
+            $("#EventThreeDate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-mm-yy',
+                defaultDate: outbound,
+                minDate: outbound,
+                maxDate: inbound
+            });
+        });
+    </script>
+    @*nikita*@
+    <script>
+        function updateDetails(author) {
+            $.ajax({
+                url: '/Requests/GetAuthorDetails',
+                type: 'POST',
+                dataType: "json",
+                data: JSON.stringify({
+                    Id: author
+                }),
+                contentType: 'application/json',
+                success: function (data) {
+                    var obj = $.parseJSON(data);
+                    console.log(obj);
+                    $("#titleSelected option").hide();
+                    $(obj.Titles).each(function () {
+                        $("#titleSelected option[value=" + this.Title.Id + "]").show();
+                    });
+
+                    $("#personDetails").val(obj.Author.FullName +
+                        " (" +
+                        obj.Author.Email +
+                        ") \n" +
+                        obj.Aud.AuthorType +
+                        " based Author \n" +
+                        obj.Aud.AddressLine1 +
+                        "\n" +
+                        obj.Aud.AddressLine2 +
+                        "\n" +
+                        obj.Aud.AddressLine3 +
+                        "\n" +
+                        obj.Aud.AuthorNotes);
+                },
+                error: function () {
+                    alert("error");
+                }
+
+            });
+
+            updateDatePickers(author);
+        }
+    </script>
+
+    <script>
+        function updateDetailsWebinar(author) {
+            $.ajax({
+                url: '/Requests/GetAuthorDetails',
+                type: 'POST',
+                dataType: "json",
+                data: JSON.stringify({
+                    Id: author
+                }),
+                contentType: 'application/json',
+                success: function (data) {
+                    var obj = $.parseJSON(data);
+                    console.log(obj);
+                    $("#titleSelectedWebinar option").hide();
+                    $(obj.Titles).each(function () {
+                        $("#titleSelectedWebinar option[value=" + this.Title.Id + "]").show();
+                    });
+
+                    $("#personDetailsWebinar").val(obj.Author.FullName +
+                        " (" +
+                        obj.Author.Email +
+                        ") \n" +
+                        obj.Aud.AuthorType +
+                        " based Author \n" +
+                        obj.Aud.AddressLine1 +
+                        "\n" +
+                        obj.Aud.AddressLine2 +
+                        "\n" +
+                        obj.Aud.AddressLine3 +
+                        "\n" +
+                        obj.Aud.AuthorNotes);
+                },
+                error: function () {
+                    alert("error");
+                }
+
+            });
+
+            updateDatePickersWebinar(author);
+        }
+    </script>
+
+    <script>
+        $(function () {
+            var eventOneSaved = false;
+            var eventTwoSaved = false;
+            var eventThreeSaved = false;
+
+            $("#EventOneSave").on('click', function () {
+                if (eventOneSaved === false) {
+                    var eventOneName = $("#EventOneName").val();
+                    $("#BookedEvents").removeClass("hidden");
+                    $("#AppendEvents").append("<tr><td width=\"90%\">" + eventOneName + "</td><td width=\"10%\"><button type=\"button\" class=\"btn btn-info pull-right\" data-toggle=\"modal\" data-target=\"#eventOne\">Edit</button> </td>");
+                    $("#NewEventTrigger")
+                        .html(
+                            "<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#eventTwo\">Add Event</button>");
+
+                    eventOneSaved = true;
+                }
+
+            });
+
+            $("#EventTwoSave").on('click', function () {
+                if (eventTwoSaved === false) {
+                    var eventTwoName = $("#EventTwoName").val();
+                    $("#AppendEvents").append("<tr><td>" + eventTwoName + "</td><td width=\"10%\"><button type=\"button\" class=\"btn btn-info pull-right\" data-toggle=\"modal\" data-target=\"#eventTwo\">Edit</button>");
+                    $("#NewEventTrigger")
+                        .html(
+                            "<button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" data-target=\"#eventThree\">Add Event</button>");
+
+                    eventTwoSaved = true;
+                }
+            });
+
+            $("#EventThreeSave").on('click', function () {
+                if (eventThreeSaved === false) {
+                    var eventThreeName = $("#EventThreeName").val();
+                    $("#AppendEvents").append("<tr><td>" + eventThreeName + "</td><td width=\"10%\"><button type=\"button\" class=\"btn btn-info pull-right\" data-toggle=\"modal\" data-target=\"#eventThree\">Edit</button>");
+                    $("#NewEventTrigger")
+                        .html("");
+
+                    eventThreeSaved = true;
+                }
+            });
+        });
+    </script>
+
+    <script>
+
+        function showForecasts(title) {
+            $.ajax({
+                url: '/Requests/GetAuthorsForTitles',
+                type: 'POST',
+                dataType: "json",
+                data: JSON.stringify({
+                    Id: title
+                }),
+                contentType: 'application/json',
+                success: function (data) {
+                    var obj = $.parseJSON(data);
+                    console.log(obj);
+                    authorSelect
+
+                    $("#authorSelect option").hide();
+                    $(obj.authors).each(function () {
+                        $("#authorSelect option[value=" + this.Id + "]").show();
+                    });
+                }
+            });
+
+            $("#forecasts").show();
+        }
+    </script>
+
+    <script>
+
+        function showForecastsWebinar(title) {
+            $.ajax({
+                url: '/Requests/GetAuthorsForTitles',
+                type: 'POST',
+                dataType: "json",
+                data: JSON.stringify({
+                    Id: title
+                }),
+                contentType: 'application/json',
+                success: function (data) {
+                    var obj = $.parseJSON(data);
+                    console.log(obj);
+                    authorSelectWebinar
+
+                    $("#authorSelectWebinar option").hide();
+                    $(obj.authors).each(function () {
+                        $("#authorSelectWebinar option[value=" + this.Id + "]").show();
+                    });
+                }
+            });
+
+            $("#forecastsWebinar").show();
+        }
+    </script>
+
+    <script>
+        $(".breadCrumbLinks").append(" <li><a href=\"/Requests/Index\">Requests</a></li>");
+        $(".breadCrumbLinks").append(" <li>Submit</li>");
+    </script>
+
+    <script>
+        function updateDatePickers(author) {
+            var disabledDates = [];
+
+            $.ajax({
+                url: '/Requests/GetAuthorDetails',
+                type: 'POST',
+                dataType: "json",
+                data: JSON.stringify({
+                    Id: author
+                }),
+                contentType: 'application/json',
+                success: function (data) {
+                    var obj = $.parseJSON(data);
+                    var cal = $.parseJSON(obj.Calendar.Data);
+
+                    $(cal).each(function (index) {
+                        var startDate = this.start; // some start date
+                        var endDate = this.end;  // some end date
+
+                        for (var d = new Date(startDate); d <= new Date(endDate); d.setDate(d.getDate() + 1)) {
+                            disabledDates.push($.datepicker.formatDate('yy-mm-dd', d));
+                            console.log("Disabled date: " + d);
+                        }
+                    });
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+
+            var d = new Date();
+
+            $(".datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-mm-yy',
+                defaultDate: d,
+                minDate: d,
+                beforeShowDay: function (date) {
+                    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                    return [disabledDates.indexOf(string) == -1]
+                }
+            });
+        };
+    </script>
+
+    <script>
+        function updateDatePickersWebinar(author) {
+            var disabledDates = [];
+
+            $.ajax({
+                url: '/Requests/GetAuthorDetails',
+                type: 'POST',
+                dataType: "json",
+                data: JSON.stringify({
+                    Id: author
+                }),
+                contentType: 'application/json',
+                success: function (data) {
+                    var obj = $.parseJSON(data);
+                    var cal = $.parseJSON(obj.Calendar.Data);
+
+                    $(cal).each(function (index) {
+                        var startDate = this.start; // some start date
+                        var endDate = this.end;  // some end date
+
+                        for (var d = new Date(startDate); d <= new Date(endDate); d.setDate(d.getDate() + 1)) {
+                            disabledDates.push($.datepicker.formatDate('yy-mm-dd', d));
+                            console.log("Disabled date: " + d);
+                        }
+                    });
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+
+            var d = new Date();
+
+            $(".datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-mm-yy',
+                defaultDate: d,
+                minDate: d,
+                beforeShowDay: function (date) {
+                    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                    return [disabledDates.indexOf(string) == -1]
+                }
+            });
+        };
+    </script>
+
+    <script>
+        $(function () {
+            $(".arriveAt").autocomplete({
+                source: getAirports(),
+                select: function (event, ui) {
+                    var value = ui.item.value;
+                    var airport = data[value.split(" -")[0]];
+                }
+            });
+        });
+
+        $(function () {
+            $(".departFrom").autocomplete({
+                source: getAirports(),
+                select: function (event, ui) {
+                    var value = ui.item.value;
+                    var airport = data[value.split(" -")[0]];
+                }
+            });
+        });
+
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
+
+        $('#outboundAirport').bind('keyup blur', function () {
+            var node = $(this);
+            node.val(node.val().replace(/[^a-zA-Z]/g, ''));
+        }
+        );
+
+        $('#inboundAirport').bind('keyup blur', function () {
+            var node = $(this);
+            node.val(node.val().replace(/[^a-zA-Z]/g, ''));
+        }
+        );
+    </script>
+
+    <script>
+        $("#clickWebinarButton").on('click', function () {
+            $("#authorRequestForm").hide();
+            $("#webinarRequest").show();
+            $("#clickWebinarButton").hide();
+            $("#authorRequestButton").show();
+        });
+
+        $("#authorRequestButton").on('click', function () {
+            $("#authorRequestForm").show();
+            $("#webinarRequest").hide();
+            $("#clickWebinarButton").show();
+            $("#authorRequestButton").hide();
+        });
+    </script>
+}

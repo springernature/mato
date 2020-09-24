@@ -1,0 +1,290 @@
+﻿@model MATO.NET.ViewModels.v2Models.IndividualAuthorViewModel
+<div class="" style="margin: 0 0 40px 0;">
+    <a href="/Author/Index" type="button" class="btn btn-info" style="padding: 5px;">Return to Author List</a>
+</div>
+<div id="authorSpace" style="margin-top: 20px;">
+    <input class="hidden" type="hidden" id="authorId" value="" />
+    <div class="row">
+        <div class="col-md-6">
+            <div class="profile-image" id="authorImage">
+                @if (Model.AuthorDetail != null)
+                {
+                    if (Model.AuthorDetail.AuthorPicture != null)
+                    {
+                        <img src="@Model.AuthorDetail.AuthorPicture" alt="@Model.Author.FullName" />
+                    }
+                    else
+                    {
+                        <img src='http://www.nmhu.edu/wp-content/uploads/2018/08/female-headshot-silhouette-21.jpg' width="96" height="96" class="m-b-md" alt="profile" />
+                    }
+                }
+                else
+                {
+                    <img src='http://www.nmhu.edu/wp-content/uploads/2018/08/female-headshot-silhouette-21.jpg' width="96" height="96" class="m-b-md" alt="profile" />
+                }
+
+            </div>
+
+            <div class="profile-info" id="step1">
+                <div class="">
+                    <div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <h2 class="no-margins" id="authorName">@Model.Author.FullName</h2>
+                            </div>
+                            <div class="col-md-2">
+                                @if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("SuperAdmin")))
+                                {
+                                    <button class="btn btn-success btn-xs float-right" data-toggle="modal" data-target="#editAuthor">Edit</button>
+                                }
+                            </div>
+                        </div>
+
+                        @if (Model.AuthorDetail != null)
+                        {
+                            <h4 id="authorRoleType">@Model.AuthorDetail.AuthorType</h4>
+                            <small id="authorBio">@Model.AuthorDetail.AuthorNotes</small>
+                        }
+                        else
+                        {
+                            <small id="authorBio"><i>This author is yet to have a bio completed, please check back soon.</i></small>
+                        }
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="ibox" id="step2">
+                <div class="ibox-content">
+                    <h3></h3>
+                    <ul class="list-unstyled file-list" id="file-list">             
+                        @foreach (var f in Model.Files)
+                        {
+                            <li>
+                                <a href="@f.FileLocation">@f.FileName</a>
+                                    @if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("SuperAdmin")))
+                                    {
+                                        <span class="label label-danger float-right" style="cursor: pointer;" id="fileDelete_@f.Id">Delete</span>
+                                    }
+                            </li>
+                        }
+                    </ul>
+
+                    @if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("SuperAdmin")))
+                    {
+                        <hr />
+
+                        <button class="btn btn-success float-right" data-toggle="modal" data-target="#newFile">Add File</button>
+                    }
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-md-6" id="step3">
+            <div class="" id="calendar">
+            </div>
+            <div class="" id="calendarLoader">
+                <img src="~/Content/Images/loader.gif" style="display: block;width: 120px;margin: 60px auto;" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("SuperAdmin")))
+{
+
+    <div class="modal inmodal" id="newFile" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Upload a new file</h2>
+                </div>
+                <div class="modal-body">
+                    <form action="#" class="dropzone" id="dropzoneForm_@(Model.Author.Id)" style="text-align: center; vertical-align: middle; cursor: pointer;">
+                        <div class="fallback">
+                            <input name="file" type="file" multiple />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal" id="editAuthor" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/Author/Edit" method="post" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h2>@Model.Author.FullName</h2>
+                    </div>
+                    <div class="modal-body">
+
+                        <input type="hidden" name="Author.Id" value="@Model.Author.Id" />
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Author.FirstName)
+                            <br>
+                            @Html.TextBoxFor(model => Model.Author.FirstName, null, new { @class = "form-control", id = "firstName" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Author.LastName)
+                            <br>
+                            @Html.TextBoxFor(model => Model.Author.LastName, null, new { @class = "form-control", id = "lastName" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Author.Email)
+                            <br>
+                            @Html.TextBoxFor(model => Model.Author.Email, null, new { @class = "form-control", id = "emailAddress" })
+                        </div>
+
+                        <hr />
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.AuthorDetail.AuthorNotes)
+                            <br>
+                            @Html.TextBoxFor(model => Model.AuthorDetail.AuthorNotes, null, new { @class = "form-control", id = "authorNotes" })
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Author Picture</label>
+                            <input type="file" name="file" class="form-control" value="@Model.AuthorDetail.AuthorPicture" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success float-right">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts {
+    <script>
+        $(function () {
+            //console.log('calendar load is here');
+            $.ajax({
+                url: '/Calendar/GetAuthorCalendar',
+                type: 'POST',
+                dataType: "json",
+                data: JSON.stringify({
+                    Id: "@Model.Author.Id"
+                }),
+                contentType: 'application/json',
+                success: function (data) {
+                    var obj = jQuery.parseJSON(data);
+                    var arr = $.makeArray(obj);
+                    //console.log(obj)
+
+                    $("#calendar").fullCalendar('destroy');
+                    $("#calendarLoader").hide();
+                    $('#calendar').fullCalendar({
+                        themeSystem: 'bootstrap3',
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'month,agendaWeek,listYear'
+                        },
+                        eventLimit: true, // allow "more" link when too many events
+                        events: arr
+                    });
+
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+
+            var dz = $("#dropzoneForm_@(Model.Author.Id)").dropzone({
+                url: "/Author/UploadFile/",
+                paramName: "files", // The name that will be used to transfer the file
+                maxFilesize: 50, // MB,
+                params: {
+                    authorId: "@Model.Author.Id"
+                },
+                uploadMultiple: true,
+                thumbnailMethod: 'contain',
+                thumbnailWidth: 240,
+                parallelUploads: 10,
+                accept: function (file, done) {
+                    done();
+                },
+                queueComplete: function () {
+                    $(".dropzoneForm").append("<div class=\"clearfix\"></div>");
+                },
+                completemultiple: function () {
+                    $(".clearfix").remove();
+                    $(".dropzoneForm").append("<div class=\"clearfix\"></div>");
+                    location.reload();
+                }
+            });
+
+        });
+
+    </script>
+
+    @foreach (var p in Model.Files)
+    {
+        <script>
+            $("#fileDelete_@p.Id").on('click', function () {
+
+                var id = $(this).attr("id");
+
+                $.ajax({
+                    url: '/Author/RemoveAuthorFile',
+                    type: 'POST',
+                    dataType: "json",
+                    data: JSON.stringify({
+                        Id: id.substring(11)
+                    }),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        //var obj = jQuery.parseJSON(data);
+                        //console.log(obj)
+                        if(data === "success") {
+                            location.reload();
+                        }
+                        else {
+                            console.log("An error occurred removing the file from author account")
+                        }
+                    },
+                    error: function (e) {
+                        alert("Error removing file - " + e.responseText);
+                    }
+                });
+            });
+        </script>
+    }
+
+
+    <script>
+        $(".introduction").on('click', function () {
+            var intro = introJs();
+            intro.setOptions({
+                steps: [
+                    {
+                        element: '#step1',
+                        intro: "The authors personal information."
+                    },
+                    {
+                        element: '#step2',
+                        intro: "An author can have multiple files uploaded against their profile. These can be notes, contracts and more."
+                    },
+                    {
+                        element: '#step3',
+                        intro: "An authors calendar will display the dates they are currently booked into other events on."
+                    }
+                ]
+            });
+            intro.start();
+        });
+    </script>
+}

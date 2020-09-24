@@ -1,0 +1,220 @@
+﻿@model MATO.NET.ViewModels.CreateUserViewModel
+@{
+    List<SelectListItem> items = new List<SelectListItem>();
+    items.Add(new SelectListItem { Text = "Fee", Value = "Fee" });
+    items.Add(new SelectListItem { Text = "Royalty", Value = "Royalty" });
+    items.Add(new SelectListItem { Text = "Title Dependent", Value = "Title Dependent" });
+}
+
+<div id="userForm">
+    <input type="hidden" id="userId" />
+    <div class="row">
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.FirstName)
+            <br>
+            @Html.TextBoxFor(model => Model.FirstName, null, new { @class = "form-control", id = "userFirstName" })
+            <br>
+        </div>
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.LastName)
+            <br>
+            @Html.TextBoxFor(model => Model.LastName, null, new { @class = "form-control", id = "userLastName" })
+            <br>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.EmailAddress)
+            <br>
+            @Html.TextBoxFor(model => Model.EmailAddress, null, new { @class = "form-control", id = "userEmailAddress" })
+            <br>
+        </div>
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.RegionId)
+            <br>
+            @Html.DropDownListFor(m => m.RegionId, new SelectList(Model.Region, "Id", "Name"), "", new { @class = "form-control", id = "userRegion" })
+            <br>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.Country)
+            <br>
+            @Html.TextBoxFor(model => Model.Country, null, new { @class = "form-control", id = "userCountry" })
+            <br>
+        </div>
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.UserGroupId)
+            <br>
+            @Html.DropDownListFor(m => m.UserGroupId, new SelectList(Model.Roles, "Name", "Name"), "", new { @class = "form-control", id = "userRoles" })
+            <br>
+        </div>
+    </div>
+
+    <div class="row" id="authorDetailsForm" style="display: none;">
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.AuthorType)
+            <br>
+            @Html.DropDownListFor(m => m.AuthorType, items, "", new { @class = "form-control", id = "authorType" })
+            <br>
+            @Html.TextAreaFor(n => n.AuthorNotes, new { @class = "form-control", @id = "authorDetails", @rows = 5 })
+            <br>
+        </div>
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.AuthorAddressLine1)
+            <br>
+            @Html.TextBoxFor(model => Model.AuthorAddressLine1, null, new { @class = "form-control", id = "authorAddress1" })
+            <br>
+            @Html.LabelFor(m => m.AuthorAddressLine2)
+            <br>
+            @Html.TextBoxFor(model => Model.AuthorAddressLine2, null, new { @class = "form-control", id = "authorAddress2" })
+            <br>
+            @Html.LabelFor(m => m.AuthorAddressLine3)
+            <br>
+            @Html.TextBoxFor(model => Model.AuthorAddressLine3, null, new { @class = "form-control", id = "authorAddress3" })
+            <br>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-danger pull-right" id="updateUserDetails">Create</button>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+        $(".breadCrumbLinks").append("<li><a href=\"/Admin/Index\">Admin</a></li><li>Create User</li>");
+    </script>
+
+    <script>
+        $("#userRoles").change(function () {
+            if ($('#userRoles').find(":selected").text() === "Author") {
+                $("#authorDetailsForm").show();
+            } else if ($('#userRoles').find(":selected").text() !== "Author") {
+                $("#authorDetailsForm").hide();
+            }
+        });
+    </script>
+
+    <script>
+        $("#updateUserDetails").on('click', function () {
+
+            var fname = $("#userFirstName").val();
+            var lname = $('#userLastName').val();
+            var email = $("#userEmailAddress").val();
+            var region = $('#userRegion').val();
+            var country = $("#userCountry").val();
+            var role = $("#userRoles").val();
+            var userId = $("#userId").val();
+            var addressLine1 = $("#authorAddress1").val();
+            var addressLine2 = $("#authorAddress2").val();
+            var addressLine3 = $("#authorAddress3").val();
+
+            var authorType = $('#authorType').find(":selected").text();
+            var notes = $("#authorDetails").val();
+
+            $.ajax({
+                url: '/Admin/CreateUser',
+                type: 'POST',
+                dataType: "json",
+                data: JSON.stringify({
+                    UserId: userId,
+                    FirstName: fname,
+                    LastName: lname,
+                    Email: email,
+                    Region: region,
+                    Country: country,
+                    Role: role,
+                    AddressLine1: addressLine1,
+                    AddressLine2: addressLine2,
+                    AddressLine3: addressLine3,
+                    AuthorType: authorType,
+                    AuthorNotes: notes
+                }),
+                contentType: 'application/json',
+                success: function (data) {
+                    var obj = JSON.parse(data);
+
+                    if (obj === "Email") {
+                        $.toast({
+                            heading: "Oops!",
+                            text: "This email address is already in the system.",
+                            showHideTransition: 'slide',
+                            bgColor: 'red',
+                            textColor: '#fff',
+                            allowToastClose: false,
+                            hideAfter: 5000,
+                            stack: 1,
+                            textAlign: 'left',
+                            position: 'top-right'
+                        });
+                    } else if (obj === "Creation") {
+                        $.toast({
+                            heading: "Oops!",
+                            text: "Something went wrong when trying to create this user, please try again.",
+                            showHideTransition: 'slide',
+                            bgColor: 'red',
+                            textColor: '#fff',
+                            allowToastClose: false,
+                            hideAfter: 5000,
+                            stack: 1,
+                            textAlign: 'left',
+                            position: 'top-right'
+                        });
+                    } else if (obj === "Missing") {
+                        $.toast({
+                            heading: "Oops!",
+                            text: "Please ensure all fields are populated before submitting the form.",
+                            showHideTransition: 'slide',
+                            bgColor: 'red',
+                            textColor: '#fff',
+                            allowToastClose: false,
+                            hideAfter: 5000,
+                            stack: 1,
+                            textAlign: 'left',
+                            position: 'top-right'
+                        });
+                    } else {
+                        $.toast({
+                            heading: "User successfully created!",
+                            text: "Redirecting back to the admin panel...",
+                            showHideTransition: 'slide', // It can be plain, fade or slide
+                            bgColor: 'green', // Background color for toast
+                            textColor: '#fff', // text color
+                            allowToastClose: false, // Show the close button or not
+                            hideAfter: 5000, // `false` to make it sticky or time in miliseconds to hide after
+                            stack:
+                                1, // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
+                            textAlign: 'left', // Alignment of text i.e. left, right, center
+                            position:
+                                'bottom-left' // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
+                        });
+
+                        setTimeout(function () {
+                            window.setTimeout(window.location.replace("/Admin/Index"), 3000);
+                        }, 3000);
+                    }
+                },
+                error: function (e) {
+                    $.toast({
+                        heading: "Oops!",
+                        text: "Something went wrong when trying to update this user, please try again.",
+                        showHideTransition: 'slide',
+                        bgColor: 'red',
+                        textColor: '#fff',
+                        allowToastClose: false,
+                        hideAfter: 5000,
+                        stack: 1,
+                        textAlign: 'left',
+                        position: 'top-right'
+                    });
+                }
+            });
+        });
+    </script>
+}

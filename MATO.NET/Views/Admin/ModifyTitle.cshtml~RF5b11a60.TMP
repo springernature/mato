@@ -1,0 +1,132 @@
+﻿@model MATO.NET.ViewModels.ModifyTitleViewModel
+
+<fieldset>
+    <legend>Modify Title</legend>
+    <div class="clearfix" style="margin-bottom:10px;"></div>
+    <div class="row">
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.SelectedTitleId)
+            <br>
+            @Html.DropDownListFor(m => m.SelectedTitleId, new SelectList(Model.Titles, "Id", "Name"), "", new { @class = "form-control", @onchange = "getTitleDetails(this.value)", id = "selectedTitle" })
+            <br>
+        </div>
+    </div>
+    <div class="clear"></div>
+</fieldset>
+
+<div class="row" id="titleForm" style="display: none;">
+    <div class="col-md-12">
+        <div id="createTitleForm">
+            <fieldset class="mt20">
+                <legend>Title details</legend>
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.LabelFor(m => m.Name)
+                        <br>
+                        @Html.TextBoxFor(model => Model.Name, null, new { @class = "form-control", id = "titleName" })
+                        <br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.LabelFor(m => m.SelectedTargetSectorId)
+                        <br>
+                        @Html.DropDownListFor(m => m.SelectedTargetSectorId, new SelectList(Model.TargetSector, "Id", "Name"), "", new { @class = "form-control", id = "targetSector"})
+                        <br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.LabelFor(m => m.SelectedAuthorIds)
+                        <br>
+                        @Html.ListBoxFor(i => Model.SelectedAuthorIds, Model.Authors, new { @class = "form-control authorList" })
+                        <br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-danger mt10 pull-right">Update</button>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+<script>
+    function getTitleDetails(title) {
+
+        $.ajax({
+            url: '/Admin/ModifyTitle',
+            type: 'POST',
+            dataType: "json",
+            data: JSON.stringify({
+                Id: title
+            }),
+            contentType: 'application/json',
+            success: function (data) {
+                var obj = JSON.parse(data);
+                console.log(obj);
+
+                $("#titleId").val(obj.title.Id);
+                $("#titleName").val(obj.title.Name);
+                $("#targetSector").val(obj.title.TargetSector.Id);
+                var authors = [];
+                $(obj.authors).each(function() {
+                    authors.push(this.Id);
+                });
+
+                console.log(authors);
+
+                $('.authorList').select2({
+                    width: "100%",
+                    multiple: true
+                });
+
+                $('.authorList').val(authors).trigger('change');
+
+                $("#titleForm").show();
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+    };
+</script>
+
+<script>
+    $("#updateTitle").on('click',
+        function() {
+
+            var selectedTitle = $("selectedTitle").val();
+            var titleName = $("#titleName").val();
+            var targetSector = $("#targetSector").val();
+            var authors = $(".authorList").select2('data');
+
+            $.ajax({
+                url: '/Admin/UpdateTitle',
+                type: 'POST',
+                dataType: "json",
+                data: JSON.stringify({
+                    Id: selectedTitle,
+                    Name: titleName,
+                    TargetSector: targetSector,
+                    Authors: authors
+                }),
+                contentType: 'application/json',
+                success: function(data) {
+                    console.log("YAY");
+                },
+                error: function(e) {
+                    console.log(e);
+                }
+            });
+        });
+</script>
+
+<script>
+    $(".breadCrumbLinks").append("<li><a href=\"/Admin/Index\">Admin</a></li><li>Modify Title</li>");
+</script>

@@ -1,0 +1,56 @@
+﻿<fieldset>
+    <legend>Calendar</legend>
+    <div class="clearfix" style="margin-bottom:10px;"></div>
+
+    <div class="col-md-6">
+        <a href="/Calendar/Index" class="btn btn-primary">Author Calendars</a>
+    </div>
+
+    <div class="clear"></div>
+</fieldset>
+
+<div id="calendar" style="display: none; margin-top: 20px;">
+
+</div>
+
+
+<script>
+    $(function() {
+        $.ajax({
+            url: '/Calendar/GetWebinarCalendar',
+            type: 'POST',
+            dataType: "json",
+            data: JSON.stringify({
+                name: "Webinar Room 1"
+            }),
+            contentType: 'application/json',
+            success: function (data) {
+                var obj = jQuery.parseJSON(data);
+                var arr = $.makeArray(obj);
+                $("#calendar").fullCalendar('destroy');
+                $("#calendar").show();
+
+                $('#calendar').fullCalendar({
+                    themeSystem: 'bootstrap3',
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,listYear'
+                    },
+                    eventLimit: true, // allow "more" link when too many events
+                    events: arr
+                });
+
+                console.log(arr);
+            },
+            error: function (data) {
+                console.log(data);
+                alert("error");
+            }
+        });
+    });
+</script>
+
+<script>
+    $(".breadCrumbLinks").append(" <li>Calendar</li>");
+</script>

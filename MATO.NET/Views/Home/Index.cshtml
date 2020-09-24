@@ -1,0 +1,854 @@
+﻿@model MATO.NET.ViewModels.UserHomeScreenViewModel
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<div class="mainContent">
+    <fieldset>
+        <legend>
+            <div class="row">
+                <div class="col-md-7">My Requests</div>
+                <div class="col-md-5 m-b-sm">
+                    @if (!User.IsInRole("Author"))
+                    {
+                        <a href="/Requests/Submit" class="btn btn-primary v2-fs-14 pull-right m-l-sm" id="step3">New Request</a>
+                        <div class="clearfix"></div>
+                    }
+                </div>
+            </div>
+        </legend>
+
+        <div class="alert alert-danger filtered" style="display: none;">
+            This table has been filtered, <a class="alert-link" id="resetTable" style="cursor: pointer">click here to reset it.</a>
+        </div>
+
+        <div class="row" id="step1">
+            <div class="col-md-12">
+                <table class="table table-hover" id="reviews">
+                    <thead>
+                        <tr>
+                            <th width="6%">Status</th>
+                            <th width="20%">Author</th>
+                            <th width="26%">Title</th>
+                            <th width="8%">Events</th>
+                            <th width="7%">City</th>
+                            <th width="13%">Region</th>
+                            <th width="20%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var m in Model.UserRequests)
+                        {
+                        <tr>
+                            <td class="project-status">
+                                @if (m.Finalised)
+                                {
+                                    <span class="label label-success column1">Approved</span>
+                                }
+                                else if (m.Declined)
+                                {
+                                    <span class="label label-danger column1">Declined</span>
+                                }
+                                else if (m.Cancelled)
+                                {
+                                    <span class="label label-danger column1">Cancelled</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-warning column1">Pending</span>
+                                }
+
+                            </td>
+                            <td class="project-title">
+                                <a href="/Requests/Request/@m.Id" class="tooltipster column2" id="@m.Id" data-tooltip-content="#tooltip_content_@(m.Id)">@m.RequestedAuthor.FullName</a>
+                            </td>
+                            <td>
+                                @m.PromotedTitle.Name
+                            </td>
+                            <td>
+                                <div class="rounded-circle v2-eventData pull-left tooltipster" data-tooltip-content="#tooltip_content_@(m.Id)_Event_1">
+                                    <a href="/Requests/Request/@m.Id">1</a>
+                                </div>
+
+                                @if (m.EventTwo != null)
+                                {
+                                    <div class="rounded-circle v2-eventData pull-left m-l-sm tooltipster" data-tooltip-content="#tooltip_content_@(m.Id)_Event_2">
+                                        <a href="/Requests/Request/@m.Id">2</a>
+                                    </div>
+                                }
+                                @if (m.EventThree != null)
+                                {
+                                    <div class="rounded-circle v2-eventData pull-left m-l-sm tooltipster" data-tooltip-content="#tooltip_content_@(m.Id)_Event_3">
+                                        <a href="/Requests/Request/@m.Id">3</a>
+                                    </div>
+                                }
+
+                            </td>
+                            <td>
+                                @m.EventOne.EventCity
+                            </td>
+                            <td>
+                                @m.Region.Name
+                            </td>
+                            <td class="project-actions">
+                                @if (User.IsInRole("Manager"))
+                                {
+                                    if (m.Declined == false && m.DeclinedDate == null &&
+                                    m.AdminApproval == false && m.AdminApprovalDate == null &&
+                                    m.ManagerApproval == false && m.ManagerApprovalDate == null)
+                                    {
+                                        <div class="btn-group">
+                                            <button data-toggle="dropdown" class="btn btn-success dropdown-toggle" aria-expanded="false">Action</button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#" class="dropdown-item" id="Approve_@m.Id"> Approve </a></li>
+                                                <li><a href="#" class="dropdown-item" id="Decline_@m.Id"> Decline </a></li>
+                                                <li class="dropdown-divider"></li>
+                                                <li><a href="/Requests/Request/@m.Id" class="dropdown-item">View</a></li>
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+
+                                @if (User.IsInRole("SuperAdmin"))
+                                {
+                                    if (m.Declined == false && m.DeclinedDate == null &&
+                                    m.AdminApproval == false && m.AdminApprovalDate == null &&
+                                    m.ManagerApproval == true && m.ManagerApprovalDate != null)
+                                    {
+                                        <div class="btn-group" style="margin-top: 5px">
+                                            <button data-toggle="dropdown" class="btn btn-success dropdown-toggle" aria-expanded="false">Action</button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#" class="dropdown-item" id="Approve_@m.Id"> Approve </a></li>
+                                                <li><a href="#" class="dropdown-item" id="Decline_@m.Id"> Decline </a></li>
+                                                <li class="dropdown-divider"></li>
+                                                <li><a href="/Requests/Request/@m.Id" class="dropdown-item">View</a></li>
+                                            </ul>
+                                        </div>
+
+                                        if (m.TentativeReason != null)
+                                        {
+                                            <div class="rounded-circle v2-tentData pull-right m-l-sm tooltipster" data-tooltip-content="#tooltip_content_@(m.Id)_Tentative">
+                                                <a href="/Requests/Request/@m.Id">T</a>
+                                            </div>
+                                        }
+                                    }
+                                }
+
+                                @if (User.IsInRole("Author"))
+                                {
+                                    if (m.Declined == false && m.DeclinedDate == null &&
+                                    m.AdminApproval == true && m.AdminApprovalDate != null &&
+                                    m.ManagerApproval == true && m.ManagerApprovalDate != null &&
+                                    m.Finalised == false)
+                                    {
+                                        <div class="btn-group">
+                                            <button data-toggle="dropdown" class="btn btn-success dropdown-toggle" aria-expanded="false">Action</button>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#" class="dropdown-item" id="Approve_@m.Id"> Approve </a></li>
+                                                <li><a href="#" class="dropdown-item" id="Decline_@m.Id"> Decline </a></li>
+                                                <li><a href="#" class="dropdown-item" id="Tentative_@m.Id" data-toggle="modal" data-target="#tentativeModal_@m.Id"> Tentative </a></li>
+                                                <li class="dropdown-divider"></li>
+                                                <li><a href="/Requests/Request/@m.Id" class="dropdown-item">View</a></li>
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr id="step2">
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div class="btn-group" role="group" id="step4">
+                    @if (!User.IsInRole("Author"))
+                    {
+                        <button id="btnGroupDrop1" type="button" class="btn btn-danger dropdown-toggle exportExcel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Export
+                        </button>
+                    }
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                        @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+                        {
+                            <a data-toggle="modal" data-target="#exportData" class="btn" value="Export">Export Date Range</a>
+                        }
+                        <a class="btn exportExcelView" value="Export">Export View</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+@foreach (var m in Model.UserRequests)
+{
+    <form method="post" action="/Home/Tentative">
+        <div class="modal" tabindex="-1" role="dialog" id="tentativeModal_@m.Id">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">@m.PromotedTitle.Name</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label>Event Start Date</label>
+                        <input type="hidden" name="RequestId" value="@m.Id" />
+                        <input class="form-control m-b-sm" type="text" disabled="disabled" value="@m.EventOne.EventDate.ToString(" dd/MM/yyyy")" />
+
+                        <label>Tentative Reason</label>
+                        <textarea class="form-control" type="text" name="TentativeReason"></textarea>
+
+                        <p class="small m-t-sm text-center">Submitting an event as tentative will give the administrator a chance to review the event and make changes that may be required.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+}
+
+<div class="tooltip_templates hidden">
+    @foreach (var m in Model.UserRequests)
+    {
+        if (m.TentativeReason != null)
+        {
+            <span id="tooltip_content_@(m.Id)_Tentative">
+                <fieldset class="tooltipList">
+
+                    <h4>@m.TentativeReason</h4>
+
+                </fieldset>
+            </span>
+        }
+    }
+
+    @foreach (var p in Model.UserRequests)
+    {
+        <span id="tooltip_content_@(p.Id)">
+            <fieldset class="tooltipList">
+                <h3>Author Information</h3>
+                <p>@p.RequestedAuthor.FullName</p>
+                <p>@p.PromotedTitle.Name</p>
+                <br />
+
+                @if (User.IsInRole("SuperAdmin"))
+                {
+                    <h3>Forecasts</h3>
+
+                    <span class="forecastTip">Year 1: @p.TitleForecast.Year1</span><br />
+                    <span class="forecastTip">Year 2: @p.TitleForecast.Year2</span><br />
+                    <span class="forecastTip">Year 3: @p.TitleForecast.Year3</span><br />
+
+                    <br />
+                }
+
+                <h3>Travel Details</h3>
+
+                <li>
+                    @if (p.OutboundDate != null)
+                    {
+                        <label>Outbound:</label>
+                        <span>@p.Outbound - @p.OutboundDate.Value.ToString("dd MMM yyyy")</span><br />
+                    }
+
+                </li>
+                <li>
+                    @if (p.InboundDate != null)
+                    {
+                        <label>Inbound:</label>
+                        <span>@p.Inbound - @p.InboundDate.Value.ToString("dd MMM yyyy")</span><br />
+                    }
+                </li>
+            </fieldset>
+        </span>
+
+        <span id="tooltip_content_@(p.Id)_Event_1">
+            <ul class="tooltipList">
+                <li>
+                    <label>Event name:</label>
+                    <span id="ctl00_ctl00_mainContent_eventName">@p.EventOne.EventName</span>
+                </li>
+                <li>
+                    <label>Event City:</label>
+                    @if (p.EventOne.EventCity != null)
+                    {
+                        @p.EventOne.EventCity
+                    }
+                </li>
+                <li>
+                    <label>Event type:</label>
+                    @if (p.EventOne.EventType != null)
+                    {
+                        @p.EventOne.EventType.Name
+                    }
+                </li>
+                <li>
+                    <label>Talk type:</label>
+                    @if (p.EventOne.TalkType != null)
+                    {
+                        @p.EventOne.TalkType.Name
+                    }
+                </li>
+                <li>
+                    <label>Target Sector:</label>
+                    @if (p.EventOne.TargetSector != null)
+                    {
+                        @p.EventOne.TargetSector.Name
+                    }
+                </li>
+                <li>
+                    <label>Date of event:</label>
+                    <span id="ctl00_ctl00_mainContent_eventDate">@p.EventOne.EventDate.ToString("dd MMM yyyy")</span>
+                </li>
+            </ul>
+        </span>
+
+        if (p.EventTwo != null)
+        {
+            <span id="tooltip_content_@(p.Id)_Event_2">
+                <ul class="tooltipList">
+                    <li>
+                        <label>Event name:</label>
+                        <span id="ctl00_ctl00_mainContent_eventName">@p.EventTwo.EventName</span>
+                    </li>
+                    <li>
+                        <label>Event City:</label>
+                        @if (p.EventTwo.EventCity != null)
+                        {
+                            @p.EventTwo.EventCity
+                        }
+                    </li>
+                    <li>
+                        <label>Event type:</label>
+                        @if (p.EventTwo.EventType != null)
+                        {
+                            @p.EventTwo.EventType.Name
+                        }
+                    </li>
+                    <li>
+                        <label>Talk type:</label>
+                        @if (p.EventTwo.TalkType != null)
+                        {
+                            @p.EventTwo.TalkType.Name
+                        }
+                    </li>
+                    <li>
+                        <label>Target Sector:</label>
+                        @if (p.EventTwo.TargetSector != null)
+                        {
+                            @p.EventTwo.TargetSector.Name
+                        }
+                    </li>
+                    <li>
+                        <label>Date of event:</label>
+                        <span id="ctl00_ctl00_mainContent_eventDate">@p.EventTwo.EventDate.ToString("dd MMM yyyy")</span>
+                    </li>
+                </ul>
+            </span>
+        }
+
+        if (p.EventThree != null)
+        {
+            <span id="tooltip_content_@(p.Id)_Event_3">
+                <ul class="tooltipList">
+                    <li>
+                        <label>Event name:</label>
+                        <span id="ctl00_ctl00_mainContent_eventName">@p.EventThree.EventName</span>
+                    </li>
+                    <li>
+                        <label>Event type:</label>
+                        @if (p.EventThree.EventType != null)
+                        {
+                            @p.EventThree.EventType.Name
+                        }
+                    </li>
+                    <li>
+                        <label>Talk type:</label>
+                        @if (p.EventThree.TalkType != null)
+                        {
+                            @p.EventThree.TalkType.Name
+                        }
+                    </li>
+                    <li>
+                        <label>Target Sector:</label>
+                        @if (p.EventThree.TargetSector != null)
+                        {
+                            @p.EventThree.TargetSector.Name
+                        }
+                    </li>
+                    <li>
+                        <label>Date of event:</label>
+                        <span id="ctl00_ctl00_mainContent_eventDate">@p.EventThree.EventDate.ToString("dd MMM yyyy")</span>
+                    </li>
+                </ul>
+            </span>
+        }
+    }
+
+</div>
+
+<div class="modal inmodal" id="exportData" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-node-text column medium-12">
+                            <label>Export Data</label>
+                            <input id="fromDate" class="datepicker form-control" placeholder="From Date" type="datetime" />
+                            <input id="toDate" class="datepicker form-control m-t-md" placeholder="To Date" type="datetime" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-default pull-left " data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn pull-right btn-primary" style="margin-right: 10px;" id="exportDateRange">Export</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    @foreach (var m in Model.UserRequests)
+    {
+        <script>
+            $("#Approve_@(m.Id)").on('click', function () {
+                var requestId = $(this).attr("Id").substring(8);
+                console.log("REQUEST: " + requestId);
+
+                $.ajax({
+                    url: '/Home/Approve',
+                    type: 'POST',
+                    dataType: "json",
+                    data: JSON.stringify({
+                        RequestId: requestId
+                    }),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        console.log(data);
+                        if (data == "Manager Approved") {
+                            toastr["success"]("Request successfully approved.")
+                            toastr.options = {
+                                "closeButton": false,
+                                "debug": false,
+                                "newestOnTop": false,
+                                "progressBar": false,
+                                "positionClass": "toast-top-right",
+                                "preventDuplicates": false,
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "1000",
+                                "timeOut": "5000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            }
+                            setTimeout(function () {
+                                location.reload();
+                            }, 2000);
+                        } else if (data == "Author Approved") {
+                            toastr["success"]("Request successfully approved.")
+                            toastr.options = {
+                                "closeButton": false,
+                                "debug": false,
+                                "newestOnTop": false,
+                                "progressBar": false,
+                                "positionClass": "toast-top-right",
+                                "preventDuplicates": false,
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "1000",
+                                "timeOut": "5000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            }
+                            setTimeout(function () {
+                                location.reload();
+                            }, 2000);
+                        } else if (data == "Admin Approved") {
+                            toastr["success"]("Request successfully approved.")
+                            toastr.options = {
+                                "closeButton": false,
+                                "debug": false,
+                                "newestOnTop": false,
+                                "progressBar": false,
+                                "positionClass": "toast-top-right",
+                                "preventDuplicates": false,
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "1000",
+                                "timeOut": "5000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            }
+                            setTimeout(function () {
+                                location.reload();
+                            }, 2000);
+                        }
+                    }
+                });
+            });
+
+            $("#Decline_@(m.Id)").on('click', function () {
+                var requestId = $(this).attr("Id").substring(8);
+                console.log("REQUEST: " + requestId);
+                $.ajax({
+                    url: '/Home/Decline',
+                    type: 'POST',
+                    dataType: "json",
+                    data: JSON.stringify({
+                        RequestId: requestId
+                    }),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        if (data == "Manager Declined") {
+                            toastr["error"]("Request successfully declined.")
+                            toastr.options = {
+                                "closeButton": false,
+                                "debug": false,
+                                "newestOnTop": false,
+                                "progressBar": false,
+                                "positionClass": "toast-top-right",
+                                "preventDuplicates": false,
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "1000",
+                                "timeOut": "5000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            }
+                            setTimeout(function () {
+                                location.reload();
+                            }, 2000);
+                        } else if (data == "Author Declined") {
+                            toastr["error"]("Request successfully declined.")
+                            toastr.options = {
+                                "closeButton": false,
+                                "debug": false,
+                                "newestOnTop": false,
+                                "progressBar": false,
+                                "positionClass": "toast-top-right",
+                                "preventDuplicates": false,
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "1000",
+                                "timeOut": "5000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            }
+                            setTimeout(function () {
+                                location.reload();
+                            }, 2000);
+                        } else if (data == "Admin Declined") {
+                            toastr["error"]("Request successfully declined.")
+                            toastr.options = {
+                                "closeButton": false,
+                                "debug": false,
+                                "newestOnTop": false,
+                                "progressBar": false,
+                                "positionClass": "toast-top-right",
+                                "preventDuplicates": false,
+                                "onclick": null,
+                                "showDuration": "300",
+                                "hideDuration": "1000",
+                                "timeOut": "5000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            }
+                            setTimeout(function () {
+                                location.reload();
+                            }, 2000);
+                        }
+                    },
+                    error: function (errorData) {
+                        console.log(errorData)
+                    }
+                });
+            });
+        </script>
+    }
+
+    <script>
+        var oTable = $('#reviews').DataTable({
+            "order": [[1, "asc"]],
+            initComplete: function () {
+                this.api().columns([0, 1, 2, 4]).every(function (i) {
+                    var column = this;
+
+                    var select = $('<select class=\"form-control footerSelect\"><option value=""></option></select>')
+                    .appendTo($(column.footer()))
+                    .on('change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                        $(this).val()
+                        );
+
+                        column
+                        .search(val ? '^' + val + '$' : '', true, false)
+                        .draw();
+                    });
+
+                    column.data().unique().sort().each(function (d, j) {
+
+                        if (d.indexOf("column1") >= 0) {
+                            d = d.replace("<span class=\"label label-warning column1\">", "");
+                            d = d.replace("<span class=\"label label-success column1\">", "");
+                            d = d.replace("<span class=\"label label-danger column1\">", "");
+                            d = d.replace("</span>", "");
+                        }
+
+
+                        if (d.indexOf("column2") >= 0) {
+                            d = d.replace(/(<([^>]+)>)/ig, "")
+                        }
+
+                        if (d.indexOf("3event") >= 0) {
+                            d = "3 Events";
+                        }
+
+                        if (d.indexOf("2event") >= 0) {
+                            d = "2 Events";
+                        }
+
+                        if (d.indexOf("1event") >= 0) {
+                            d = "1 Event";
+                        }
+
+                        $.each(select, function (key, value) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+
+
+                    });
+
+                    if (i == 0) {
+                        select.val("Pending");
+                        var val = "Pending";
+                        column
+                            .search(val ? '^' + val + '$' : '', true, false)
+                            .draw();
+                    }
+
+                });
+            },
+            stateSave: true,
+            "stateLoaded": function (settings, data) {
+                var show = false;
+
+                $.each(data.columns, function (index, value) {
+                    if (value.search.search !== "" && value.search.search !== "^Pending$") {
+                        show = true;
+                    }
+                });
+
+                if (data.search.search !== "") {
+                    show = true;
+                }
+
+                if (show) {
+                    $(".filtered").show();
+                }
+            },
+            "drawCallback": function () {
+                $(".tooltipstered").each(function () {
+                    $(this).tooltipster("destroy");
+                });
+
+                $('.tooltipster').tooltipster({
+                    theme: 'tooltipster-shadow',
+                    side: 'top'
+                });
+            },
+        });
+
+
+        $.each($(".footerSelect"), function (index, value) {
+
+            var values = [];
+
+            for (i = 0; i < value.length; i++) {
+                var select = this[i];
+                if (values.indexOf(select.value) > -1) {
+                    // Duplicates don't need reinserting into dropdown.
+                }
+                else {
+                    values.push(select.value);
+                }
+            }
+
+            $(this).find("option").remove();
+
+            var option = '';
+            for (var i = 0; i < values.length; i++) {
+                option += '<option value="' + values[i] + '">' + values[i] + '</option>';
+            }
+
+            $(this).append(option);
+        });
+
+        $('.footerSelect').val('Pending');
+
+        var state = oTable.state.loaded();
+        if (state) {
+            oTable.columns().eq(0).each(function (colIdx) {
+                var colSearch = state.columns[colIdx].search;
+
+                if (colSearch.search !== "" && colSearch.search !== "^Pending$") {
+                    show = true;
+                    var term = colSearch.search.substring(1, colSearch.search.length - 1);
+                    var col = colIdx + 1;
+                    $("tfoot tr th:nth-child(" + col + ") select").val(term);
+                }
+            });
+        };
+
+        $("#resetTable").on('click', function () {
+            window.localStorage.clear();
+            localStorage.removeItem("DataTables_reviews_/Home/Index");
+            location.reload();
+        });
+
+    </script>
+
+    <script>
+
+        $(".introduction").on('click', function () {
+            var intro = introJs();
+            intro.setOptions({
+                steps: [
+                  {
+                      element: '#step1',
+                      intro: "This <b>table</b> with show all of <i>your</i> created requests, as well as any requests you may have decision authority for."
+                  },
+                  {
+                      element: '#step2',
+                      intro: "You can filter your requests. By default we only show the requests that are still pending.",
+                  },
+                  {
+                      element: '#step3',
+                      intro: 'Use this button to create a new author travel request.',
+                      position: 'left'
+                  },
+                  {
+                      element: '#step4',
+                      intro: 'You can export all of your reviews by search criteria or date range.',
+                      position: 'left'
+                  },
+                ]
+            });
+            intro.start();
+        });
+    </script>
+
+    <script>
+
+        $(".exportExcelView").on('click', function () {
+            debugger;
+            var table = $('#reviews').DataTable();
+            var data = table.rows({ search: 'applied' }).data();
+            var values = new Array();
+
+            $(".table-wrapper").hide();
+            $(".loading-spinner").show();
+
+            $(data).each(function (index) {
+                values.push($(this[1]).attr("id"));
+            });
+
+            $.ajax({
+                url: '/Home/ExportToExcel',
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify(values),
+                contentType: 'application/json',
+                success: function (data) {
+
+                    $(".loading-spinner").hide();
+                    $(".table-wrapper").show();
+
+                    var link = document.createElement('a');
+                    link.href = data;
+                    document.body.appendChild(link);
+
+                    link.click();
+                },
+                error: function (e) {
+                }
+            });
+        });
+
+        $("#exportDateRange").on('click', function () {
+            debugger;
+            $(".table-wrapper").hide();
+            $(".loading-spinner").show();
+            $("#exportData").modal("toggle");
+
+            var from = $("#fromDate").val();
+            var to = $("#toDate").val();
+
+            $.ajax({
+                url: '/Home/ExportDateRange',
+                type: 'POST',
+                dataType: 'json',
+                data: JSON.stringify({
+                    fromDate: from,
+                    toDate: to
+                }),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+                    $(".table-wrapper").show();
+                    $(".loading-spinner").hide();
+
+                    var link = document.createElement('a');
+                    link.href = data;
+                    document.body.appendChild(link);
+
+                    link.click();
+                },
+                error: function (e) {
+                }
+            });
+        });
+
+        $(".datepicker").datepicker({
+            dateFormat: 'dd/mm/yy'
+        });
+
+
+    </script>
+
+}

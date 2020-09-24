@@ -1,0 +1,299 @@
+﻿@using Microsoft.AspNet.Identity
+@model MATO.NET.ViewModels.ViewRequestViewModel
+
+@if (Request.IsAuthenticated && User.IsInRole("SuperAdmin"))
+{
+    using (Html.BeginForm("UpdateRequest", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", id = "newRequest" }))
+    {
+        @Html.TextBoxFor(model => Model.Id, null, new { @class = "form-control hidden", autocomplete = "off", id = "id" })
+        <fieldset>
+            <legend>Status summary</legend>
+            <ul>
+                <li>
+                    <label>Submission date:</label>
+                    <span>@Model.SubmitDate.ToString("dd MMM yyyy")</span>
+                </li>
+                <li>
+                    <label>Submission By:</label>
+                    <span id="ctl00_ctl00_mainContent_requestMadeBy">@Model.WhoSubmit.FullName</span>
+                </li>
+                <li>
+                    <label>Status:</label>
+                    @if (Model.ManagerApproved)
+                    {
+                        if (Model.AdminApproved)
+                        {
+                            if (Model.Finalised)
+                            {
+                                <span>Finalised</span>
+                            }
+                            else
+                            {
+                                <span>Awaiting Author Decision</span>
+                            }
+                        }
+                        else
+                        {
+                            <span>Awaiting Admin Approval</span>
+                        }
+                    }
+                    else
+                    {
+                        <span>Awaiting Manager Approval</span>
+                    }
+                </li>
+            </ul>
+        </fieldset>
+
+        <fieldset>
+            <legend>Request details</legend>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Author:</label>
+                    @Html.TextBoxFor(model => Model.Author.FullName, null, new { disabled = "disabled", @class = "form-control", autocomplete = "off" })
+                </div>
+                <div class="col-md-6">
+                    <label>Title Promoted:</label>
+                    @Html.TextBoxFor(model => Model.PromotedTitle.Name, null, new { disabled = "disabled", @class = "form-control", autocomplete = "off" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-4">
+                    <label>Year 1 Forecast:</label>
+                    <span>
+                        @Html.TextBoxFor(model => Model.Forecast.Year1, null, new { @class = "form-control", autocomplete = "off", id = "forecast1" })
+                    </span><br />
+                </div>
+                <div class="col-md-4">
+                    <label>Year 2 Forecast:</label>
+                    <span>@Html.TextBoxFor(model => Model.Forecast.Year2, null, new { @class = "form-control", autocomplete = "off", id = "forecast2" })</span><br /><br />
+                </div>
+                <div class="col-md-4">
+                    <label>Year 3 Forecast:</label>
+                    <span>@Html.TextBoxFor(model => Model.Forecast.Year3, null, new { @class = "form-control", autocomplete = "off", id = "forecast3" })</span><br />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Outbound:</label>
+                    <span>@Html.TextBoxFor(model => Model.Outbound, null, new { @class = "form-control", autocomplete = "off", id = "outbound" })</span>
+                    <span>@Html.TextBoxFor(model => Model.OutboundDate, null, new { @class = "form-control", autocomplete = "off", id = "outboundDate" })</span><br /><br />
+                </div>
+                <div class="col-md-6">
+                    <label>Inbound:</label>
+                    <span>@Html.TextBoxFor(model => Model.Inbound, null, new { @class = "form-control", autocomplete = "off", id = "inbound" })</span>
+                    <span>@Html.TextBoxFor(model => Model.InboundDate, null, new { @class = "form-control", autocomplete = "off", id = "inboundDate" })</span><br />
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <legend>Event Details</legend>
+            @if (Model.EventOne.EventName != null)
+            {
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Event name:</label>
+                        <span>@Html.TextBoxFor(model => Model.EventOne.EventName, null, new { @class = "form-control", autocomplete = "off", id = "eventOneName" })</span>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Event City:</label>
+                        <span>@Html.TextBoxFor(model => Model.EventOne.EventCity, null, new { @class = "form-control", autocomplete = "off", id = "eventOneCity" })</span>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Date of event:</label>
+                        @Html.TextBoxFor(model => Model.EventOne.EventDate, null, new { disabled = "disabled", @class = "form-control", autocomplete = "off" })
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Event type:</label>
+                        @Html.TextBoxFor(model => Model.EventOne.EventType.Name, null, new { disabled = "disabled", @class = "form-control", autocomplete = "off" })
+                    </div>
+                    <div class="col-md-4">
+                        <label>Talk type:</label>
+                        @Html.TextBoxFor(model => Model.EventOne.TalkType.Name, null, new { disabled = "disabled", @class = "form-control", autocomplete = "off" })
+                    </div>
+                    <div class="col-md-4">
+                        <label>Target Sector:</label>
+                        @Html.TextBoxFor(model => Model.EventOne.TargetSector.Name, null, new { disabled = "disabled", @class = "form-control", autocomplete = "off" })
+                    </div>
+                </div>
+
+            }
+
+            <hr />
+
+            @if (Model.EventTwo != null)
+            {
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Event name:</label>
+                        <span>@Html.TextBoxFor(model => Model.EventTwo.EventName, null, new { @class = "form-control", autocomplete = "off", id = "eventTwoName" })</span>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Event City:</label>
+                        <span>@Html.TextBoxFor(model => Model.EventTwo.EventCity, null, new { @class = "form-control", autocomplete = "off", id = "eventTwoCity" })</span>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Date of event:</label>
+                        @Html.TextBoxFor(model => Model.EventTwo.EventDate, null, new { disabled = "disabled", @class = "form-control", autocomplete = "off" })
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Event type:</label>
+                        @Html.TextBoxFor(model => Model.EventTwo.EventType.Name, null, new { disabled = "disabled", @class = "form-control", autocomplete = "off" })
+                    </div>
+                    <div class="col-md-4">
+                        <label>Talk type:</label>
+                        @Html.TextBoxFor(model => Model.EventTwo.TalkType.Name, null, new { disabled = "disabled", @class = "form-control", autocomplete = "off" })
+                    </div>
+                    <div class="col-md-4">
+                        <label>Target Sector:</label>
+                        @Html.TextBoxFor(model => Model.EventTwo.TargetSector.Name, null, new { disabled = "disabled", @class = "form-control", autocomplete = "off" })
+                    </div>
+                </div>
+            }
+
+            <hr />
+
+            @if (Model.EventThree != null)
+            {
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Event name:</label>
+                        <span>@Html.TextBoxFor(model => Model.EventThree.EventName, null, new { @class = "form-control", autocomplete = "off", id = "eventThreeName" })</span>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Event City:</label>
+                        <span>@Html.TextBoxFor(model => Model.EventThree.EventCity, null, new { @class = "form-control", autocomplete = "off", id = "eventThreeCity" })</span>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Date of event:</label>
+                        @Html.TextBoxFor(model => Model.EventThree.EventDate, null, new { disabled = "disabled", @class = "form-control", autocomplete = "off" })
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Event type:</label>
+                        @Html.TextBoxFor(model => Model.EventThree.EventType.Name, null, new { disabled = "disabled", @class = "form-control", autocomplete = "off" })
+                    </div>
+                    <div class="col-md-4">
+                        <label>Talk type:</label>
+                        @Html.TextBoxFor(model => Model.EventThree.TalkType.Name, null, new { disabled = "disabled", @class = "form-control", autocomplete = "off" })
+                    </div>
+                    <div class="col-md-4">
+                        <label>Target Sector:</label>
+                        @Html.TextBoxFor(model => Model.EventThree.TargetSector.Name, null, new { disabled = "disabled", @class = "form-control", autocomplete = "off" })
+                    </div>
+                </div>
+            }
+        </fieldset>
+
+        <br />
+
+        <fieldset>
+            <legend>Decisions</legend>
+            <ul>
+
+                @if (Model.Declined)
+                {
+                    if (Model.ManagerApprovalDate != null && Model.AdminApprovalDate == null && Model.FinalisedDate == null)
+                    {
+                        <li>
+                            <label>Declined:</label>
+
+                            <span>Regional Manager</span>
+                        </li>
+                    }
+                    else if (Model.ManagerApprovalDate != null && Model.AdminApprovalDate != null && Model.FinalisedDate == null)
+                    {
+                        <li>
+                            <label>Declined</label>
+
+                            <span>Administrator</span>
+                        </li>
+                    }
+                    else if (Model.ManagerApprovalDate != null && Model.AdminApprovalDate != null && Model.FinalisedDate != null)
+                    {
+                        <li>
+                            <label>Declined</label>
+
+                            <span>Author</span>
+                        </li>
+                    }
+
+                }
+                else
+                {
+                    <li>
+                        <label>Regional Manager:</label>
+                        @if (Model.ManagerApproved && Model.Declined == false)
+                        {
+                            <span>Approved - @Model.ManagerApprovalDate.Value.ToString("dd MMM yyyy")</span>
+                        }
+                        else
+                        {
+                            <span> Pending </span>
+                        }
+                    </li>
+                    <li>
+                        <label>Admin:</label>
+                        @if (Model.AdminApproved)
+                        {
+                            <span>Approved - @Model.AdminApprovalDate.Value.ToString("dd MMM yyyy")</span>
+                        }
+                        else
+                        {
+                            <span> Pending </span>
+                        }
+                    </li>
+                    <li>
+                        <label>Author:</label>
+                        @if (Model.Finalised)
+                        {
+                            <span>Approved - @Model.FinalisedDate.Value.ToString("dd MMM yyyy")</span>
+                        }
+                        else
+                        {
+                            <span> Pending </span>
+
+                        }
+                    </li>
+                }
+            </ul>
+        </fieldset>
+
+        <fieldset id="ctl00_ctl00_mainContent_adminFieldset">
+            <legend>Notes</legend>
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Author Visible:</label>
+                    <span>@Html.TextAreaFor(m => m.AuthorNotesBySalesRep, new { @class = "form-control", @id = "authorVisibleNotes" })</span>
+                </div>
+                <br />
+                <div class="col-md-12">
+                    <label>Admin Only:</label>
+                    <span>@Html.TextAreaFor(m => m.NonAuthorNotesBySalesRep, new { @class = "form-control", @id = "authorInvisibleNotes" })</span>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-danger right mt10">Update</button>
+            </div>
+        </div>
+        
+    }
+}
+else
+{
+    <span> You do not have permission to view this page. </span>
+}
+
+<script>
+    $(".breadCrumbLinks").append(" <li>Request </li><li> @(Model.EventOne.EventName) </li>");
+</script>

@@ -1,0 +1,61 @@
+﻿<fieldset>
+    <legend>System Management</legend>
+    <ul>
+        <li><a href="~/Admin/ModifyEventTypes">Modify</a> Event Types.</li>
+        <li><a href="~/Admin/ModifyTargetSectors">Modify</a> Target Sectors.</li>
+        <li><a href="~/Admin/ModifyTalkTypes">Modify</a> Talk Types.</li>
+    </ul>
+</fieldset>
+
+<fieldset>
+    <legend>Title Management</legend>
+    <ul>
+        <li><a href="~/Admin/CreateTitle">Create</a> a title.</li>
+        <li><a href="/Admin/ModifyTitle">Modify</a> a title.</li>
+    </ul>
+</fieldset>
+
+<fieldset>
+    <legend>Region management</legend>
+    <ul>
+        <li><a href="~/Admin/CreateRegion">Create</a> a region.</li>
+        <li><a href="~/Admin/ModifyRegion">Modify</a> a region.</li>
+        <!--<li><a href="./Book/delete.aspx">Delete</a> a book.</li> -->
+    </ul>
+</fieldset>
+
+<fieldset>
+    <legend>User management</legend>
+    <ul>
+        <li><a href="~/Admin/CreateUser">Create</a> a user.</li>
+        <li><a href="~/Admin/ModifyUser">Modify</a> a user.</li>
+        <li><a href="~/Admin/CreateCalendarEvent">Create</a> a calendar event.</li>
+        <li><a href="~/Admin/ModifyCalendarEvents">Modify</a> a calendar event.</li>
+        <!--<li><a href="./Book/delete.aspx">Delete</a> a book.</li> -->
+    </ul>
+</fieldset>
+
+<fieldset>
+    <legend>Email management</legend>
+    <ul>
+        <li><a href="~/Admin/EmailList">Modify</a> email list.</li>
+        <!--<li><a href="./Book/delete.aspx">Delete</a> a book.</li> -->
+    </ul>
+</fieldset>
+
+@if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+{
+    <fieldset>
+        <legend>Super Admin Only</legend>
+        <ul>
+            <li><a href="~/Admin/ModifyRequest">Modify</a> a request.</li>
+            <li><a href="~/Admin/Audit">Audit</a> log.</li>
+            <!--<li><a href="./Book/delete.aspx">Delete</a> a book.</li> -->
+        </ul>
+    </fieldset>
+
+}
+
+<script>
+    $(".breadCrumbLinks").append("<li>Admin</li>");
+</script>

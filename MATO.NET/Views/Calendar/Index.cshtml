@@ -1,0 +1,70 @@
+﻿@model MATO.NET.ViewModels.CalendarViewModel
+
+<fieldset>
+    <legend>Calendar</legend>
+    <div class="clearfix" style="margin-bottom:10px;"></div>
+
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.SelectedAuthorId)
+        <br>
+        @Html.DropDownListFor(m => m.SelectedAuthorId, new SelectList(Model.Authors, "Id", "FullName"), "", new { @class = "form-control", @onchange = "getAuthCalendar(this.value)" })
+        <br>
+    </div>
+    <div class="col-md-6">
+        <label></label>
+        <br />
+        <a href="/Calendar/WebinarCalendar" class="btn btn-primary" style="margin-top: 5px;">Webinar Calendar</a>
+        <br />
+    </div>
+
+    <div class="clear"></div>
+</fieldset>
+
+<div id="calendar" style="display: none; margin-top: 20px;">
+
+</div>
+
+@section Scripts {
+
+    <script>
+        function getAuthCalendar(author) {
+            //console.log(author);
+            debugger;
+            $.ajax({
+                url: '/Calendar/GetAuthorCalendar',
+                type: 'POST',
+                dataType: "json",
+                data: JSON.stringify({
+                    Id: author
+                }),
+                contentType: 'application/json',
+                success: function (data) {
+                    var obj = jQuery.parseJSON(data);
+                    var arr = $.makeArray(obj);
+                    $("#calendar").fullCalendar('destroy');
+                    $("#calendar").show();
+
+                    $('#calendar').fullCalendar({
+                        themeSystem: 'bootstrap3',
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'month,agendaWeek,listYear'
+                        },
+                        eventLimit: true, // allow "more" link when too many events
+                        events: arr
+                    });
+
+                    console.log(arr);
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        };
+    </script>
+
+    <script>
+        $(".breadCrumbLinks").append(" <li>Calendar</li>");
+    </script>
+}

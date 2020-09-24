@@ -1,0 +1,67 @@
+﻿@model MATO.NET.ViewModels.AuthorsViewModel
+<style>
+    #tableBody { font-size: 12px; }
+</style>
+<fieldset>
+    <legend>Yearly Reporting</legend>
+    <div class="clearfix" style="margin-bottom:10px;"></div>
+
+    <div class="col-md-6">
+        <select id="yearDropdown" class="form-control">
+            <option value=""></option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+        </select>
+    </div>
+
+    <div class="clear"></div>
+</fieldset>
+
+<div class="col-md-12 mt10">
+    <button class="btn btn-info" id="excelExport" style="display: none;"> Export to Excel </button>
+</div>
+
+<script>
+    $("#excelExport").on('click',
+        function () {
+            var year = $('#yearDropdown').find(":selected").val();
+
+            console.log(year);
+
+            $.ajax({
+                url: '/Reporting/ExportToExcel',
+                type: 'POST',
+                dataType: "json",
+                data: JSON.stringify({
+                    Id: year,
+                    Type: "Year"
+                }),
+                contentType: 'application/json',
+                success: function (data) {
+                    console.log(data);
+
+                    var link = document.createElement('a');
+                    link.href = data;
+                    document.body.appendChild(link);
+
+                    link.click();
+
+                }
+            });
+        });
+
+
+    $("#yearDropdown").change(function () {
+        //function getAuthorRequests(author) {
+
+        $("#excelExport").show();
+
+    });
+
+</script>
+
+<script>
+    $(".breadCrumbLinks").append("<li><a href=\"/Reporting/Index\">Reports</a></li> <li>Authors</li>");
+</script>

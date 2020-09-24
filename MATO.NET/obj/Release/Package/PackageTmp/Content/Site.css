@@ -1,0 +1,49 @@
+﻿.btn { border-style: none !important; }
+
+[class^="v2"] { font-family: 'Roboto', sans-serif; }
+.v2-fs-14 { font-size: 14px !important; }
+
+.v2-w-150 { width: 150px !important; }
+.v2-w-200 { width: 200px !important; }
+
+.v2Body { background-color: #f3f3f4; width: 1200px; }
+
+.v2MenuNav { border-left: solid 0px black !important; border-right: solid 0px black !important; }
+    .v2MenuNav ol { height: 48px; }
+        .v2MenuNav ol li { line-height: 48px; font-size: 14px; }
+            .v2MenuNav ol li:hover { opacity: 0.9; text-decoration: underline; }
+
+.ibox-content { padding: 5px 10px 10px 10px !important; }
+.v2iBox { border: 1px solid #e7eaec; }
+
+.v2-approved { border-top: 2px solid #1ab394 !important; }
+.v2-declined { border-top: 2px solid #ed5565 !important; }
+.v2-pending { border-top: 2px solid #f8ac59 !important; }
+.v2-cancelled {
+    border-top: 2px solid #5bc0de !important;
+}
+
+.v2-eventData { background: #7d7b7b; color: #fff; padding: 10px; text-align: center; font-weight: 600; width: 40px; float: left; }
+.v2-tentData { background: #fb7a0c; color: #fff; padding: 5px; text-align: center; font-weight: 600; width: 30px; float: left; margin: 5px 5px; }
+
+
+.project-people { margin-left: 10px; }
+
+.tooltipster { opacity: 1 !important; }
+
+.tooltipList { list-style-type: none; margin: 0; padding: 0; }
+
+.rounded-circle { cursor: pointer; }
+    .rounded-circle a { color: #fff; }
+
+tfoot th { border-bottom: 1px solid #e7eaec; }
+
+.hidden { display: none; }
+
+.pull-right { float: right; }
+
+.modal-backdrop { opacity: 0.5 !important; }
+
+.btn { -webkit-appearance: none !important; padding: 5px 10px; }
+
+.dropdown-menu a { margin: 10px 10px !important; line-height: 34px; }

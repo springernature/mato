@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="MATO.net" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\tristan\.hudson1\\Documents\\MATO\.net\\MATO\.NET\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\tristan\.hudson1\\Documents\\MATO\.net\\MATO\.NET\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=SENLDOGO5244;Initial Catalog=MATO.net;Persist Security Info=True;User ID=mato_login;Password=K94h30hw3u5" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\tristan\.hudson1\\Documents\\MATO\.net\\MATO\.NET\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>

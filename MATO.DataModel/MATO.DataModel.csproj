@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A14CB03B-F740-41E1-AB1B-471E5087E07E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MATO.DataModel</RootNamespace>
+    <AssemblyName>MATO.DataModel</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MATOContext.cs" />
+    <Compile Include="Migrations\201807110945286_initial.cs" />
+    <Compile Include="Migrations\201807110945286_initial.Designer.cs">
+      <DependentUpon>201807110945286_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807111323289_appuserchanges.cs" />
+    <Compile Include="Migrations\201807111323289_appuserchanges.Designer.cs">
+      <DependentUpon>201807111323289_appuserchanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807111352490_updates.cs" />
+    <Compile Include="Migrations\201807111352490_updates.Designer.cs">
+      <DependentUpon>201807111352490_updates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807111407253_more.cs" />
+    <Compile Include="Migrations\201807111407253_more.Designer.cs">
+      <DependentUpon>201807111407253_more.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807111412439_nullabledates.cs" />
+    <Compile Include="Migrations\201807111412439_nullabledates.Designer.cs">
+      <DependentUpon>201807111412439_nullabledates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807131511281_lists.cs" />
+    <Compile Include="Migrations\201807131511281_lists.Designer.cs">
+      <DependentUpon>201807131511281_lists.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807131552062_unlists.cs" />
+    <Compile Include="Migrations\201807131552062_unlists.Designer.cs">
+      <DependentUpon>201807131552062_unlists.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807161159024_titlepromoToRequestFromEvent.cs" />
+    <Compile Include="Migrations\201807161159024_titlepromoToRequestFromEvent.Designer.cs">
+      <DependentUpon>201807161159024_titlepromoToRequestFromEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807161325528_forecasts.cs" />
+    <Compile Include="Migrations\201807161325528_forecasts.Designer.cs">
+      <DependentUpon>201807161325528_forecasts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807161351547_eventToRequestTravelDetails.cs" />
+    <Compile Include="Migrations\201807161351547_eventToRequestTravelDetails.Designer.cs">
+      <DependentUpon>201807161351547_eventToRequestTravelDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807161434086_regions.cs" />
+    <Compile Include="Migrations\201807161434086_regions.Designer.cs">
+      <DependentUpon>201807161434086_regions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807231051535_tas.cs" />
+    <Compile Include="Migrations\201807231051535_tas.Designer.cs">
+      <DependentUpon>201807231051535_tas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807231139337_regionalmanagers.cs" />
+    <Compile Include="Migrations\201807231139337_regionalmanagers.Designer.cs">
+      <DependentUpon>201807231139337_regionalmanagers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807231427365_additionalRegionOnRequest.cs" />
+    <Compile Include="Migrations\201807231427365_additionalRegionOnRequest.Designer.cs">
+      <DependentUpon>201807231427365_additionalRegionOnRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807231705582_superadminRequest.cs" />
+    <Compile Include="Migrations\201807231705582_superadminRequest.Designer.cs">
+      <DependentUpon>201807231705582_superadminRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807241642322_calendar.cs" />
+    <Compile Include="Migrations\201807241642322_calendar.Designer.cs">
+      <DependentUpon>201807241642322_calendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807251032552_regionalmaanger.cs" />
+    <Compile Include="Migrations\201807251032552_regionalmaanger.Designer.cs">
+      <DependentUpon>201807251032552_regionalmaanger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807251140393_requestsTweaks.cs" />
+    <Compile Include="Migrations\201807251140393_requestsTweaks.Designer.cs">
+      <DependentUpon>201807251140393_requestsTweaks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807251448286_regionAsInt.cs" />
+    <Compile Include="Migrations\201807251448286_regionAsInt.Designer.cs">
+      <DependentUpon>201807251448286_regionAsInt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808011440128_emails.cs" />
+    <Compile Include="Migrations\201808011440128_emails.Designer.cs">
+      <DependentUpon>201808011440128_emails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808021500088_fixes.cs" />
+    <Compile Include="Migrations\201808021500088_fixes.Designer.cs">
+      <DependentUpon>201808021500088_fixes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808291505456_country.cs" />
+    <Compile Include="Migrations\201808291505456_country.Designer.cs">
+      <DependentUpon>201808291505456_country.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809131140483_authordetails.cs" />
+    <Compile Include="Migrations\201809131140483_authordetails.Designer.cs">
+      <DependentUpon>201809131140483_authordetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811050955117_auditlog.cs" />
+    <Compile Include="Migrations\201811050955117_auditlog.Designer.cs">
+      <DependentUpon>201811050955117_auditlog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811121250295_eventTurnout.cs" />
+    <Compile Include="Migrations\201811121250295_eventTurnout.Designer.cs">
+      <DependentUpon>201811121250295_eventTurnout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901211217331_webinarCalendars.cs" />
+    <Compile Include="Migrations\201901211217331_webinarCalendars.Designer.cs">
+      <DependentUpon>201901211217331_webinarCalendars.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201906261509139_tentative.cs" />
+    <Compile Include="Migrations\201906261509139_tentative.Designer.cs">
+      <DependentUpon>201906261509139_tentative.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907150929309_AuthorFiles.cs" />
+    <Compile Include="Migrations\201907150929309_AuthorFiles.Designer.cs">
+      <DependentUpon>201907150929309_AuthorFiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907170924143_tweaks.cs" />
+    <Compile Include="Migrations\201907170924143_tweaks.Designer.cs">
+      <DependentUpon>201907170924143_tweaks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009211341243_AddPaymentTypetable.cs" />
+    <Compile Include="Migrations\202009211341243_AddPaymentTypetable.Designer.cs">
+      <DependentUpon>202009211341243_AddPaymentTypetable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009211404560_AddPaymentType_IdIntas.cs" />
+    <Compile Include="Migrations\202009211404560_AddPaymentType_IdIntas.Designer.cs">
+      <DependentUpon>202009211404560_AddPaymentType_IdIntas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MATO.Classes\MATO.Classes.csproj">
+      <Project>{d6f35b89-f0d3-4995-b544-69336bb06936}</Project>
+      <Name>MATO.Classes</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201807110945286_initial.resx">
+      <DependentUpon>201807110945286_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807111323289_appuserchanges.resx">
+      <DependentUpon>201807111323289_appuserchanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807111352490_updates.resx">
+      <DependentUpon>201807111352490_updates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807111407253_more.resx">
+      <DependentUpon>201807111407253_more.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807111412439_nullabledates.resx">
+      <DependentUpon>201807111412439_nullabledates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807131511281_lists.resx">
+      <DependentUpon>201807131511281_lists.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807131552062_unlists.resx">
+      <DependentUpon>201807131552062_unlists.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807161159024_titlepromoToRequestFromEvent.resx">
+      <DependentUpon>201807161159024_titlepromoToRequestFromEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807161325528_forecasts.resx">
+      <DependentUpon>201807161325528_forecasts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807161351547_eventToRequestTravelDetails.resx">
+      <DependentUpon>201807161351547_eventToRequestTravelDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807161434086_regions.resx">
+      <DependentUpon>201807161434086_regions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807231051535_tas.resx">
+      <DependentUpon>201807231051535_tas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807231139337_regionalmanagers.resx">
+      <DependentUpon>201807231139337_regionalmanagers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807231427365_additionalRegionOnRequest.resx">
+      <DependentUpon>201807231427365_additionalRegionOnRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807231705582_superadminRequest.resx">
+      <DependentUpon>201807231705582_superadminRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807241642322_calendar.resx">
+      <DependentUpon>201807241642322_calendar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807251032552_regionalmaanger.resx">
+      <DependentUpon>201807251032552_regionalmaanger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807251140393_requestsTweaks.resx">
+      <DependentUpon>201807251140393_requestsTweaks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807251448286_regionAsInt.resx">
+      <DependentUpon>201807251448286_regionAsInt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808011440128_emails.resx">
+      <DependentUpon>201808011440128_emails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808021500088_fixes.resx">
+      <DependentUpon>201808021500088_fixes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808291505456_country.resx">
+      <DependentUpon>201808291505456_country.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809131140483_authordetails.resx">
+      <DependentUpon>201809131140483_authordetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811050955117_auditlog.resx">
+      <DependentUpon>201811050955117_auditlog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811121250295_eventTurnout.resx">
+      <DependentUpon>201811121250295_eventTurnout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901211217331_webinarCalendars.resx">
+      <DependentUpon>201901211217331_webinarCalendars.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906261509139_tentative.resx">
+      <DependentUpon>201906261509139_tentative.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907150929309_AuthorFiles.resx">
+      <DependentUpon>201907150929309_AuthorFiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907170924143_tweaks.resx">
+      <DependentUpon>201907170924143_tweaks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009211341243_AddPaymentTypetable.resx">
+      <DependentUpon>202009211341243_AddPaymentTypetable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009211404560_AddPaymentType_IdIntas.resx">
+      <DependentUpon>202009211404560_AddPaymentType_IdIntas.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

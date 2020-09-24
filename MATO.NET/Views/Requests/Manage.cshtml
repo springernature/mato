@@ -1,0 +1,119 @@
+﻿@model MATO.NET.ViewModels.ManageRequestViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<div class="mainContent">
+
+    <fieldset>
+        <legend>
+            Finalised requests
+        </legend>
+        <ul class="myRequests">
+            @if (Model.FinalisedRequests.Count == 0)
+            {
+                <p> You have no approved requests. </p>
+            }
+            else
+            {
+                foreach (var f in Model.FinalisedRequests)
+                {
+
+                    <li class="mt10">
+                        <a href="/Requests/Request/@f.Id">@f.RequestedAuthor.FullName</a>, for the event(s)
+                        "@f.EventOne.EventName" on @f.EventOne.EventDate. <br />
+                        @if (f.EventTwo == null) { }
+                        else
+                        {
+                            <span>"@f.EventTwo.EventName" on @f.EventTwo.EventDate.ToString("dd MMM yyyy")</span>
+                            <br />
+                        }
+                        @if (f.EventThree == null) { }
+                        else
+                        {
+                            <span>"@f.EventThree.EventName" on @f.EventThree.EventDate.ToString("dd MMM yyyy")</span>
+                            <br />
+                        }
+                    </li>
+                    <br />
+
+                }
+            }
+        </ul>
+    </fieldset>
+
+    <fieldset>
+        <legend>Pending requests</legend>
+        <ul class="myRequests">
+            @if (Model.PendingRequests.Count == 0)
+            {
+                <p> You have no pending requests. </p>
+            }
+            else
+            {
+                foreach (var p in Model.PendingRequests)
+                {
+                    <li class="mt10">
+                        <a href="/Requests/Request/@p.Id">@p.RequestedAuthor.FullName</a>, for the event(s) <br />
+                        @if (p.EventOne == null) { }
+                    else
+                    {
+                            <span class="ml40">"@p.EventOne.EventName" on @p.EventOne.EventDate.ToString("dd MMM yyyy") <br /> </span>
+                        }
+                        @if (p.EventTwo == null) { }
+                    else
+                    {
+                            <span class="ml40">"@p.EventTwo.EventName" on @p.EventTwo.EventDate.ToString("dd MMM yyyy") <br /> </span>
+                        }
+                        @if (p.EventThree == null) { }
+                    else
+                    {
+                            <span class="ml40">"@p.EventThree.EventName" on @p.EventThree.EventDate.ToString("dd MMM yyyy") <br /> </span>
+                        }
+                    </li>
+                }
+            }
+        </ul>
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            Declined requests
+        </legend>
+        <ul class="myRequests">
+            @if (Model.GetDeclinedRequests.Count == 0)
+            {
+                <p> You have no declined requests. </p>
+            }
+            else
+            {
+                foreach (var c in Model.GetDeclinedRequests)
+                {
+                    <li class="mt10">
+                        <a href="/Requests/Request/@c.Id">@c.RequestedAuthor.FullName</a>, for the event(s) <br />
+                        @if (c.EventOne == null) { }
+                        else
+                        {
+                            <span class="ml40">"@c.EventOne.EventName" on @c.EventOne.EventDate.ToString("dd MMM yyyy") <br/> </span>
+                        }
+                        @if (c.EventTwo == null) { }
+                        else
+                        {
+                            <span class="ml40">"@c.EventTwo.EventName" on @c.EventTwo.EventDate.ToString("dd MMM yyyy") <br /> </span>
+                        }
+                        @if (c.EventThree == null) { }
+                        else
+                        {
+                            <span class="ml40">"@c.EventThree.EventName" on @c.EventThree.EventDate.ToString("dd MMM yyyy") <br /> </span>
+                        }
+                    </li>
+                }
+            }
+        </ul>
+    </fieldset>
+</div>
+
+<script>
+    $(".breadCrumbLinks").append(" <li><a href=\"/Requests/Index\">Requests</a></li>");
+    $(".breadCrumbLinks").append(" <li>Manage</li>");
+</script>

@@ -1,0 +1,112 @@
+﻿<link rel="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<link href="~/Content/reporting.css" rel="stylesheet" />
+
+
+@if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("SuperAdmin")))
+{
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel b">
+                <div class="panel-body text-center">
+                    <a href="/Reporting/Authors" class="link-unstyled text-primary">
+                        <img src="~/Content/Images/letter-a.png" class="reportIcon" />
+                        <br>
+                        <span class="h4">By Author</span>
+                        <br>
+                        <small class="text-muted">View all →</small>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel b">
+                <div class="panel-body text-center">
+                    <a href="/Reporting/Yearly" class="link-unstyled text-primary">
+                        <img src="~/Content/Images/letter-y.png" class="reportIcon" />
+                        <br>
+                        <span class="h4">By Year</span>
+                        <br>
+                        <small class="text-muted">View all →</small>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel b">
+                <div class="panel-body text-center">
+                    <a href="/Reporting/Title" class="link-unstyled text-primary">
+                        <img src="~/Content/Images/letter-t.png" class="reportIcon" />
+                        <br>
+                        <span class="h4">By Title</span>
+                        <br>
+                        <small class="text-muted">View all →</small>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel b">
+                <div class="panel-body text-center">
+                    <a href="/Reporting/Region" class="link-unstyled text-primary">
+                        <img src="~/Content/Images/letter-r.png" class="reportIcon" />
+                        <br>
+                        <span class="h4">By Region</span>
+                        <br>
+                        <small class="text-muted">View all →</small>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel b">
+                <div class="panel-body text-center">
+                    <a href="/Reporting/EventType" class="link-unstyled text-primary">
+                        <img src="~/Content/Images/letter-e.png" class="reportIcon" />
+                        <br>
+                        <span class="h4">By Event Type</span>
+                        <br>
+                        <small class="text-muted">View all →</small>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel b sectionDisabled">
+                <div class="panel-body text-center">
+                    <em class="fa fa-5x fa-television mb-lg"></em>
+                    <br>
+                    <span class="h4">Coming Soon...</span>
+                    <br>
+                    <small class="text-muted">View all →</small>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Request.IsAuthenticated && (User.IsInRole("Manager")))
+{
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel b">
+                <div class="panel-body text-center">
+                    <a href="/Reporting/Region" class="link-unstyled text-primary">
+                        <img src="~/Content/Images/letter-r.png" class="reportIcon" />
+                        <br>
+                        <span class="h4">By Region</span>
+                        <br>
+                        <small class="text-muted">View all →</small>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,37 @@
+﻿@model MATO.NET.ViewModels.ReportingRequestsViewModel
+
+<table id="requestsTable">
+    <thead>
+    <tr>
+        <td> Id </td>
+        <td> Event One Name </td>
+        <td> Manager Decision </td>
+        <td> Admin Decision </td>
+        <td> Author Decision </td>
+    </tr>
+    </thead>
+    <tbody>
+     @if(Model.Requests != null) {
+       foreach (var r in Model.Requests)
+       {
+           <tr>
+               <td> @r.Id </td>
+               <td> @r.EventOne.EventName </td>
+               <td> @r.ManagerApproval </td>
+               <td> @r.AdminApproval</td>
+               <td> @r.Finalised </td>
+           </tr>
+         }
+     }
+     else
+     {
+        <span>Nothing to see here...</span>
+     }
+    </tbody>
+</table>
+
+<script>
+    $( function () {
+        $('#requestsTable').DataTable();
+    });
+</script>

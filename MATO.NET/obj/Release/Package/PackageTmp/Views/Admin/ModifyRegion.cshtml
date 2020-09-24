@@ -1,0 +1,80 @@
+﻿@model MATO.NET.ViewModels.ModifyRegionViewModel
+@using (Html.BeginForm("ModifyRegion", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Modify Region</legend>
+        <div class="clearfix" style="margin-bottom: 10px;"></div>
+        <div class="row">
+            <div class="col-md-6">
+                @Html.LabelFor(m => m.SelectedRegionId)
+                <br>
+                @Html.DropDownListFor(m => m.SelectedRegionId, new SelectList(Model.Regions, "Id", "Name"), "", new { @class = "form-control", @onchange = "getRegionList(this.value)" })
+                <br>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </fieldset>
+
+    <div id="regionForm" style="display: none; margin-top: 20px;">
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(m => m.Name)
+                <br>
+                @Html.TextBoxFor(model => Model.Name, null, new { @class = "form-control", id = "regionName" })
+                <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(m => m.SelectedManagerId)
+                <br>
+                @Html.DropDownListFor(m => m.SelectedManagerId, new SelectList(Model.RegionalManager, "Id", "UserName"), "", new { @class = "form-control", id = "regionManager" })
+                <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-danger pull-right">Submit</button>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+
+    <script>
+        function getRegionList(region) {
+            console.log(region);
+
+            $.ajax({
+                url: '/Admin/GetRegion',
+                type: 'POST',
+                dataType: "json",
+                data: JSON.stringify({
+                    Id: region
+                }),
+                contentType: 'application/json',
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    console.log(obj);
+
+                    $("#regionName").val(obj.Name);
+                    $('#regionManager').val(obj.RegionalManagerId);
+                    $("#regionForm").show();
+
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        };
+    </script>
+
+    <script>
+        $(".breadCrumbLinks").append("<li><a href=\"/Admin/Index\">Admin</a></li><li>Modify a Region</li>");
+    </script>
+
+}

@@ -1,0 +1,65 @@
+﻿@model MATO.NET.ViewModels.TitlesViewModel
+<style>
+    #tableBody { font-size: 12px; }
+</style>
+<fieldset>
+    <legend>Title Reporting</legend>
+    <div class="clearfix" style="margin-bottom:10px;"></div>
+
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.SelectedTitleId)
+        <br>
+        @Html.DropDownListFor(m => m.SelectedTitleId, new SelectList(Model.Titles, "Id", "Name"), "", new { @class = "form-control", @onchange = "showExport()", id = "titleSelected" })
+        <br>
+    </div>
+
+    <div class="clear"></div>
+</fieldset>
+
+<div class="col-md-12">
+    <button class="btn btn-info" id="excelExport" style="display: none;"> Export to Excel </button>
+</div>
+
+<script>
+
+    function showExport() {
+        $("#excelExport").show();
+    }
+
+    $("#excelExport").on('click',
+        function () {
+            var title = $('#titleSelected').find(":selected").val();
+
+            console.log(title);
+
+            $.ajax({
+                url: '/Reporting/ExportToExcel',
+                type: 'POST',
+                dataType: "json",
+                data: JSON.stringify({
+                    Id: title,
+                    Type: 'Title'
+                }),
+                contentType: 'application/json',
+                success: function (data) {
+                    console.log(data);
+
+                    var link = document.createElement('a');
+                    link.href = data;
+                    document.body.appendChild(link);
+
+                    link.click();
+
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        });
+
+
+</script>
+
+<script>
+    $(".breadCrumbLinks").append("<li><a href=\"/Reporting/Index\">Reports</a></li> <li>Authors</li>");
+</script>

@@ -1,0 +1,34 @@
+﻿@model List<MATO.Classes.AuditLog>
+
+<legend>Audit Log</legend>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td>Item</td>
+            <td>From</td>
+            <td>To</td>
+            <td>Update By</td>
+            <td>Update Date</td>
+        </tr>
+    </thead>
+    @foreach (var r in Model)
+    {
+        <tr>
+            <td>
+                @r.ChangeItem
+            </td>
+            <td>
+                @r.From
+            </td>
+            <td>
+                @r.To
+            </td>
+            <td>
+                @r.UpdateBy
+            </td>
+            <td>
+                @r.UpdateDate
+            </td>
+        </tr>
+    }
+</table>

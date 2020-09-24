@@ -1,0 +1,563 @@
+﻿@model MATO.NET.ViewModels.SubmitWebinarRequestViewModel
+@{
+    ViewBag.Title = "Submit";
+}
+
+<style>
+    .ui-autocomplete { z-index: 1100 !important; }
+</style>
+
+@using (Html.BeginForm("Webinar", "Requests", FormMethod.Post, new { enctype = "multipart/form-data", id = "newRequest" }))
+{
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    if (Model.CurrentUser.Region == 0)
+    {
+        <div class="alert alert-danger ">
+            You have no region set against your user profile. You will be unable to create requests until this is added.
+        </div>
+    }
+
+    if (Model.UserRegion != null)
+    {
+        if (Model.UserRegion.RegionalManagerId == null)
+        {
+            <div class="alert alert-danger mt10">
+                You have no regional manager - requests will not work until this is fixed by the System Administrator.
+            </div>
+        }
+    }
+
+    <div id="authorForm">
+        <fieldset class="mt20">
+            <legend>Request details</legend>
+            <div class="my-custom-container">
+                <div class="row">
+                    <div class="clearfix" style="margin-bottom:10px;"></div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(m => m.SelectedAuthorId)
+                        <br>
+                        @Html.DropDownListFor(m => m.SelectedAuthorId, new SelectList(Model.Authors, "Id", "FullName"), "", new { @class = "form-control", @onchange = "updateDetails(this.value)", id = "authorSelect" })
+                        <br>
+                        @Html.LabelFor(m => m.TitlePromotedId)
+                        <br>
+                        @Html.DropDownListFor(m => m.TitlePromotedId, new SelectList(Model.PromotedTitle, "Id", "Name"), "", new { @class = "form-control", @onchange = "showForecasts(this.value)", id = "titleSelected" })
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>Author's Details</label>
+                        <br>
+                        @Html.TextArea("Person's Details", null, new { @class = "form-control", @id = "personDetails", @rows = 5 })
+                    </div>
+                    <div class="clearfix" style="margin-bottom:10px;"></div>
+                </div>
+                <div class="row" id="forecasts" style="display: none">
+                    <div class="col-md-4">
+                        @Html.LabelFor(m => m.Forecast.Year1) (&pound;)
+                        <br>
+                        @Html.TextBoxFor(model => Model.Forecast.Year1, null, new { @class = "form-control", autocomplete = "off", id = "forecast1" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.LabelFor(m => m.Forecast.Year2) (&pound;)
+                        <br>
+                        @Html.TextBoxFor(model => Model.Forecast.Year2, null, new { @class = "form-control", autocomplete = "off", id = "forecast2" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.LabelFor(m => m.Forecast.Year3) (&pound;)
+                        <br>
+                        @Html.TextBoxFor(model => Model.Forecast.Year3, null, new { @class = "form-control", autocomplete = "off", id = "forecast3" })
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="mt20">
+            <legend>Webinar Details</legend>
+            <div class="my-custom-container" id="eventLists">
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.LabelFor(m => m.EventOne.EventName)
+                        <br />
+                        @Html.TextBoxFor(model => Model.EventOne.EventName, null, new { @class = "form-control", @id = "EventOneName" })
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.LabelFor(m => m.EventOne.SelectedEventId)
+                        <br>
+                        @Html.DropDownListFor(m => m.EventOne.SelectedEventId, new SelectList(Model.EventOne.EventType, "Id", "Name"), "", new { @class = "form-control", @id = "EventOneEventType" })
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-6 mt10">
+                        @Html.LabelFor(m => m.EventOne.EventDate)
+                        <br />
+                        @Html.TextBoxFor(model => Model.EventOne.EventDate, null, new { @class = "form-control datepicker", autocomplete = "off", @id = "EventOneDate" })
+                    </div>
+                    <div class="col-md-6 mt10">
+                        @Html.LabelFor(m => m.EventOne.SectorTargetedId)
+                        <br />
+                        @Html.DropDownListFor(m => m.EventOne.SectorTargetedId, new SelectList(Model.EventOne.TargetSector, "Id", "Name"), "", new { @class = "form-control", @id = "EventOneTargetSector" })
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-6 mt10">
+                        @Html.LabelFor(m => m.EventOne.ExpectedTurnout)
+                        <br />
+                        @Html.TextBoxFor(model => Model.EventOne.ExpectedTurnout, null, new { @class = "form-control", autocomplete = "off", @id = "EventOneExpectedTurnout", onkeypress = "return isNumberKey(event)" })
+                    </div>
+                    <div class="col-md-6 mt10">
+                        @Html.LabelFor(m => m.EventOne.TalkTypeId)
+                        <br />
+                        @Html.DropDownListFor(m => m.EventOne.TalkTypeId, new SelectList(Model.EventOne.TalkType, "Id", "Name"), "", new { @class = "form-control", @id = "EventOneTalkType" })
+                    </div>
+                </div>
+
+            </div>
+        </fieldset>
+
+        <fieldset class="mt20">
+            <legend>Notes</legend>
+            <div class="my-custom-container">
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.LabelFor(m => m.AuthorNotesBySalesRep)
+                        <br>
+                        @Html.TextAreaFor(m => m.AuthorNotesBySalesRep, new { @class = "form-control", @id = "authorVisibleNotes" })
+                        <br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.LabelFor(m => m.NonAuthorNotesBySalesRep)
+                        <br>
+                        @Html.TextAreaFor(m => m.NonAuthorNotesBySalesRep, new { @class = "form-control", @id = "authorInvisibleNotes" })
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        @if (Model.CurrentUser.Region != 0 && Model.UserRegion.RegionalManagerId != null)
+        {
+            <button type="submit" class="btn btn-danger right">Submit</button>
+        }
+    </div>
+
+}
+
+<script>
+    $('#newRequest').submit(function () {
+        console.log("STARTED");
+        if ($.trim($("#authorSelect").val()) === "") {
+            $.toast({
+                heading: 'Error',
+                text: 'No Author selected',
+                showHideTransition: 'fade',
+                icon: 'error'
+            });
+            return false;
+        } else if ($.trim($("#titleSelected").val()) === "") {
+            $.toast({
+                heading: 'Error',
+                text: 'No title to be promoted has been chosen',
+                showHideTransition: 'fade',
+                icon: 'error'
+            });
+            return false;
+        } else if ($.trim($("#forecast1").val()) === "" ||
+            $.trim($("#forecast2").val()) === "" ||
+            $.trim($("#forecast3").val()) === "") {
+            $.toast({
+                heading: 'Error',
+                text: 'Please ensure all forecasts are populated',
+                showHideTransition: 'fade',
+                icon: 'error'
+            });
+            return false;
+        } else if ($("#forecast1").val().indexOf(",") >= 0 || $("#forecast1").val().indexOf(".") >= 0) {
+            $.toast({
+                heading: 'Error',
+                text: 'Please ensure all forecasts are whole numbers only and exclude comma\'s and decimals. ',
+                showHideTransition: 'fade',
+                icon: 'error'
+            });
+            return false;
+        } else if ($("#forecast2").val().indexOf(",") >= 0 || $("#forecast2").val().indexOf(".") >= 0) {
+            $.toast({
+                heading: 'Error',
+                text: 'Please ensure all forecasts are whole numbers only and exclude comma\'s and decimals. ',
+                showHideTransition: 'fade',
+                icon: 'error'
+            });
+            return false;
+        } else if ($("#forecast3").val().indexOf(",") >= 0 || $("#forecast3").val().indexOf(".") >= 0) {
+            $.toast({
+                heading: 'Error',
+                text: 'Please ensure all forecasts are whole numbers only and exclude comma\'s and decimals. ',
+                showHideTransition: 'fade',
+                icon: 'error'
+            });
+            return false;
+        } else if ($.isNumeric($("#forecast1").val()) == false || $.isNumeric($("#forecast2").val()) == false || $.isNumeric($("#forecast3").val()) == false) {
+            $.toast({
+                heading: 'Error',
+                text: 'Please ensure all forecasts are whole numbers only and exclude comma\'s and decimals. ',
+                showHideTransition: 'fade',
+                icon: 'error'
+            });
+            return false;
+        } else if ($.trim($("#EventOneName").val()) === "") {
+            $.toast({
+                heading: 'Error',
+                text: 'Event One must have a name',
+                showHideTransition: 'fade',
+                icon: 'error'
+            });
+            return false;
+        } else if ($.trim($("#EventOneEventType").val()) === "") {
+            $.toast({
+                heading: 'Error',
+                text: 'Event One must have an event type',
+                showHideTransition: 'fade',
+                icon: 'error'
+            });
+            return false;
+        } else if ($.trim($("#EventOneDate").val()) === "") {
+            $.toast({
+                heading: 'Error',
+                text: 'Event One\'s date must be populated',
+                showHideTransition: 'fade',
+                icon: 'error'
+            });
+            return false;
+        } else if ($.trim($("#EventOneTargetSector").val()) === "") {
+            $.toast({
+                heading: 'Error',
+                text: 'Event One\'s Target Sector must be populated',
+                showHideTransition: 'fade',
+                icon: 'error'
+            });
+            return false;
+        } else if ($.trim($("#EventOneExpectedTurnout").val()) === "") {
+            $.toast({
+                heading: 'Error',
+                text: 'Event One\'s Expected Turnout must be populated',
+                showHideTransition: 'fade',
+                icon: 'error'
+            });
+            return false;
+        } else if ($.trim($("#EventOneTalkType").val()) === "") {
+            $.toast({
+                heading: 'Error',
+                text: 'Event One\'s Talk Type must be populated',
+                showHideTransition: 'fade',
+                icon: 'error'
+            });
+            return false;
+        } else if ($.trim($("#EventTwoName").val()) !== "") {
+            if ($.trim($("#EventTwoCity").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event Two\'s city must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#EventTwoEventType").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event Two must have an event type',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#EventTwoDate").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event Two\'s date must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#EventTwoTargetSector").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event Two\'s Target Sector must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#EventTwoExpectedTurnout").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event Two\'s Expected Turnout must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            } else if ($.trim($("#EventTwoTalkType").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Event Two\'s Talk Type must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            }
+            if ($.trim($("#EventThreeName").val()) !== "") {
+                if ($.trim($("#EventThreeCity").val()) === "") {
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Event Three\'s city must be populated',
+                        showHideTransition: 'fade',
+                        icon: 'error'
+                    });
+                    return false;
+                } else if ($.trim($("#EventThreeEventType").val()) === "") {
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Event Three must have an event type',
+                        showHideTransition: 'fade',
+                        icon: 'error'
+                    });
+                    return false;
+                } else if ($.trim($("#EventThreeDate").val()) === "") {
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Event Three\'s date must be populated',
+                        showHideTransition: 'fade',
+                        icon: 'error'
+                    });
+                    return false;
+                } else if ($.trim($("#EventThreeTargetSector").val()) === "") {
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Event Three\'s Target Sector must be populated',
+                        showHideTransition: 'fade',
+                        icon: 'error'
+                    });
+                    return false;
+                } else if ($.trim($("#EventThreeExpectedTurnout").val()) === "") {
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Event Three\'s Expected Turnout must be populated',
+                        showHideTransition: 'fade',
+                        icon: 'error'
+                    });
+                    return false;
+                } else if ($.trim($("#EventThreeTalkType").val()) === "") {
+                    $.toast({
+                        heading: 'Error',
+                        text: 'Event Three\'s Talk Type must be populated',
+                        showHideTransition: 'fade',
+                        icon: 'error'
+                    });
+                    return false;
+                }
+            }
+        }
+        return true;
+    });
+</script>
+
+<script>
+    $("#EventOneEventType").val(2);
+
+    $("#EventOneDate").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'dd-mm-yy',
+        minDate: 0,
+    });
+</script>
+
+<script>
+    function updateDetails(author) {
+        $.ajax({
+            url: '/Requests/GetAuthorDetails',
+            type: 'POST',
+            dataType: "json",
+            data: JSON.stringify({
+                Id: author
+            }),
+            contentType: 'application/json',
+            success: function (data) {
+                var obj = $.parseJSON(data);
+                //console.log(obj);
+                $("#titleSelected option").hide();
+                $(obj.Titles).each(function () {
+                    $("#titleSelected option[value=" + this.Title.Id + "]").show();
+                });
+
+                $("#personDetails").val(obj.Author.FullName +
+                    " (" +
+                    obj.Author.Email +
+                    ") \n" +
+                    obj.Aud.AuthorType +
+                    " based Author \n" +
+                    obj.Aud.AddressLine1 +
+                    "\n" +
+                    obj.Aud.AddressLine2 +
+                    "\n" +
+                    obj.Aud.AddressLine3 +
+                    "\n" +
+                    obj.Aud.AuthorNotes);
+            },
+            error: function () {
+                alert("error");
+            }
+
+        });
+
+        updateDatePickers(author);
+    }
+</script>
+
+<script>
+
+    function showForecasts(title) {
+        $.ajax({
+            url: '/Requests/GetAuthorsForTitles',
+            type: 'POST',
+            dataType: "json",
+            data: JSON.stringify({
+                Id: title
+            }),
+            contentType: 'application/json',
+            success: function (data) {
+                var obj = $.parseJSON(data);
+                console.log(obj);
+                authorSelect
+
+                $("#authorSelect option").hide();
+                $(obj.authors).each(function () {
+                    $("#authorSelect option[value=" + this.Id + "]").show();
+                });
+            }
+        });
+
+        $("#forecasts").show();
+    }
+</script>
+
+<script>
+    $(".breadCrumbLinks").append(" <li><a href=\"/Requests/Index\">Requests</a></li>");
+    $(".breadCrumbLinks").append(" <li>Submit</li>");
+</script>
+
+<script>
+
+    $(function () {
+
+        var disabledDates = [];
+
+        $.ajax({
+            url: '/Requests/GetWebinarCalendar',
+            type: 'POST',
+            dataType: "json",
+            data: JSON.stringify({
+                Id: 1
+            }),
+            contentType: 'application/json',
+            success: function (data) {
+                var obj = $.parseJSON(data);
+                var cal = $.parseJSON(obj.Calendar.Data);
+
+                
+
+                $(cal).each(function (index) {
+                    var startDate = this.start; // some start date
+                    var endDate = this.end;  // some end date
+
+                    for (var d = new Date(startDate) ; d <= new Date(endDate) ; d.setDate(d.getDate() + 1)) {
+                        disabledDates.push($.datepicker.formatDate('yy-mm-dd', d));
+                        //console.log("Disabled date: " + d);
+                    }
+                });
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+
+        var d = new Date();
+        console.log(disabledDates);
+
+        $("#EventOneDate").datepicker("destroy");
+        $("#EventOneDate").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd-mm-yy',
+            defaultDate: d,
+            minDate: d,
+            beforeShowDay: function (date) {
+                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                return [disabledDates.indexOf(string) == -1]
+            }
+        });
+
+    });
+
+    function updateDatePickers(author) {
+        var disabledDates = [];
+
+        $.ajax({
+            url: '/Requests/GetAuthorDetails',
+            type: 'POST',
+            dataType: "json",
+            data: JSON.stringify({
+                Id: author
+            }),
+            contentType: 'application/json',
+            success: function (data) {
+                var obj = $.parseJSON(data);
+                var cal = $.parseJSON(obj.Calendar.Data);
+
+                $(cal).each(function (index) {
+                    var startDate = this.start; // some start date
+                    var endDate = this.end;  // some end date
+
+                    for (var d = new Date(startDate) ; d <= new Date(endDate) ; d.setDate(d.getDate() + 1)) {
+                        disabledDates.push($.datepicker.formatDate('yy-mm-dd', d));
+                        //console.log("Disabled date: " + d);
+                    }
+                });
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+
+        console.log(disabledDates);
+
+        var d = new Date();
+
+        $(".datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd-mm-yy',
+            defaultDate: d,
+            minDate: d,
+            beforeShowDay: function (date) {
+                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                return [disabledDates.indexOf(string) == -1]
+            }
+        });
+    };
+</script>
+
+<script>
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+</script>

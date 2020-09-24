@@ -1,0 +1,290 @@
+﻿@using Microsoft.AspNet.Identity
+@model MATO.NET.ViewModels.ViewRequestViewModel
+
+@{
+    var loggedInUser = User.Identity.GetUserId();
+
+    //saqibh
+    //var userRole = User.IsInRole("Manager");
+    //var userRegion = Request.LogonUserIdentity;
+
+}
+@if (Request.IsAuthenticated && (loggedInUser == Model.WhoSubmit.Id || loggedInUser == Model.Region.RegionalManagerId || User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || loggedInUser == Model.Author.Id))
+{
+    <fieldset>
+        <legend>Status summary</legend>
+        <ul>
+            <li>
+                <label>Submission date:</label>
+                <span>@Model.SubmitDate.ToString("dd MMM yyyy")</span>
+            </li>
+            <li>
+                <label>Submission By:</label>
+                <span id="ctl00_ctl00_mainContent_requestMadeBy">@Model.WhoSubmit.FullName</span>
+            </li>
+            <li>
+                <label>Status:</label>
+                @if (Model.ManagerApproved)
+                {
+                    if (Model.AdminApproved)
+                    {
+                        if (Model.Finalised)
+                        {
+                            <span>Finalised</span>
+                        }
+                        else
+                        {
+                            <span>Awaiting Author Decision</span>
+                        }
+                    }
+                    else
+                    {
+                        <span>Awaiting Admin Approval</span>
+                    }
+                }
+                else
+                {
+                    <span>Awaiting Manager Approval</span>
+                }
+            </li>
+        </ul>
+    </fieldset>
+
+    <fieldset>
+        <legend>Request details</legend>
+        <ul>
+            <li>
+                <label>Author:</label>
+                <span id="">@Model.Author.FullName</span>
+            </li>
+
+            <li>
+                <label>Title Promoted:</label>
+                <span id="">@Model.PromotedTitle.Name</span>
+            </li>
+            @if (!User.IsInRole("Author"))
+            {
+                <li>
+                    <label>Year 1 Forecast:</label>
+                    <span>@Model.Forecast.Year1</span><br />
+                </li>
+                <li>
+                    <label>Year 2 Forecast:</label>
+                    <span>@Model.Forecast.Year2</span><br />
+                </li>
+                <li>
+                    <label>Year 3 Forecast:</label>
+                    <span>@Model.Forecast.Year3</span><br />
+                </li>
+            }
+            <hr />
+            @if (Model.Outbound != null)
+            {
+                <li>
+                    <label>Outbound:</label>
+                    <span>@Model.Outbound - @Model.OutboundDate.Value.ToString("dd MMM yyyy")</span><br />
+                </li>
+            }
+            @if (Model.Inbound != null)
+            {
+                <li>
+                    <label>Inbound:</label>
+                    <span>@Model.Inbound - @Model.InboundDate.Value.ToString("dd MMM yyyy")</span><br />
+                </li>
+            }
+
+            @if (Model.EventOne.EventName != null)
+            {
+                <hr />
+                <li>
+                    <label>Event name:</label>
+                    <span id="ctl00_ctl00_mainContent_eventName">@Model.EventOne.EventName</span>
+                </li>
+                <li>
+                    <label>Event City:</label>
+                    @Model.EventOne.EventCity
+                </li>
+                <li>
+                    <label>Event type:</label>
+                    @Model.EventOne.EventType.Name
+                </li>
+                <li>
+                    <label>Talk type:</label>
+                    @Model.EventOne.TalkType.Name
+                </li>
+                <li>
+                    <label>Target Sector:</label>
+                    @Model.EventOne.TargetSector.Name
+                </li>
+                <li>
+                    <label>Date of event:</label>
+                    <span id="ctl00_ctl00_mainContent_eventDate">@Model.EventOne.EventDate.ToString("dd MMM yyyy")</span>
+                </li>
+            }
+
+            @if (Model.EventTwo != null)
+            {
+                <hr />
+                <li>
+                    <label>Event name:</label>
+                    <span id="ctl00_ctl00_mainContent_eventName">@Model.EventTwo.EventName</span>
+                </li>
+                <li>
+                    <label>Event City:</label>
+                    @Model.EventTwo.EventCity
+                </li>
+                <li>
+                    <label>Event type:</label>
+                    @Model.EventTwo.EventType.Name
+                </li>
+                <li>
+                    <label>Talk type:</label>
+                    @Model.EventTwo.TalkType.Name
+                </li>
+                <li>
+                    <label>Target Sector:</label>
+                    @Model.EventTwo.TargetSector.Name
+                </li>
+                <li>
+                    <label>Date of event:</label>
+                    <span id="ctl00_ctl00_mainContent_eventDate">@Model.EventTwo.EventDate.ToString("dd MMM yyyy")</span>
+                </li>
+            }
+
+            @if (Model.EventThree != null)
+            {
+                <hr />
+                <li>
+                    <label>Event name:</label>
+                    <span id="ctl00_ctl00_mainContent_eventName">@Model.EventThree.EventName</span>
+                </li>
+                <li>
+                    <label>Event City:</label>
+                    @Model.EventThree.EventCity
+                </li>
+                <li>
+                    <label>Event type:</label>
+                    @Model.EventThree.EventType.Name
+                </li>
+                <li>
+                    <label>Talk type:</label>
+                    @Model.EventThree.TalkType.Name
+                </li>
+                <li>
+                    <label>Target Sector:</label>
+                    @Model.EventThree.TargetSector.Name
+                </li>
+                <li>
+                    <label>Date of event:</label>
+                    <span id="ctl00_ctl00_mainContent_eventDate">@Model.EventThree.EventDate.ToString("dd MMM yyyy")</span>
+                </li>
+            }
+        </ul>
+    </fieldset>
+
+    <fieldset>
+        <legend>Decisions</legend>
+        <ul>
+
+            @if (Model.Declined)
+            {
+                if (Model.ManagerApprovalDate != null && Model.AdminApprovalDate == null && Model.FinalisedDate == null)
+                {
+                    <li>
+                        <label>Declined:</label>
+
+                        <span>Regional Manager</span>
+                    </li>
+                }
+                else if (Model.ManagerApprovalDate != null && Model.AdminApprovalDate != null && Model.FinalisedDate == null)
+                {
+                    <li>
+                        <label>Declined</label>
+
+                        <span>Administrator</span>
+                    </li>
+                }
+                else if (Model.ManagerApprovalDate != null && Model.AdminApprovalDate != null && Model.FinalisedDate != null)
+                {
+                    <li>
+                        <label>Declined</label>
+
+                        <span>Author</span>
+                    </li>
+                }
+
+            }
+            else
+            {
+                <li>
+                    <label>Regional Manager:</label>
+                    @if (Model.ManagerApproved && Model.Declined == false)
+                    {
+                        <span>Approved - @Model.ManagerApprovalDate.Value.ToString("dd MMM yyyy")</span>
+                    }
+                    else
+                    {
+                        <span> Pending </span>
+                    }
+                </li>
+                <li>
+                    <label>Admin:</label>
+                    @if (Model.AdminApproved)
+                    {
+                        <span>Approved - @Model.AdminApprovalDate.Value.ToString("dd MMM yyyy")</span>
+                    }
+                    else
+                    {
+                        <span> Pending </span>
+                    }
+                </li>
+                <li>
+                    <label>Author:</label>
+                    @if (Model.Finalised)
+                    {
+                        <span>Approved - @Model.FinalisedDate.Value.ToString("dd MMM yyyy")</span>
+                    }
+                    else
+                    {
+                        <span> Pending </span>
+
+                    }
+                </li>
+            }
+        </ul>
+    </fieldset>
+
+    <fieldset id="ctl00_ctl00_mainContent_adminFieldset">
+        <legend>Notes</legend>
+        <ul>
+            <li>
+                @if (!User.IsInRole("Author"))
+                {
+                    <label>Notes for author:</label>
+                }
+                else
+                {
+                    <label>Notes</label>
+                }
+
+                <span>@Model.AuthorNotesBySalesRep</span>
+            </li>
+            @if (!User.IsInRole("Author"))
+            {
+                <li>
+                    <label>Admin Only:</label>
+                    <span>@Model.NonAuthorNotesBySalesRep</span>
+                </li>
+            }
+        </ul>
+    </fieldset>
+
+}
+else
+{
+    <span> You do not have permission to view this request. </span>
+}
+
+<script>
+    $(".breadCrumbLinks").append(" <li>Request </li><li> @(Model.EventOne.EventName) </li>");
+</script>

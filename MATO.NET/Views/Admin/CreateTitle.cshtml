@@ -1,0 +1,63 @@
+﻿@model MATO.NET.ViewModels.CreateTitleViewModel
+
+@using (Html.BeginForm("CreateTitle", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="row">
+        <div class="col-md-12">
+            <div id="createTitleForm">
+                <fieldset class="mt20">
+                    <legend>Title details</legend>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(m => m.Name)
+                            <br>
+                            @Html.TextBoxFor(model => Model.Name, null, new { @class = "form-control" })
+                            <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(m => m.SelectedTargetSectorId)
+                            <br>
+                            @Html.DropDownListFor(m => m.SelectedTargetSectorId, new SelectList(Model.TargetSector, "Id", "Name"), "", new { @class = "form-control", @onchange = "updateDetails(this.value)" })
+                            <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.LabelFor(m => m.SelectedAuthorIds)
+                            <br>
+                            @Html.ListBoxFor(i => Model.SelectedAuthorIds, Model.Authors, new { @class = "form-control authorList" })
+                            <br>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-danger mt10 pull-right">Submit</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts {
+
+
+    <script>
+        $(document).ready(function () {
+            $('.authorList').select2();
+        });
+    </script>
+
+    <script>
+        $(".breadCrumbLinks").append("<li><a href=\"/Admin/Index\">Admin</a></li><li>Create Title</li>");
+    </script>
+
+}

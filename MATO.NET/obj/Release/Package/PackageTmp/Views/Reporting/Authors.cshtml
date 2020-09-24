@@ -1,0 +1,111 @@
+﻿@model MATO.NET.ViewModels.AuthorsViewModel
+<style>
+    #tableBody {
+        font-size: 12px; 
+    }
+</style>
+<fieldset>
+    <legend>Author Reporting</legend>
+    <div class="clearfix" style="margin-bottom:10px;"></div>
+
+    <div class="col-md-6">
+        @Html.LabelFor(m => m.SelectedAuthorId)
+        <br>
+        @Html.DropDownListFor(m => m.SelectedAuthorId, new SelectList(Model.Authors, "Id", "FullName"), "", new { @class = "form-control", @onchange = "getAuthorRequests(this.value)", id = "author" })
+        <br>
+    </div>
+
+    <div class="clear"></div>
+</fieldset>
+
+<div id="totalTable" style="display: none;">
+
+    <div class="col-md-4">
+        <label>Manager Status:</label>
+        <select id="manager-status" name="manStatus" class="form-control">
+            <option></option>
+            <option>Approved</option>
+            <option>Declined</option>
+            <option>Pending</option>
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <label>Admin Status:</label>
+        <select id="admin-status" name="adminStatus" class="form-control">
+            <option></option>
+            <option>Approved</option>
+            <option>Declined</option>
+            <option>Pending</option>
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <label>Author Status:</label>
+        <select id="author-status" name="authorStatus" class="form-control">
+            <option></option>
+            <option>Approved</option>
+            <option>Declined</option>
+            <option>Pending</option>
+        </select>
+    </div>
+
+    <div class="clear"></div>
+    
+    <div class="col-md-12">
+        <table id="dataTable" style="margin-top: 20px;" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th> Event Name </th>
+                    <th> Event Date </th>
+                    <th data-dynatable-column="manStatus"> Manager Approval </th>
+                    <th data-dynatable-column="adminStatus"> Admin Approval </th>
+                    <th data-dynatable-column="authorStatus"> Author Approval </th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <button class="btn btn-info" id="excelExport" style="display: none;"> Export to Excel </button>
+</div>
+
+<script>
+    $("#excelExport").on('click',
+        function () {
+            var author = $('#author').find(":selected").val();
+
+            console.log(author);
+
+            $.ajax({
+                url: '/Reporting/ExportToExcel',
+                type: 'POST',
+                dataType: "json",
+                data: JSON.stringify({
+                    Id: author,
+                    Type: "Author"
+                }),
+                contentType: 'application/json',
+                success: function (data) {
+                    console.log(data);
+
+                    var link = document.createElement('a');
+                    link.href = data;
+                    document.body.appendChild(link);
+
+                    link.click();
+
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        });
+</script>
+
+<script>
+    $(".breadCrumbLinks").append("<li><a href=\"/Reporting/Index\">Reports</a></li> <li>Authors</li>");
+</script>

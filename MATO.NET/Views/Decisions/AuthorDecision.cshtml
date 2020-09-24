@@ -1,0 +1,158 @@
+﻿@model MATO.NET.ViewModels.ViewRequestViewModel
+@if (Request.IsAuthenticated && User.IsInRole("Author"))
+{
+<fieldset>
+    <legend>Status summary</legend>
+    <ul>
+        <li>
+            <label>Submission date:</label>
+            <span>@Model.SubmitDate.ToString("dd MMM yyyy")</span>
+        </li>
+        <li>
+            <label>Submission By:</label>
+            <span id="ctl00_ctl00_mainContent_requestMadeBy">@Model.WhoSubmit.FullName (@Model.WhoSubmit.Country)</span>
+        </li>
+    </ul>
+</fieldset>
+
+<fieldset>
+    <legend>Request details</legend>
+    <ul>
+        <li>
+            <label>Author:</label>
+            <span id="ctl00_ctl00_mainContent_requestedAuthor">@Model.Author.FullName</span>
+        </li>
+
+        <li>
+            <label>Title Promoted:</label>
+            <span id="ctl00_ctl00_mainContent_requestedAuthor">@Model.PromotedTitle.Name</span>
+        </li>
+        
+        <hr />
+        @if (Model.Outbound != null)
+        {
+            <li>
+                <label>Outbound:</label>
+                <span>@Model.Outbound - @Model.OutboundDate.Value.ToString("dd MMM yyyy")</span><br />
+            </li>
+        }
+        @if (Model.Inbound != null)
+        {
+            <li>
+                <label>Inbound:</label>
+                <span>@Model.Inbound - @Model.InboundDate.Value.ToString("dd MMM yyyy")</span><br />
+            </li>
+        }
+
+        @if (Model.EventOne.EventName != null)
+        {
+            <li>
+                <label>Event name:</label>
+                <span id="ctl00_ctl00_mainContent_eventName">@Model.EventOne.EventName</span>
+            </li>
+            <li>
+                <label>Event City:</label>
+                @Model.EventOne.EventCity
+            </li>
+            <li>
+                <label>Event type:</label>
+                @Model.EventOne.EventType.Name
+            </li>
+            <li>
+                <label>Talk type:</label>
+                @Model.EventOne.TalkType.Name
+            </li>
+            <li>
+                <label>Target Sector:</label>
+                @Model.EventOne.TargetSector.Name
+            </li>
+            <li>
+                <label>Date of event:</label>
+                <span id="ctl00_ctl00_mainContent_eventDate">@Model.EventOne.EventDate.ToString("dd MMM yyyy")</span>
+            </li>
+        }
+
+        @if (Model.EventTwo != null)
+        {
+            <hr />
+                <li>
+                    <label>Event name:</label>
+                    <span id="ctl00_ctl00_mainContent_eventName">@Model.EventTwo.EventName</span>
+                </li>
+                <li>
+                    <label>Event City:</label>
+                    @Model.EventTwo.EventCity
+                </li>
+                <li>
+                    <label>Event type:</label>
+                    @Model.EventTwo.EventType.Name
+                </li>
+                <li>
+                    <label>Talk type:</label>
+                    @Model.EventTwo.TalkType.Name
+                </li>
+                <li>
+                    <label>Target Sector:</label>
+                    @Model.EventTwo.TargetSector.Name
+                </li>
+                <li>
+                    <label>Date of event:</label>
+                    <span id="ctl00_ctl00_mainContent_eventDate">@Model.EventTwo.EventDate.ToString("dd MMM yyyy")</span>
+                </li>
+        }
+
+        @if (Model.EventThree != null)
+        {
+            <hr />
+                <li>
+                    <label>Event name:</label>
+                    <span id="ctl00_ctl00_mainContent_eventName">@Model.EventThree.EventName</span>
+                </li>
+                <li>
+                    <label>Event City:</label>
+                    @Model.EventThree.EventCity
+                </li>
+                <li>
+                    <label>Event type:</label>
+                    @Model.EventThree.EventType.Name
+                </li>
+                <li>
+                    <label>Talk type:</label>
+                    @Model.EventThree.TalkType.Name
+                </li>
+                <li>
+                    <label>Target Sector:</label>
+                    @Model.EventThree.TargetSector.Name
+                </li>
+                <li>
+                    <label>Date of event:</label>
+                    <span id="ctl00_ctl00_mainContent_eventDate">@Model.EventThree.EventDate.ToString("dd MMM yyyy")</span>
+                </li>
+        }
+    </ul>
+</fieldset>
+
+<fieldset id="ctl00_ctl00_mainContent_adminFieldset">
+    <legend>Notes</legend>
+    <ul>
+        <li>
+            <span id="">@Model.AuthorNotesBySalesRep</span>
+        </li>
+    </ul>
+</fieldset>
+
+<form method="post" action="">
+    <fieldset>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary right" name="action:AuthorApprove">Approve</button>
+                <button type="submit" class="btn btn-danger right" name="action:AuthorDecline">Decline</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+}
+else
+{
+    <span> You do not have permission to make decisions as an Author. </span>
+}

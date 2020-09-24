@@ -1,0 +1,96 @@
+﻿@model MATO.NET.ViewModels.CreateCalendarEventViewModel
+
+@using (Html.BeginForm("CreateCalendarEvent", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+
+    <fieldset>
+        <legend>Event</legend>
+        <div class="clearfix" style="margin-bottom:10px;"></div>
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(m => m.SelectedAuthorId)
+                <br>
+                @Html.DropDownListFor(m => m.SelectedAuthorId, new SelectList(Model.Authors, "Id", "FullName"), "", new { @class = "form-control" })
+                <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(m => m.EventName)
+                <br>
+                @Html.TextBoxFor(model => Model.EventName, null, new { @class = "form-control" })
+                <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(m => m.StartDate)
+                <br>
+                @Html.TextBoxFor(model => Model.StartDate, null, new { @class = "form-control datepicker", autocomplete = "off", id = "startDate" })
+                <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(m => m.EndDate)
+                <br>
+                @Html.TextBoxFor(model => Model.EndDate, null, new { @class = "form-control datepicker", autocomplete = "off", id = "endDate" })
+                <br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-danger pull-right">Submit</button>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+    </fieldset>
+}
+
+@section Scripts {
+
+    <script>
+        var d = new Date();
+        var disabledDates = [];
+
+        $(".datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd-mm-yy',
+            defaultDate: d,
+            minDate: d,
+            beforeShowDay: function (date) {
+                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                return [disabledDates.indexOf(string) == -1]
+            }
+        });
+    </script>
+
+    <script>
+        $("#startDate").change(function () {
+            $("#endDate").datepicker("destroy");
+            var start = $("#startDate").val();
+
+            $("#endDate").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd-mm-yy',
+                defaultDate: start,
+                minDate: start
+            });
+        });
+    </script>
+
+    <script>
+        $(".breadCrumbLinks").append("<li><a href=\"/Admin/Index\">Admin</a></li><li>Create Calendar Event</li>");
+    </script>
+
+}

@@ -1,0 +1,29 @@
+datepicker only shows when author is selected
+
+Regional manager gets email of new requests
+Authors gets emails on approvals by admin 
+
+Regional can view requests (check the region and ensure manager is correct)
+
+calendar doesnt get blocked until the admin approves the request
+
+approval/decline of requests seemed to work as expected
+
+-----------------------------------------------
+
+Notes
+Clickview form  - no author details
+check author gets an email.
+
+notes - permission - author should not see it
+my requests page  - dont want to see pedign stuff
+
+-----------------------------------------------
+Fixes
+Amended regional manager for default region - can you now access the requests and get emails
+Click view form - fixed author details 
+Can't replicate the author to superadmin error
+
+
+
+

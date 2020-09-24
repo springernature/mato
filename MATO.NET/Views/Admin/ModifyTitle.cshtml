@@ -1,0 +1,164 @@
+﻿@model MATO.NET.ViewModels.ModifyTitleViewModel
+
+<fieldset>
+    <legend>Modify Title</legend>
+    <div class="clearfix" style="margin-bottom:10px;"></div>
+    <div class="row">
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.SelectedTitleId)
+            <br>
+            @Html.DropDownListFor(m => m.SelectedTitleId, new SelectList(Model.Titles, "Id", "Name"), "", new { @class = "form-control", @onchange = "getTitleDetails(this.value)", id = "selectedTitle" })
+            <br>
+        </div>
+    </div>
+    <div class="clear"></div>
+</fieldset>
+
+<div class="row" id="titleForm" style="display: none;">
+    <div class="col-md-12">
+        <div id="createTitleForm">
+            <fieldset class="mt20">
+                <legend>Title details</legend>
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.LabelFor(m => m.Name)
+                        <br>
+                        @Html.TextBoxFor(model => Model.Name, null, new { @class = "form-control", id = "titleName" })
+                        <br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.LabelFor(m => m.SelectedTargetSectorId)
+                        <br>
+                        @Html.DropDownListFor(m => m.SelectedTargetSectorId, new SelectList(Model.TargetSector, "Id", "Name"), "", new { @class = "form-control", id = "targetSector" })
+                        <br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.LabelFor(m => m.SelectedAuthorIds)
+                        <br>
+                        @Html.ListBoxFor(i => Model.SelectedAuthorIds, Model.Authors, new { @class = "form-control authorList" })
+                        <br>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-danger mt10 pull-right" id="updateTitle">Update</button>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+        function getTitleDetails(title) {
+            debugger;
+            $.ajax({
+                url: '/Admin/ModifyTitle',
+                type: 'POST',
+                dataType: "json",
+                data: JSON.stringify({
+                    Id: title
+                }),
+                contentType: 'application/json',
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    console.log(obj);
+                    $("#titleId").val(obj.title.Id);
+                    $("#titleName").val(obj.title.Name);
+                    $("#targetSector").val(obj.title.TargetSector.Id);
+                    var authors = [];
+                    $(obj.authors).each(function () {
+                        authors.push(this.Id);
+                    });
+
+
+                    $('.authorList').select2({
+                        width: "100%",
+                        multiple: true
+                    });
+
+                    $('.authorList').val(authors).trigger('change');
+
+                    $("#titleForm").show();
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        };
+    </script>
+
+    <script>
+        $("#updateTitle").on('click',
+            function () {
+                debugger;
+                var selectedTitle = $("#selectedTitle option:selected").val();
+                var titleName = $("#titleName").val();
+                var targetSector = $("#targetSector").val();
+                var authors = $(".authorList").select2('data');
+              
+                var auth = [];
+                $(authors).each(function () {
+                    auth.push(this.id);
+                });
+                debugger;
+                var authList = JSON.stringify(auth);
+
+                $.ajax({
+                    url: '/Admin/UpdateTitle',
+                    type: 'POST',
+                    dataType: "json",
+                    data: JSON.stringify({
+                        Id: selectedTitle,
+                        Name: titleName,
+                        TargetSector: targetSector,
+                        Authors: authList
+                    }),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        $.toast({
+                            heading: "Title updated",
+                            text: "This title has been updated successfully.",
+                            showHideTransition: 'slide', // It can be plain, fade or slide
+                            bgColor: 'green', // Background color for toast
+                            textColor: '#fff', // text color
+                            allowToastClose: false, // Show the close button or not
+                            hideAfter: 5000, // `false` to make it sticky or time in miliseconds to hide after
+                            stack:
+                                1, // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
+                            textAlign: 'left', // Alignment of text i.e. left, right, center
+                            position:
+                                'bottom-left' // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
+                        });
+                    },
+                    error: function (e) {
+                        $.toast({
+                            heading: "Oops!",
+                            text: "Something went wrong when trying to update this title, please try again.",
+                            showHideTransition: 'slide',
+                            bgColor: 'red',
+                            textColor: '#fff',
+                            allowToastClose: false,
+                            hideAfter: 5000,
+                            stack: 1,
+                            textAlign: 'left',
+                            position: 'top-right'
+                        });
+                    }
+                });
+            });
+    </script>
+
+    <script>
+        $(".breadCrumbLinks").append("<li><a href=\"/Admin/Index\">Admin</a></li><li>Modify Title</li>");
+    </script>
+}

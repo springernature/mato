@@ -1,0 +1,38 @@
+﻿@model List<MATO.Classes.Requests>
+
+<legend>System Requests</legend>
+
+<table class="table">
+
+    <thead>
+    <tr>
+        <th>Event One Name</th>
+        <th>Submit By</th>
+        <th>Author</th>
+        <th>Region</th>
+        <th>Event One Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var r in Model)
+    {
+        <tr>
+            <td>
+                <a href="/Admin/AuditLog/@r.Id">@r.EventOne.EventName</a>
+            </td>
+            <td>
+                @r.SubmitBy.FullName
+            </td>
+            <td>
+                @r.RequestedAuthor.FullName
+            </td>
+            <td>
+                @r.Region.Name
+            </td>
+            <td>
+                @r.EventOne.EventDate
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

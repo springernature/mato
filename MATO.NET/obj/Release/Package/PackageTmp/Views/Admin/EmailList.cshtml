@@ -1,0 +1,124 @@
+﻿@model MATO.NET.ViewModels.EmailListViewModel
+
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
+
+
+<fieldset>
+    <legend>Choose Email</legend>
+    <div class="clearfix" style="margin-bottom:10px;"></div>
+    <div class="row">
+        <div class="col-md-6">
+            @Html.LabelFor(m => m.SelectedEmailId)
+            <br>
+            @Html.DropDownListFor(m => m.SelectedEmailId, new SelectList(Model.EmailTemplates, "Id", "Name"), "", new { @class = "form-control", @onchange = "getEmailList(this.value)", id = "optionSelected" })
+            <br>
+        </div>
+    </div>
+    <div class="clear"></div>
+</fieldset>
+
+<div id="emailHtmlEditor" style="display: none; margin-top: 20px;">
+    <form method="post">
+        <textarea id="summernote" name="editordata"></textarea>
+    </form>
+    <button class="btn btn-primary pull-right" id="saveTemplate">Save</button>
+
+</div>
+
+<div class="clearfix"></div>
+
+@section Scripts {
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+
+    <script>
+        function getEmailList(list) {
+            console.log(list);
+
+            $.ajax({
+                url: '/Admin/GetEmailList',
+                type: 'POST',
+                dataType: "json",
+                data: JSON.stringify({
+                    Id: list
+                }),
+                contentType: 'application/json',
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    console.log(obj);
+
+                    $("#emailHtmlEditor").show();
+
+                    $("#summernote").summernote("destroy");
+                    $(document).ready(function () {
+                        $('#summernote').summernote();
+                    });
+
+
+                    $("#summernote").val(obj.Html);
+
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        };
+
+        $("#saveTemplate").on('click',
+            function () {
+                var option = $("#optionSelected option:selected").val();
+                var text = $("#summernote").val();
+
+                console.log(text);
+
+                $.ajax({
+                    url: '/Admin/UpdateEmailTemplate',
+                    type: 'POST',
+                    dataType: "json",
+                    data: JSON.stringify({
+                        Id: option,
+                        Html: text
+                    }),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        console.log(data);
+                        if (data === "Success") {
+                            $.toast({
+                                heading: "Email Template saved!",
+                                text: "The changes to your email template have been successfully saved",
+                                showHideTransition: 'slide', // It can be plain, fade or slide
+                                bgColor: 'green', // Background color for toast
+                                textColor: '#fff', // text color
+                                allowToastClose: false, // Show the close button or not
+                                hideAfter: 5000, // `false` to make it sticky or time in miliseconds to hide after
+                                stack:
+                                    1, // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
+                                textAlign: 'left', // Alignment of text i.e. left, right, center
+                                position:
+                                    'bottom-left' // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
+                            });
+                        }
+                        else {
+                            $.toast({
+                                heading: "Oops!",
+                                text: "Something went wrong when trying to save your template, please try again.",
+                                showHideTransition: 'slide',
+                                bgColor: 'red',
+                                textColor: '#fff',
+                                allowToastClose: false,
+                                hideAfter: 5000,
+                                stack: 1,
+                                textAlign: 'left',
+                                position: 'top-right'
+                            });
+                        }
+                    }
+                });
+            });
+    </script>
+
+    <script>
+        $(".breadCrumbLinks").append("<li><a href=\"/Admin/Index\">Admin</a></li><li>Email List</li>");
+    </script>
+
+}

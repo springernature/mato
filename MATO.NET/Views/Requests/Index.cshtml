@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<fieldset>
+    <legend>Your requests</legend>
+    <ul>
+        <li><a href="/Requests/Submit/">Submit</a> a new request.</li>
+        <li><a href="/Requests/Webinar/">Submit</a> a new Click Webinar request.</li>
+        <li><a href="/Requests/Manage">Manage</a> your requests.</li>
+    </ul>
+</fieldset>
+
+@if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Manager")))
+{
+    <fieldset id="ctl00_ctl00_mainContent_mainContent_adminOnly">
+        <legend>Reporting</legend>
+        <ul>
+            <li>
+                <a href="/Reporting/Index">View</a> request reports.
+            </li>
+        </ul>
+    </fieldset>
+}
+
+<script>
+    $(".breadCrumbLinks").append(" <li>Requests</li>");
+</script>

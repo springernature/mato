@@ -1,0 +1,130 @@
+﻿@model MATO.NET.ViewModels.PendingDecisionsViewModel
+<fieldset>
+    <legend>
+        My Decisions
+    </legend>
+    <ul class="myRequests">
+        @if (Model.Decisions == null)
+        {
+        }
+        else if (Model.Decisions.Count > 0)
+        {
+            foreach (var f in Model.Decisions)
+            {
+                <li>
+                    <a href="/Decisions/Decision/@f.Id">@f.RequestedAuthor.FullName</a>, for the event(s) <br />
+                    "@f.EventOne.EventName" on @f.EventOne.EventDate.ToString("dd MMM yyyy") <br />
+                    @if (f.EventTwo == null)
+                    {
+                    }
+                    else
+                    {
+                        <span>"@f.EventTwo.EventName" on @f.EventTwo.EventDate.ToString("dd MMM yyyy")</span>
+                        <br />
+                    }
+                    @if (f.EventThree == null)
+                    {
+                    }
+                    else
+                    {
+                        <span>"@f.EventThree.EventName" on @f.EventThree.EventDate.ToString("dd MMM yyyy")</span>
+                        <br />
+                    }
+                </li>
+                <br />
+            }
+        }
+        else if (Model.Decisions.Count == 0)
+        {
+            <p> You have no pending decisions. </p>
+        }
+    </ul>
+</fieldset>
+@if (Model.AdminDecisions != null)
+{
+    <fieldset>
+        <legend>
+            My Decisions as Administrator
+        </legend>
+
+        <ul class="myRequests">
+            @if (Model.AdminDecisions.Count > 0)
+            {
+                foreach (var f in Model.AdminDecisions)
+                {
+                    <li>
+                        <a href="/Decisions/AdminDecision/@f.Id">@f.RequestedAuthor.FullName</a>, for the event(s) <br />
+                        "@f.EventOne.EventName" on @f.EventOne.EventDate.ToString("dd MMM yyyy") <br />
+                        @if (f.EventTwo == null)
+                        {
+                        }
+                        else
+                        {
+                            <span>"@f.EventTwo.EventName" on @f.EventTwo.EventDate.</span>
+                            <br />
+                        }
+                        @if (f.EventThree == null)
+                        {
+                        }
+                        else
+                        {
+                            @f.EventThree.EventName
+                        }
+                    </li>
+                    <br />
+                }
+            }
+            else if (Model.AdminDecisions.Count == 0)
+            {
+                <p> You have no pending decisions. </p>
+            }
+        </ul>
+    </fieldset>
+}
+
+
+@if (Model.AuthorDecisions != null)
+{
+    <fieldset>
+        <legend>
+            My Decisions as an Author
+        </legend>
+
+        <ul class="myRequests">
+            @if (Model.AuthorDecisions.Count > 0)
+            {
+                foreach (var f in Model.AuthorDecisions)
+                {
+                    <li>
+                        <a href="/Decisions/AuthorDecision/@f.Id">@f.RequestedAuthor.FullName</a>, for the event(s) <br />
+                        "@f.EventOne.EventName" on @f.EventOne.EventDate. <br />
+                        @if (f.EventTwo == null)
+                        {
+                        }
+                        else
+                        {
+                            <span>"@f.EventTwo.EventName" on @f.EventTwo.EventDate.</span>
+                            <br />
+                        }
+                        @if (f.EventThree == null)
+                        {
+                        }
+                        else
+                        {
+                            @f.EventThree.EventName
+                        }
+                    </li>
+                    <br />
+                }
+            }
+            else if (Model.AuthorDecisions.Count == 0)
+            {
+                <p> You have no pending decisions. </p>
+            }
+        </ul>
+    </fieldset>
+}
+
+<script>
+    $(".breadCrumbLinks").append(" <li>Decisions </li>");
+</script>

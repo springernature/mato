@@ -1,0 +1,39 @@
+﻿@model MATO.NET.ViewModels.AuthorViewModel
+
+<fieldset style="min-height: 180px;" class="authorChooser">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6" id="step1">
+            <h2 class="text-center" style="margin-top:40px;"> Choose an Author </h2>
+            @Html.DropDownListFor(m => m.SelectedAuthorId, new SelectList(Model.Authors, "Id", "FullName"), "", new { @class = "form-control", @onchange = "directUser(this.value)" })
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</fieldset>
+
+@section Scripts {
+
+    <script>
+
+        function directUser(author) {
+            //console.log(author);
+            window.location.replace("/Author/Index/" + author);
+        }
+
+    </script>
+
+    <script>
+        $(".introduction").on('click', function () {
+            var intro = introJs();
+            intro.setOptions({
+                steps: [
+                  {
+                      element: '#step1',
+                      intro: "Select an author to progress to the author's individual information."
+                  }
+                ]
+            });
+            intro.start();
+        });
+    </script>
+}

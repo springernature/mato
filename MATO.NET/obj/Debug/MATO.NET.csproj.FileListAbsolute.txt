@@ -1,0 +1,632 @@
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\csc.exe
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\System.Collections.Immutable.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\System.Reflection.Metadata.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\vbc.exe
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\VBCSCompiler.exe
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\VBCSCompiler.exe.config
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\MATO.NET.dll.config
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\MATO.NET.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\MATO.NET.pdb
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Antlr3.Runtime.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\EntityFramework.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\EntityFramework.SqlServer.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\MATO.Classes.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\MATO.DataModel.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.AspNet.Identity.Core.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.Cookies.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.Facebook.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.Google.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.OAuth.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.Twitter.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Web.Infrastructure.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Newtonsoft.Json.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Owin.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.Helpers.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.Mvc.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.Optimization.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.Razor.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.WebPages.Deployment.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.WebPages.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.WebPages.Razor.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\WebGrease.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\MATO.Classes.pdb
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\MATO.DataModel.pdb
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.AspNet.Identity.Core.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.Helpers.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.Mvc.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.Optimization.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.Razor.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.WebPages.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.WebPages.Deployment.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.WebPages.Razor.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Antlr3.Runtime.pdb
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Newtonsoft.Json.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\EntityFramework.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\EntityFramework.SqlServer.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.Facebook.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.Cookies.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.OAuth.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.Google.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.Twitter.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\Documents\MATO\MATO.NET\MATO.NET\obj\Debug\MATO.NET.csprojResolveAssemblyReference.cache
+E:\Documents\MATO\MATO.NET\MATO.NET\obj\Debug\MATO.NET.dll
+E:\Documents\MATO\MATO.NET\MATO.NET\obj\Debug\MATO.NET.pdb
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\csc.exe
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\vbc.exe
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\VBCSCompiler.exe
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\MATO.NET.dll.config
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\MATO.NET.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\MATO.NET.pdb
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Antlr3.Runtime.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\EntityFramework.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\EntityFramework.SqlServer.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\MATO.Classes.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\MATO.DataModel.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Newtonsoft.Json.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Owin.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.Helpers.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.Mvc.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.Optimization.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.Razor.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.WebPages.Deployment.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.WebPages.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.WebPages.Razor.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\WebGrease.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\MATO.Classes.pdb
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\MATO.DataModel.pdb
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.Helpers.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.Mvc.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.Optimization.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.Razor.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.WebPages.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.WebPages.Deployment.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\System.Web.WebPages.Razor.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Antlr3.Runtime.pdb
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Newtonsoft.Json.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\EntityFramework.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\EntityFramework.SqlServer.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\obj\Debug\MATO.NET.csprojResolveAssemblyReference.cache
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\obj\Debug\MATO.NET.dll
+C:\Users\tristan.hudson1\Documents\MATO\MATO.NET\MATO.NET\obj\Debug\MATO.NET.pdb
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\roslyn\csc.exe
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\roslyn\vbc.exe
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\roslyn\VBCSCompiler.exe
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\MATO.NET.dll.config
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\MATO.NET.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\MATO.NET.pdb
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Antlr3.Runtime.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\ClosedXML.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\DocumentFormat.OpenXml.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\EntityFramework.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\EntityFramework.SqlServer.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\ExcelNumberFormat.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\FastMember.Signed.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\MATO.Classes.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\MATO.DataModel.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.Owin.Security.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Newtonsoft.Json.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Owin.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\System.Web.Helpers.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\System.Web.Mvc.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\System.Web.Optimization.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\System.Web.Razor.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\System.Web.WebPages.Deployment.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\System.Web.WebPages.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\System.Web.WebPages.Razor.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\WebGrease.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\MATO.Classes.pdb
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\MATO.DataModel.pdb
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\ClosedXML.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\DocumentFormat.OpenXml.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\ExcelNumberFormat.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\System.Web.Helpers.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\System.Web.Mvc.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\System.Web.Optimization.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\System.Web.Razor.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\System.Web.WebPages.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\System.Web.WebPages.Deployment.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\System.Web.WebPages.Razor.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Antlr3.Runtime.pdb
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Newtonsoft.Json.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\EntityFramework.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\EntityFramework.SqlServer.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.Owin.Security.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\obj\Debug\MATO.NET.csprojResolveAssemblyReference.cache
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\obj\Debug\MATO.NET.dll
+C:\Users\tristan.hudson1\Documents\MATO.net\MATO.NET\obj\Debug\MATO.NET.pdb
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\roslyn\csc.exe
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\roslyn\vbc.exe
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\roslyn\VBCSCompiler.exe
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\MATO.NET.dll.config
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\MATO.NET.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\MATO.NET.pdb
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Antlr3.Runtime.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\ClosedXML.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\DocumentFormat.OpenXml.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\EntityFramework.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\EntityFramework.SqlServer.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\ExcelNumberFormat.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\FastMember.Signed.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\MATO.Classes.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\MATO.DataModel.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.Owin.Security.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Newtonsoft.Json.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Owin.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\System.Web.Helpers.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\System.Web.Mvc.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\System.Web.Optimization.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\System.Web.Razor.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\System.Web.WebPages.Deployment.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\System.Web.WebPages.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\System.Web.WebPages.Razor.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\WebGrease.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\MATO.Classes.pdb
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\MATO.Classes.dll.config
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\MATO.DataModel.pdb
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\MATO.DataModel.dll.config
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\ClosedXML.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\DocumentFormat.OpenXml.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\ExcelNumberFormat.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\System.Web.Helpers.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\System.Web.Mvc.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\System.Web.Optimization.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\System.Web.Razor.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\System.Web.WebPages.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\System.Web.WebPages.Deployment.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\System.Web.WebPages.Razor.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Antlr3.Runtime.pdb
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Newtonsoft.Json.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\EntityFramework.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\EntityFramework.SqlServer.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.Owin.Security.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\obj\Debug\MATO.NET.csprojAssemblyReference.cache
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\obj\Debug\MATO.NET.csproj.CopyComplete
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\obj\Debug\MATO.NET.dll
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\obj\Debug\MATO.NET.pdb
+D:\SN_Projects\mato\MATO.NET\bin\roslyn\csc.exe
+D:\SN_Projects\mato\MATO.NET\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\SN_Projects\mato\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\SN_Projects\mato\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\SN_Projects\mato\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\SN_Projects\mato\MATO.NET\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\SN_Projects\mato\MATO.NET\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\SN_Projects\mato\MATO.NET\bin\roslyn\System.Collections.Immutable.dll
+D:\SN_Projects\mato\MATO.NET\bin\roslyn\System.Reflection.Metadata.dll
+D:\SN_Projects\mato\MATO.NET\bin\roslyn\vbc.exe
+D:\SN_Projects\mato\MATO.NET\bin\roslyn\VBCSCompiler.exe
+D:\SN_Projects\mato\MATO.NET\bin\roslyn\VBCSCompiler.exe.config
+D:\SN_Projects\mato\MATO.NET\bin\MATO.NET.dll.config
+D:\SN_Projects\mato\MATO.NET\bin\MATO.NET.dll
+D:\SN_Projects\mato\MATO.NET\bin\MATO.NET.pdb
+D:\SN_Projects\mato\MATO.NET\bin\Antlr3.Runtime.dll
+D:\SN_Projects\mato\MATO.NET\bin\ClosedXML.dll
+D:\SN_Projects\mato\MATO.NET\bin\DocumentFormat.OpenXml.dll
+D:\SN_Projects\mato\MATO.NET\bin\EntityFramework.dll
+D:\SN_Projects\mato\MATO.NET\bin\EntityFramework.SqlServer.dll
+D:\SN_Projects\mato\MATO.NET\bin\ExcelNumberFormat.dll
+D:\SN_Projects\mato\MATO.NET\bin\FastMember.Signed.dll
+D:\SN_Projects\mato\MATO.NET\bin\MATO.Classes.dll
+D:\SN_Projects\mato\MATO.NET\bin\MATO.DataModel.dll
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.AspNet.Identity.Core.dll
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.Owin.Security.Cookies.dll
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.Owin.Security.dll
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.Owin.Security.Facebook.dll
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.Owin.Security.Google.dll
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.Owin.Security.OAuth.dll
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.Owin.Security.Twitter.dll
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.Web.Infrastructure.dll
+D:\SN_Projects\mato\MATO.NET\bin\Newtonsoft.Json.dll
+D:\SN_Projects\mato\MATO.NET\bin\Owin.dll
+D:\SN_Projects\mato\MATO.NET\bin\System.Web.Helpers.dll
+D:\SN_Projects\mato\MATO.NET\bin\System.Web.Mvc.dll
+D:\SN_Projects\mato\MATO.NET\bin\System.Web.Optimization.dll
+D:\SN_Projects\mato\MATO.NET\bin\System.Web.Razor.dll
+D:\SN_Projects\mato\MATO.NET\bin\System.Web.WebPages.Deployment.dll
+D:\SN_Projects\mato\MATO.NET\bin\System.Web.WebPages.dll
+D:\SN_Projects\mato\MATO.NET\bin\System.Web.WebPages.Razor.dll
+D:\SN_Projects\mato\MATO.NET\bin\WebGrease.dll
+D:\SN_Projects\mato\MATO.NET\bin\MATO.Classes.pdb
+D:\SN_Projects\mato\MATO.NET\bin\MATO.Classes.dll.config
+D:\SN_Projects\mato\MATO.NET\bin\MATO.DataModel.pdb
+D:\SN_Projects\mato\MATO.NET\bin\MATO.DataModel.dll.config
+D:\SN_Projects\mato\MATO.NET\bin\ClosedXML.xml
+D:\SN_Projects\mato\MATO.NET\bin\DocumentFormat.OpenXml.xml
+D:\SN_Projects\mato\MATO.NET\bin\ExcelNumberFormat.xml
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.AspNet.Identity.Core.xml
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\SN_Projects\mato\MATO.NET\bin\System.Web.Helpers.xml
+D:\SN_Projects\mato\MATO.NET\bin\System.Web.Mvc.xml
+D:\SN_Projects\mato\MATO.NET\bin\System.Web.Optimization.xml
+D:\SN_Projects\mato\MATO.NET\bin\System.Web.Razor.xml
+D:\SN_Projects\mato\MATO.NET\bin\System.Web.WebPages.xml
+D:\SN_Projects\mato\MATO.NET\bin\System.Web.WebPages.Deployment.xml
+D:\SN_Projects\mato\MATO.NET\bin\System.Web.WebPages.Razor.xml
+D:\SN_Projects\mato\MATO.NET\bin\Antlr3.Runtime.pdb
+D:\SN_Projects\mato\MATO.NET\bin\Newtonsoft.Json.xml
+D:\SN_Projects\mato\MATO.NET\bin\EntityFramework.xml
+D:\SN_Projects\mato\MATO.NET\bin\EntityFramework.SqlServer.xml
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.Owin.Security.xml
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.Owin.Security.Facebook.xml
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.Owin.Security.Cookies.xml
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.Owin.Security.OAuth.xml
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.Owin.Security.Google.xml
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.Owin.Security.Twitter.xml
+D:\SN_Projects\mato\MATO.NET\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\SN_Projects\mato\MATO.NET\obj\Debug\MATO.NET.csprojAssemblyReference.cache
+D:\SN_Projects\mato\MATO.NET\obj\Debug\MATO.NET.csproj.CoreCompileInputs.cache
+D:\SN_Projects\mato\MATO.NET\obj\Debug\MATO.NET.csproj.CopyComplete
+D:\SN_Projects\mato\MATO.NET\obj\Debug\MATO.NET.dll
+D:\SN_Projects\mato\MATO.NET\obj\Debug\MATO.NET.pdb
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\roslyn\csc.exe
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\roslyn\vbc.exe
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\roslyn\VBCSCompiler.exe
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\MATO.NET.dll.config
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\MATO.NET.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\MATO.NET.pdb
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Antlr3.Runtime.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\ClosedXML.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\DocumentFormat.OpenXml.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\EntityFramework.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\EntityFramework.SqlServer.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\ExcelNumberFormat.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\FastMember.Signed.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\MATO.Classes.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\MATO.DataModel.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.Owin.Security.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Newtonsoft.Json.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Owin.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\System.Web.Helpers.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\System.Web.Mvc.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\System.Web.Optimization.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\System.Web.Razor.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\System.Web.WebPages.Deployment.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\System.Web.WebPages.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\System.Web.WebPages.Razor.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\WebGrease.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\MATO.Classes.pdb
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\MATO.Classes.dll.config
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\MATO.DataModel.pdb
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\MATO.DataModel.dll.config
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\ClosedXML.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\DocumentFormat.OpenXml.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\ExcelNumberFormat.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\System.Web.Helpers.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\System.Web.Mvc.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\System.Web.Optimization.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\System.Web.Razor.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\System.Web.WebPages.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\System.Web.WebPages.Deployment.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\System.Web.WebPages.Razor.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Antlr3.Runtime.pdb
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Newtonsoft.Json.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\EntityFramework.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\EntityFramework.SqlServer.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.Owin.Security.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\obj\Debug\MATO.NET.csprojAssemblyReference.cache
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\obj\Debug\MATO.NET.csproj.CoreCompileInputs.cache
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\obj\Debug\MATO.NET.csproj.CopyComplete
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\obj\Debug\MATO.NET.dll
+C:\Users\saqib\Documents\springernature\mato2\mato\MATO.NET\obj\Debug\MATO.NET.pdb
+C:\Users\saqib\Documents\springernature\mato\MATO.NET\obj\Debug\MATO.NET.csproj.CoreCompileInputs.cache
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\roslyn\csc.exe
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\roslyn\System.Collections.Immutable.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\roslyn\System.Reflection.Metadata.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\roslyn\vbc.exe
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\roslyn\VBCSCompiler.exe
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\roslyn\VBCSCompiler.exe.config
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\MATO.NET.dll.config
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\MATO.NET.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\MATO.NET.pdb
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Antlr3.Runtime.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\ClosedXML.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\DocumentFormat.OpenXml.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\EntityFramework.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\EntityFramework.SqlServer.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\ExcelNumberFormat.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\FastMember.Signed.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\MATO.Classes.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\MATO.DataModel.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.Owin.Security.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.Owin.Security.Google.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.Web.Infrastructure.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Newtonsoft.Json.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Owin.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\System.Web.Helpers.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\System.Web.Mvc.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\System.Web.Optimization.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\System.Web.Razor.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\System.Web.WebPages.Deployment.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\System.Web.WebPages.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\System.Web.WebPages.Razor.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\WebGrease.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\MATO.Classes.pdb
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\MATO.Classes.dll.config
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\MATO.DataModel.pdb
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\MATO.DataModel.dll.config
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\ClosedXML.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\DocumentFormat.OpenXml.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\ExcelNumberFormat.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\System.Web.Helpers.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\System.Web.Mvc.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\System.Web.Optimization.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\System.Web.Razor.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\System.Web.WebPages.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\System.Web.WebPages.Deployment.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\System.Web.WebPages.Razor.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Antlr3.Runtime.pdb
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Newtonsoft.Json.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\EntityFramework.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\EntityFramework.SqlServer.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.Owin.Security.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.Owin.Security.Google.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Unzip_Mato\mato_copy\MATO.NET\obj\Debug\MATO.NET.csprojAssemblyReference.cache
+C:\Unzip_Mato\mato_copy\MATO.NET\obj\Debug\MATO.NET.csproj.CoreCompileInputs.cache
+C:\Unzip_Mato\mato_copy\MATO.NET\obj\Debug\MATO.NET.csproj.CopyComplete
+C:\Unzip_Mato\mato_copy\MATO.NET\obj\Debug\MATO.NET.dll
+C:\Unzip_Mato\mato_copy\MATO.NET\obj\Debug\MATO.NET.pdb
+C:\MATO Application\MATO\MATO.NET\bin\roslyn\csc.exe
+C:\MATO Application\MATO\MATO.NET\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\MATO Application\MATO\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\MATO Application\MATO\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\MATO Application\MATO\MATO.NET\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\MATO Application\MATO\MATO.NET\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\MATO Application\MATO\MATO.NET\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\MATO Application\MATO\MATO.NET\bin\roslyn\System.Collections.Immutable.dll
+C:\MATO Application\MATO\MATO.NET\bin\roslyn\System.Reflection.Metadata.dll
+C:\MATO Application\MATO\MATO.NET\bin\roslyn\vbc.exe
+C:\MATO Application\MATO\MATO.NET\bin\roslyn\VBCSCompiler.exe
+C:\MATO Application\MATO\MATO.NET\bin\roslyn\VBCSCompiler.exe.config
+C:\MATO Application\MATO\MATO.NET\bin\MATO.NET.dll.config
+C:\MATO Application\MATO\MATO.NET\bin\MATO.NET.dll
+C:\MATO Application\MATO\MATO.NET\bin\MATO.NET.pdb
+C:\MATO Application\MATO\MATO.NET\bin\Antlr3.Runtime.dll
+C:\MATO Application\MATO\MATO.NET\bin\ClosedXML.dll
+C:\MATO Application\MATO\MATO.NET\bin\DocumentFormat.OpenXml.dll
+C:\MATO Application\MATO\MATO.NET\bin\EntityFramework.dll
+C:\MATO Application\MATO\MATO.NET\bin\EntityFramework.SqlServer.dll
+C:\MATO Application\MATO\MATO.NET\bin\ExcelNumberFormat.dll
+C:\MATO Application\MATO\MATO.NET\bin\FastMember.Signed.dll
+C:\MATO Application\MATO\MATO.NET\bin\MATO.Classes.dll
+C:\MATO Application\MATO\MATO.NET\bin\MATO.DataModel.dll
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.AspNet.Identity.Core.dll
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.Owin.Security.Cookies.dll
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.Owin.Security.dll
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.Owin.Security.Facebook.dll
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.Owin.Security.Google.dll
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.Owin.Security.OAuth.dll
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.Owin.Security.Twitter.dll
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.Web.Infrastructure.dll
+C:\MATO Application\MATO\MATO.NET\bin\Newtonsoft.Json.dll
+C:\MATO Application\MATO\MATO.NET\bin\Owin.dll
+C:\MATO Application\MATO\MATO.NET\bin\System.Web.Helpers.dll
+C:\MATO Application\MATO\MATO.NET\bin\System.Web.Mvc.dll
+C:\MATO Application\MATO\MATO.NET\bin\System.Web.Optimization.dll
+C:\MATO Application\MATO\MATO.NET\bin\System.Web.Razor.dll
+C:\MATO Application\MATO\MATO.NET\bin\System.Web.WebPages.Deployment.dll
+C:\MATO Application\MATO\MATO.NET\bin\System.Web.WebPages.dll
+C:\MATO Application\MATO\MATO.NET\bin\System.Web.WebPages.Razor.dll
+C:\MATO Application\MATO\MATO.NET\bin\WebGrease.dll
+C:\MATO Application\MATO\MATO.NET\bin\MATO.Classes.pdb
+C:\MATO Application\MATO\MATO.NET\bin\MATO.Classes.dll.config
+C:\MATO Application\MATO\MATO.NET\bin\MATO.DataModel.pdb
+C:\MATO Application\MATO\MATO.NET\bin\MATO.DataModel.dll.config
+C:\MATO Application\MATO\MATO.NET\bin\ClosedXML.xml
+C:\MATO Application\MATO\MATO.NET\bin\DocumentFormat.OpenXml.xml
+C:\MATO Application\MATO\MATO.NET\bin\ExcelNumberFormat.xml
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.AspNet.Identity.Core.xml
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\MATO Application\MATO\MATO.NET\bin\System.Web.Helpers.xml
+C:\MATO Application\MATO\MATO.NET\bin\System.Web.Mvc.xml
+C:\MATO Application\MATO\MATO.NET\bin\System.Web.Optimization.xml
+C:\MATO Application\MATO\MATO.NET\bin\System.Web.Razor.xml
+C:\MATO Application\MATO\MATO.NET\bin\System.Web.WebPages.xml
+C:\MATO Application\MATO\MATO.NET\bin\System.Web.WebPages.Deployment.xml
+C:\MATO Application\MATO\MATO.NET\bin\System.Web.WebPages.Razor.xml
+C:\MATO Application\MATO\MATO.NET\bin\Antlr3.Runtime.pdb
+C:\MATO Application\MATO\MATO.NET\bin\Newtonsoft.Json.xml
+C:\MATO Application\MATO\MATO.NET\bin\EntityFramework.xml
+C:\MATO Application\MATO\MATO.NET\bin\EntityFramework.SqlServer.xml
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.Owin.Security.xml
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.Owin.Security.Facebook.xml
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.Owin.Security.Cookies.xml
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.Owin.Security.OAuth.xml
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.Owin.Security.Google.xml
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.Owin.Security.Twitter.xml
+C:\MATO Application\MATO\MATO.NET\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\MATO Application\MATO\MATO.NET\obj\Debug\MATO.NET.csprojAssemblyReference.cache
+C:\MATO Application\MATO\MATO.NET\obj\Debug\MATO.NET.csproj.CoreCompileInputs.cache
+C:\MATO Application\MATO\MATO.NET\obj\Debug\MATO.NET.csproj.CopyComplete
+C:\MATO Application\MATO\MATO.NET\obj\Debug\MATO.NET.dll
+C:\MATO Application\MATO\MATO.NET\obj\Debug\MATO.NET.pdb

@@ -1,0 +1,122 @@
+﻿@model MATO.NET.ViewModels.AdminModifySystemViewModel
+
+<style>
+    .notActive { color: #fff; }
+        .notActive:hover { color: #fff; text-decoration: none; }
+        .notActive:visited { color: #fff; text-decoration: none; }
+</style>
+
+<table class="table table-striped table-hover">
+    <tbody id="eventTypeTable">
+        @foreach (var p in Model.TalkTypes)
+        {
+            <tr>
+                <td width="90%">@p.Name</td>
+                @if (p.Active)
+                {
+                    <td><span class="label label-primary" width="10%"><a href="#" class="toggleActiveStatus notActive" id="@p.Id">Active</a></span></td>
+                }
+                else
+                {
+                    <td><span class="label label-danger" width="10%"><a href="#" class="toggleActiveStatus notActive" id="@p.Id">Inactive</a></span></td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newEventType">
+    Add Talk Type
+</button>
+
+<div class="modal inmodal" id="newEventType" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="EventOne_EventName">Talk Type Name</label>
+                        <br>
+                        <input class="form-control" id="talkTypeName" name="talkTypeName" type="text" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="talkTypeSave" data-dismiss="modal">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(".toggleActiveStatus").on('click',
+            function () {
+
+                var id = $(this).attr("id");
+
+                $.ajax({
+                    url: '/Admin/ToggleActiveTalkType',
+                    type: 'POST',
+                    dataType: "json",
+                    data: JSON.stringify({
+                        Id: id
+                    }),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+
+                        console.log(obj.Active);
+
+                        if (obj.Active) {
+                            $("#" + obj.Id).parent().addClass("label-primary");
+                            $("#" + obj.Id).parent().removeClass("label-danger");
+                            $("#" + obj.Id).html("Active");
+                        } else {
+                            $("#" + obj.Id).parent().addClass("label-danger");
+                            $("#" + obj.Id).parent().removeClass("label-primary");
+                            $("#" + obj.Id).html("Inactive");
+                        }
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                });
+            });
+
+        $("#talkTypeSave").on('click',
+            function () {
+                var name = $("#talkTypeName").val();
+                console.log(name);
+
+                $.ajax({
+                    url: '/Admin/AddTalkType',
+                    type: 'POST',
+                    dataType: "json",
+                    data: JSON.stringify({
+                        Name: name
+                    }),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        console.log(obj);
+                        $("#eventTypeTable")
+                            .append(
+                                "<tr><td width=\"90%\">" + obj.Name + "</td><td><span class=\"label label-primary\" width=\"10%\"><a href=\"#\" class=\"toggleActiveStatus notActive\" id=" +
+                                obj.Id +
+                                ">Active</a></span></td><tr>");
+
+                        console.log("+ CALL TOAST");
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                });
+
+            });
+    </script>
+
+    <script>
+        $(".breadCrumbLinks").append("<li><a href=\"/Admin/Index\">Admin</a></li><li>Modify Talk Type</li>");
+    </script>
+}
