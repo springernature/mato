@@ -94,8 +94,7 @@ namespace MATO.NET.Controllers
             var titleId = Int32.Parse(id);
             var title = _unitOfWork.AdminService.GetTitleById(titleId);
             var authors = _unitOfWork.AdminService.GetAuthorsByTitleId(titleId);
-            var authorwithpaymenttype = _unitOfWork.AdminService.GetAuthorsAndPaymenetType(titleId);
-            var json = JsonConvert.SerializeObject(new { title, authors, authorwithpaymenttype }, new Newtonsoft.Json.Converters.StringEnumConverter());
+            var json = JsonConvert.SerializeObject(new { title, authors }, new Newtonsoft.Json.Converters.StringEnumConverter());
             return Json(json);
         }
 
@@ -109,7 +108,41 @@ namespace MATO.NET.Controllers
 
             return Json("");
         }
+        [HttpGet]
+        public ActionResult ModifyPaymentType()
+        {
+            
+            ModifyPaymentTypeViewModel model =
+                   new ModifyPaymentTypeViewModel { Authors = _unitOfWork.UserService.GetApplicationUsersInRole("Author") };
+            return View(model);
 
+           
+        }
+        [HttpPost]
+        public JsonResult GetTitleAndPaymentType(string id)
+        {
+
+            var titles = _unitOfWork.AdminService.GetTitles(id);
+            var paymentType = _unitOfWork.AdminService.GetPaymentType(id);
+            var json = JsonConvert.SerializeObject(new { titles, paymentType }, new Newtonsoft.Json.Converters.StringEnumConverter());
+            return Json(json);
+        }
+        [HttpPost]
+        public JsonResult GetAllPaymentType()
+        {
+            var paymentInfo = _unitOfWork.AdminService.GetAllPaymentTypes();
+            var json = JsonConvert.SerializeObject(new { paymentInfo }, new Newtonsoft.Json.Converters.StringEnumConverter());
+            return Json(json);
+
+        }
+        [HttpPost]
+        public JsonResult EditPaymentType(int RowId,string PaymentId)
+        {
+            var payment= _unitOfWork.AdminService.UpdatePaymentType(RowId, PaymentId);
+            var json = JsonConvert.SerializeObject(new { payment }, new Newtonsoft.Json.Converters.StringEnumConverter());
+            return Json(json);
+           
+        }
         [HttpGet]
         public ActionResult CreateUser()
         {
@@ -267,7 +300,7 @@ namespace MATO.NET.Controllers
 
             if (userRoles.Any())
             {
-                UserManager.RemoveFromRoles(user.Id, userRoles.ToArray());
+             UserManager.RemoveFromRoles(user.Id, userRoles.ToArray());
             }
 
             _unitOfWork.UserService.DeleteUser(userId);
@@ -403,6 +436,7 @@ namespace MATO.NET.Controllers
             {
                 Users = _unitOfWork.UserService.GetAllUsers()
             };
+
 
             return View(model);
         }
@@ -594,7 +628,9 @@ namespace MATO.NET.Controllers
                 Finalised = request.Finalised,
                 FinalisedDate = request.FinalisedDate,
                 AuthorNotesBySalesRep = request.AuthorNotesBySalesRep,
-                NonAuthorNotesBySalesRep = request.NonAuthorNotesBySalesRep
+                NonAuthorNotesBySalesRep = request.NonAuthorNotesBySalesRep,
+                SessionDescription = request.SessionDescription,
+               LocalAuthorContact=request.LocalAuthorContact
             };
 
             return View(model);
@@ -605,6 +641,20 @@ namespace MATO.NET.Controllers
         {
             var request = _unitOfWork.RequestsService.GetRequestById(model.Id); // Pass Id to get Request.
 
+            if (request.SessionDescription != model.SessionDescription)
+            {
+                _unitOfWork.AdminService.CreateAuditLog(request.Id, "Session Description", request.SessionDescription,
+                    model.SessionDescription, "Super Admin Panel");
+                request.SessionDescription = model.SessionDescription;
+                _unitOfWork.Complete();
+            }
+            if (request.LocalAuthorContact != model.LocalAuthorContact)
+            {
+                _unitOfWork.AdminService.CreateAuditLog(request.Id, "Local Author Contact", request.LocalAuthorContact,
+                    model.LocalAuthorContact, "Super Admin Panel");
+                request.LocalAuthorContact = model.LocalAuthorContact;
+                _unitOfWork.Complete();
+            }
             if (request.TitleForecast.Year1 != model.Forecast.Year1)
             {
                 _unitOfWork.AdminService.CreateAuditLog(request.Id, "Forecast Year 1", request.TitleForecast.Year1.ToString(),

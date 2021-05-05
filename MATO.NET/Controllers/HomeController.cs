@@ -93,7 +93,7 @@ namespace MATO.NET.Controllers
             else if (role == "Admin" || role == "SuperAdmin")
             {
                 _unitOfWork.DecisionsService.AdminApproveRequest(model.RequestId);
-                _unitOfWork.RequestsService.AddRequestToAuthorCalendar(request.RequestedAuthor.Id, request.EventOne.EventName, request.OutboundDate, request.InboundDate, request.Id);
+               _unitOfWork.RequestsService.AddRequestToAuthorCalendar(request.RequestedAuthor.Id, request.EventOne.EventName, request.OutboundDate, request.InboundDate, request.Id, request.EventOne.EventDate);
                 _unitOfWork.EmailService.SendMail(manager, 4, request); // Regional Manager
                 _unitOfWork.EmailService.SendMail(whoSubmit, 6, request); // Sales Rep Who Submit
                 _unitOfWork.EmailService.SendMail(author, 8, request); // Sales Rep Who Submit

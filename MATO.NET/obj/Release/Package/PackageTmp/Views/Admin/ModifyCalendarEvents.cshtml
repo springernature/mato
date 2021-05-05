@@ -45,6 +45,7 @@
 
                     $(obj).each(function () {
                         $("#eventTable").append("<tr id=\"" + this.title + "\"><td width=\"60%\">" + this.title + "</td><td>" + this.start + "</td><td>" + this.end + "</td><td><span class=\"label label-danger\" width=\"10%\"><a href=\"#\" onclick=\"removeCalendarEvent(this)\" class=\"removeCalendarEvent notActive\" id=\"" + this.title + "\">Delete</a></span></td></tr>");
+
                     });
 
                     $("#userId").val(obj.Id);
@@ -61,7 +62,8 @@
 
     <script>
         function removeCalendarEvent(selected) {
-
+            debugger;
+           
             var id = $("#userSelected").val();
             var title = $(selected).attr('id');
 

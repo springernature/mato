@@ -153,6 +153,7 @@
 <script>
     $('#newRequest').submit(function () {
         console.log("STARTED");
+        debugger;
         if ($.trim($("#authorSelect").val()) === "") {
             $.toast({
                 heading: 'Error',

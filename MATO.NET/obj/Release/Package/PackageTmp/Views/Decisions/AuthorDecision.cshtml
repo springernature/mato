@@ -27,7 +27,14 @@
             <label>Title Promoted:</label>
             <span id="ctl00_ctl00_mainContent_requestedAuthor">@Model.PromotedTitle.Name</span>
         </li>
-        
+        <li>
+            <label>Session Description:</label>
+            <span id="ctl00_ctl00_mainContent_requestedAuthor">@Model.SessionDescription</span>
+        </li>
+        <li>
+            <label>Local Author Contact:</label>
+            <span id="ctl00_ctl00_mainContent_requestedAuthor">@Model.LocalAuthorContact</span>
+        </li>
         <hr />
         @if (Model.Outbound != null)
         {
@@ -75,59 +82,59 @@
         @if (Model.EventTwo != null)
         {
             <hr />
-                <li>
-                    <label>Event name:</label>
-                    <span id="ctl00_ctl00_mainContent_eventName">@Model.EventTwo.EventName</span>
-                </li>
-                <li>
-                    <label>Event City:</label>
-                    @Model.EventTwo.EventCity
-                </li>
-                <li>
-                    <label>Event type:</label>
-                    @Model.EventTwo.EventType.Name
-                </li>
-                <li>
-                    <label>Talk type:</label>
-                    @Model.EventTwo.TalkType.Name
-                </li>
-                <li>
-                    <label>Target Sector:</label>
-                    @Model.EventTwo.TargetSector.Name
-                </li>
-                <li>
-                    <label>Date of event:</label>
-                    <span id="ctl00_ctl00_mainContent_eventDate">@Model.EventTwo.EventDate.ToString("dd MMM yyyy")</span>
-                </li>
+            <li>
+                <label>Event name:</label>
+                <span id="ctl00_ctl00_mainContent_eventName">@Model.EventTwo.EventName</span>
+            </li>
+            <li>
+                <label>Event City:</label>
+                @Model.EventTwo.EventCity
+            </li>
+            <li>
+                <label>Event type:</label>
+                @Model.EventTwo.EventType.Name
+            </li>
+            <li>
+                <label>Talk type:</label>
+                @Model.EventTwo.TalkType.Name
+            </li>
+            <li>
+                <label>Target Sector:</label>
+                @Model.EventTwo.TargetSector.Name
+            </li>
+            <li>
+                <label>Date of event:</label>
+                <span id="ctl00_ctl00_mainContent_eventDate">@Model.EventTwo.EventDate.ToString("dd MMM yyyy")</span>
+            </li>
         }
 
         @if (Model.EventThree != null)
         {
             <hr />
-                <li>
-                    <label>Event name:</label>
-                    <span id="ctl00_ctl00_mainContent_eventName">@Model.EventThree.EventName</span>
-                </li>
-                <li>
-                    <label>Event City:</label>
-                    @Model.EventThree.EventCity
-                </li>
-                <li>
-                    <label>Event type:</label>
-                    @Model.EventThree.EventType.Name
-                </li>
-                <li>
-                    <label>Talk type:</label>
-                    @Model.EventThree.TalkType.Name
-                </li>
-                <li>
-                    <label>Target Sector:</label>
-                    @Model.EventThree.TargetSector.Name
-                </li>
-                <li>
-                    <label>Date of event:</label>
-                    <span id="ctl00_ctl00_mainContent_eventDate">@Model.EventThree.EventDate.ToString("dd MMM yyyy")</span>
-                </li>
+            <li>
+                <label>Event name:</label>
+                <span id="ctl00_ctl00_mainContent_eventName">@Model.EventThree.EventName</span>
+            </li>
+            <li>
+                <label>Event City:</label>
+                @Model.EventThree.EventCity
+            </li>
+            <li>
+                <label>Event type:</label>
+                @Model.EventThree.EventType.Name
+            </li>
+            <li>
+                <label>Talk type:</label>
+                @Model.EventThree.TalkType.Name
+            </li>
+            <li>
+                <label>Target Sector:</label>
+                @Model.EventThree.TargetSector.Name
+            </li>
+            <li>
+                <label>Date of event:</label>
+                <span id="ctl00_ctl00_mainContent_eventDate">@Model.EventThree.EventDate.ToString("dd MMM yyyy")</span>
+            </li>
         }
     </ul>
 </fieldset>

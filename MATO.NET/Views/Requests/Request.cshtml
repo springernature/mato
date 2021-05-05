@@ -62,6 +62,14 @@
                 <label>Title Promoted:</label>
                 <span id="">@Model.PromotedTitle.Name</span>
             </li>
+            <li>
+                <label>Session Description:</label>
+                <span id="">@Model.SessionDescription</span>
+            </li>
+            <li>
+                <label>LocalAuthorContact:</label>
+                <span id="">@Model.LocalAuthorContact</span>
+            </li>
             @if (!User.IsInRole("Author"))
             {
                 <li>

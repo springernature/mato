@@ -1,0 +1,15 @@
+https://jira.springernature.com/secure/Dashboard.jspa
+Use this for database engineering team and sys admin tickets
+--------------------------------------------------------------------------------
+SYSADM-94279
+Covers portal webservice access in production
+---------------------------------------------------------------------------------
+If Nikita needs anything re-configuring in her JIRA project she will need to contact the JIRA administrators on 
+this email address - appman-ticket@springernature.com
+--------------------------------------------------------------------------------
+https://drive.google.com/drive/folders/1Bsgh52P7EJtak8NquGMqu8xgruvPId-I
+patch test
+-------------------------------------------------------------------------------------
+Production - First sunday of the month servers are patched. Check MATO and Covers Portal. Ensure you can login.--on monday
+UAT/Dev - Third sunday of the month servers are patched. Check MATO and Covers Portal. Ensure you can login.--on monday
+------------------------------------------------------------------------------------

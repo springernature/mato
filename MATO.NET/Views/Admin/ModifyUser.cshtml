@@ -1,10 +1,10 @@
 ﻿@model MATO.NET.ViewModels.ModifyUserViewModel
-@{
+@*@{
     List<SelectListItem> items = new List<SelectListItem>();
     items.Add(new SelectListItem { Text = "Fee", Value = "Fee" });
     items.Add(new SelectListItem { Text = "Royalty", Value = "Royalty" });
     items.Add(new SelectListItem { Text = "Title Dependent", Value = "Title Dependent" });
-}
+}*@
 <fieldset>
     <legend>Modify User</legend>
     <div class="clearfix" style="margin-bottom:10px;"></div>
@@ -68,10 +68,10 @@
 
     <div class="row" id="authorDetailsForm" style="display: none">
         <div class="col-md-6">
-            @Html.LabelFor(m => m.AuthorDetails.AuthorType)
+            @*@Html.LabelFor(m => m.AuthorDetails.AuthorType)*@
             <br>
-            @Html.DropDownListFor(m => m.AuthorDetails.AuthorType, items, "", new { @class = "form-control", id = "authorType" })
-            <br>
+            @*@Html.DropDownListFor(m => m.AuthorDetails.AuthorType, items, "", new { @class = "form-control", id = "authorType" })
+            <br>*@
             @Html.TextAreaFor(n => n.AuthorDetails.AuthorNotes, new { @class = "form-control", @id = "authorDetails", @rows = 5 })
             <br>
         </div>
@@ -189,6 +189,7 @@
 
         $("#deleteUserConfirm").on('click',
             function () {
+                debugger;
                 var userId = $("#userId").val();
 
                 $.ajax({

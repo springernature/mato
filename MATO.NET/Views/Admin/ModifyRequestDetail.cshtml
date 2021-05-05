@@ -57,7 +57,25 @@
                     @Html.TextBoxFor(model => Model.PromotedTitle.Name, null, new { disabled = "disabled", @class = "form-control", autocomplete = "off" })
                 </div>
             </div>
-            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <label style="margin-top:15px;">Session Description:</label>
+                    @Html.TextBoxFor(model => Model.SessionDescription, null, new { @class = "form-control", autocomplete = "off", id = "SessionDescription" })
+                </div>
+                <div class="col-md-6">
+                    <label style="margin-top:15px;">Local Author Contact:</label>
+                    @Html.TextBoxFor(model => Model.LocalAuthorContact, null, new { @class = "form-control", autocomplete = "off", id = "LocalAuthorContact" })
+                </div>
+
+            </div>
+            <br/>
+            @*<div class="row">
+                <div class="col-md-6">
+                    <label style="margin-top:15px;">Local Author Contact:</label>
+                    @Html.TextBoxFor(model => Model.LocalAuthorContact, null, new { @class = "form-control", autocomplete = "off", id = "LocalAuthorContact" })
+                </div>
+
+            </div>*@
             <div class="row">
                 <div class="col-md-4">
                     <label>Year 1 Forecast:</label>

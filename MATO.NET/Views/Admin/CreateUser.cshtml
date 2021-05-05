@@ -1,10 +1,10 @@
 ﻿@model MATO.NET.ViewModels.CreateUserViewModel
-@{
+@*@{
     List<SelectListItem> items = new List<SelectListItem>();
     items.Add(new SelectListItem { Text = "Fee", Value = "Fee" });
     items.Add(new SelectListItem { Text = "Royalty", Value = "Royalty" });
     items.Add(new SelectListItem { Text = "Title Dependent", Value = "Title Dependent" });
-}
+}*@
 
 <div id="userForm">
     <input type="hidden" id="userId" />
@@ -55,9 +55,9 @@
 
     <div class="row" id="authorDetailsForm" style="display: none;">
         <div class="col-md-6">
-            @Html.LabelFor(m => m.AuthorType)
-            <br>
-            @Html.DropDownListFor(m => m.AuthorType, items, "", new { @class = "form-control", id = "authorType" })
+            @Html.LabelFor(m => m.AuthorNotes)
+            @*<br>
+            @Html.DropDownListFor(m => m.AuthorType, items, "", new { @class = "form-control", id = "authorType" })*@
             <br>
             @Html.TextAreaFor(n => n.AuthorNotes, new { @class = "form-control", @id = "authorDetails", @rows = 5 })
             <br>

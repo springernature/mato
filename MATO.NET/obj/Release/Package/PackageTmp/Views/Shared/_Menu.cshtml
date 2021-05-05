@@ -2,21 +2,27 @@
     <ol>
         <li><a href="/Home/Index">Home</a></li>
         @*@if (!User.IsInRole("Author"))
-            {
-                <li id="ctl00_menuRequests">
-                    <a href="/Requests/Index">Requests</a>
-                </li>
-            }
-            @if (!User.IsInRole("SalesRep"))
-            {
-                <li id="ctl00_menuDecisions">
-                    <a href="/Decisions/Index">Decisions</a>
-                </li>
-            }*@
+        {
+            <li id="ctl00_menuRequests">
+                <a href="/Requests/Index">Requests</a>
+            </li>
+        }
+        @if (!User.IsInRole("SalesRep"))
+        {
+            <li id="ctl00_menuDecisions">
+                <a href="/Decisions/Index">Decisions</a>
+            </li>
+        }*@
         @if (Request.IsAuthenticated && !User.IsInRole("Author"))
         {
             <li id="ctl00_menuCalendar">
                 <a href="/Author/Index">Authors</a>
+            </li>
+        }
+        @if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("SuperAdmin")))
+        {
+            <li id="ctl00_menuAdmin">
+                <a href="/Title/Index">Titles</a>
             </li>
         }
         @if (Request.IsAuthenticated && (User.IsInRole("Admin") || User.IsInRole("SuperAdmin")))
@@ -28,7 +34,9 @@
         <li><a href="#" class="introduction">Help</a></li>
         <li>
             <style>
-                #logoutForm { display: inline; }
+                #logoutForm {
+                    display: inline;
+                }
             </style>
             @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
             {

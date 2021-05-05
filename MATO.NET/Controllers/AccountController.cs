@@ -227,8 +227,8 @@ namespace MATO.NET.Controllers
                 {
                     Port = 25,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
-                    //Host = "relay.springernature.com"
-                    Host = "localhost"
+                 // Host = "relay.springernature.com"
+                 Host = "localhost"
                 };
 
                 //recipient address

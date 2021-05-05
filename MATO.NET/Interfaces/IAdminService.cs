@@ -35,7 +35,10 @@ namespace MATO.NET.Interfaces
         PromotedTitle GetTitleById(int id);
         List<AppUser> GetAuthorsByTitleId(int id);
         List<TitleAuthorAssociation> GetAuthorsAndPaymenetType(int id);
-        
+        List<PromotedTitle> GetTitles(string id);
+         List<TitleAuthorAssociation> GetPaymentType(string id);
+        List<PaymentType> GetAllPaymentTypes();
+        PaymentType UpdatePaymentType(int RowId, string PaymentId);
         PromotedTitle UpdateTitle(PromotedTitle title, string name, int targetSector, string authors);
         AuditLog CreateAuditLog(int id, string changeItem, string from, string to, string by);
         List<AuditLog> GetAuditLogById(int id);

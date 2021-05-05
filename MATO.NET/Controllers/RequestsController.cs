@@ -154,6 +154,10 @@ namespace MATO.NET.Controllers
                 AuthorNotesBySalesRep = request.AuthorNotesBySalesRep,
                 NonAuthorNotesBySalesRep = request.NonAuthorNotesBySalesRep,
                 Region = request.Region,
+                SessionDescription=request.SessionDescription,
+                LocalAuthorContact = request.LocalAuthorContact
+
+
             };
 
             return View(model);

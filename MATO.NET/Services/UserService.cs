@@ -49,12 +49,31 @@ namespace MATO.NET.Services
 
         public AppUser DeleteUser(string id)
         {
+            var authorsList = context.TitleAuthorAssociation.Include("Author").Where(s => s.Author.Id == id).ToList();
+            foreach (var a in authorsList)
+            {
+                context.TitleAuthorAssociation.Remove(a);
+            }
+            var calendarsRows = context.Calendar.Where(s => s.Author.Id == id).ToList();
+            foreach (var c in calendarsRows)
+            {
+                context.Calendar.Remove(c);
+            }
+            var requestRows = context.Requests.Include("RequestedAuthor").Where(a => a.RequestedAuthor.Id == id).ToList();
+            foreach (var r in requestRows)
+            {
+                context.Requests.Remove(r);
+            }
+            var AuthorFilesRows = context.AuthorFiles.Where(s => s.Author.Id == id).ToList();
+            foreach (var af in AuthorFilesRows)
+            {
+                context.AuthorFiles.Remove(af);
+            }
             var user = context.Users.FirstOrDefault(o => o.Id == id);
             context.Users.Remove(user);
-
             return user;
         }
-
+       
         public List<AppUser> GetAllUsers()
         {
             return context.Users.Where(o => o.Id != null).OrderBy(o => o.FirstName).ToList();

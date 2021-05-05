@@ -60,7 +60,7 @@
 
     <script>
         function getTitleDetails(title) {
-
+            debugger;
             $.ajax({
                 url: '/Admin/ModifyTitle',
                 type: 'POST',
@@ -71,7 +71,7 @@
                 contentType: 'application/json',
                 success: function (data) {
                     var obj = JSON.parse(data);
-
+                    console.log(obj);
                     $("#titleId").val(obj.title.Id);
                     $("#titleName").val(obj.title.Name);
                     $("#targetSector").val(obj.title.TargetSector.Id);
@@ -100,17 +100,17 @@
     <script>
         $("#updateTitle").on('click',
             function () {
-
+                debugger;
                 var selectedTitle = $("#selectedTitle option:selected").val();
                 var titleName = $("#titleName").val();
                 var targetSector = $("#targetSector").val();
                 var authors = $(".authorList").select2('data');
-
+              
                 var auth = [];
                 $(authors).each(function () {
                     auth.push(this.id);
                 });
-
+                debugger;
                 var authList = JSON.stringify(auth);
 
                 $.ajax({

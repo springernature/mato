@@ -251,7 +251,25 @@ namespace MATO.NET.Services
             region.RegionalManagerId = model.SelectedManagerId;
             return region;
         }
+        
+          public List<PaymentType> GetAllPaymentTypes()
+        {
+            return context.PaymentTypes.OrderBy(e => e.Name).ToList();
 
+        }
+        public PaymentType UpdatePaymentType(int RowId, string PaymentId)
+        {
+              var paymentTypeId = Int32.Parse(PaymentId);
+
+              var payment = context.PaymentTypes.FirstOrDefault(b => b.Id == paymentTypeId);
+              var result = context.TitleAuthorAssociation.FirstOrDefault(b => b.Id == RowId);
+                if (result != null)
+                {
+                    result.PaymentType = payment;
+                    context.SaveChanges();
+                }
+              return payment;
+        }
         public PromotedTitle GetTitleById(int id)
         {
             return context.PromotedTitle.Include("TargetSector").FirstOrDefault(t => t.Id == id);
@@ -277,8 +295,22 @@ namespace MATO.NET.Services
             var authorsWithPymentType = context.TitleAuthorAssociation.Include("Author").Include("PaymentType").Where(t => t.Title.Id == title.Id).ToList();
             return authorsWithPymentType;
         }
-       
+        public List<PromotedTitle> GetTitles(string authorid)
+        {
 
+            var users = context.TitleAuthorAssociation
+               .Where(t => t.Author.Id == authorid)
+               .Select(u => u.Title)//not Include
+               .ToList();
+            return users;
+
+        }
+        public List<TitleAuthorAssociation> GetPaymentType(string authorid)
+        {
+            var payment = context.TitleAuthorAssociation.Include("PaymentType")
+              .Where(s => s.Author.Id == authorid).ToList();
+           return payment;
+        }
         public bool IsIdExist(string author,int titleid)
         {
             if (context.TitleAuthorAssociation.Include("Author").Where(s => s.Title.Id == titleid && s.Author.Id == author).ToList().Count() > 0)
@@ -292,12 +324,12 @@ namespace MATO.NET.Services
             title.Name = name;
             bool flag;
             title.TargetSector = context.TargetSector.FirstOrDefault(x => x.Id == targetSector);
-            var list = JsonConvert.DeserializeObject<List<string>>(authors);
-            var currentAuthors = context.TitleAuthorAssociation.Include("Author").Where(s => s.Title.Id == title.Id).ToList();
-            var deselectedAuthors = currentAuthors.Except(currentAuthors.Where(o => list.Select(s => s).ToList().Contains(o.Author.Id))).ToList();
-            foreach (var deselectauthors in deselectedAuthors)
+            var list = JsonConvert.DeserializeObject<List<string>>(authors);//selected authors
+            var currentAuthors = context.TitleAuthorAssociation.Include("Author").Where(s => s.Title.Id == title.Id).ToList();//all authors
+            var deselectedAuthors = currentAuthors.Except(currentAuthors.Where(o => list.Select(s => s).ToList().Contains(o.Author.Id))).ToList();//deselected authors
+            foreach (var deselectauthor in deselectedAuthors)
             {
-                if (deselectauthors != null) context.TitleAuthorAssociation.Remove(deselectauthors);
+                if (deselectauthor != null) context.TitleAuthorAssociation.Remove(deselectauthor);
             }
             foreach (var a in list)
             {
@@ -311,10 +343,9 @@ namespace MATO.NET.Services
                 if(flag == false)
                 {
                     context.TitleAuthorAssociation.Add(t);
-                }
-
-                context.SaveChanges();
+                }   
             }
+            context.SaveChanges();
             return title;
         }
 

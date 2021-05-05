@@ -50,8 +50,9 @@ namespace MATO.NET.Services
                 {
                     Port = 25,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
-                    //Host = "relay.springernature.com"
+                  //  Host = "relay.springernature.com"
                     Host = "localhost"
+
                 };
 
                 //recipient address

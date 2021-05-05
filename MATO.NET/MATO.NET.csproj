@@ -222,6 +222,7 @@
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AuthorViewModel.cs" />
+    <Compile Include="ViewModels\ModifyPaymentTypeViewModel.cs" />
     <Compile Include="ViewModels\RegionsViewModel.cs" />
     <Compile Include="ViewModels\SubmitWebinarRequestViewModel.cs" />
     <Compile Include="ViewModels\TitlesViewModel.cs" />
@@ -379,6 +380,7 @@
     <Content Include="Views\Author\Index.cshtml" />
     <Content Include="Views\Author\Individual.cshtml" />
     <Content Include="Views\Title\Index.cshtml" />
+    <Content Include="Views\Admin\ModifyPaymentType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -776,6 +776,7 @@
     <script>
 
         $(".exportExcelView").on('click', function () {
+            debugger;
             var table = $('#reviews').DataTable();
             var data = table.rows({ search: 'applied' }).data();
             var values = new Array();
@@ -810,7 +811,7 @@
         });
 
         $("#exportDateRange").on('click', function () {
-
+            debugger;
             $(".table-wrapper").hide();
             $(".loading-spinner").show();
             $("#exportData").modal("toggle");

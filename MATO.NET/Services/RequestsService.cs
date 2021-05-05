@@ -42,7 +42,9 @@ namespace MATO.NET.Services
                 Declined = false,
                 ManagerApproval = false,
                 AuthorNotesBySalesRep = model.AuthorNotesBySalesRep,
-                NonAuthorNotesBySalesRep = model.NonAuthorNotesBySalesRep
+                NonAuthorNotesBySalesRep = model.NonAuthorNotesBySalesRep,
+                SessionDescription=model.SessionDescription,
+               LocalAuthorContact=model.LocalAuthorContact
             };
             context.Requests.Add(req);
             context.SaveChanges();
@@ -250,7 +252,7 @@ namespace MATO.NET.Services
             return context.Region.FirstOrDefault(r => r.Id == id);
         }
 
-        public Calendar AddRequestToAuthorCalendar(string id, string eventName, DateTime? startDate, DateTime? endDate, int reqId)
+        public Calendar AddRequestToAuthorCalendar(string id, string eventName, DateTime? startDate, DateTime? endDate, int reqId, DateTime eventDate)
         {
             var author = context.Users.FirstOrDefault(u => u.Id == id);
             var calendar = context.Calendar.FirstOrDefault(c => c.Author.Id == author.Id);
@@ -266,14 +268,20 @@ namespace MATO.NET.Services
             JavaScriptSerializer jsSerializer = new JavaScriptSerializer();
             var cevents = jsSerializer.Deserialize<List<CalendarEvent>>(calendar.Data);
 
+            //var cal = new CalendarEvent
+            //{
+            //    title = eventName,
+            //    start = startDate != null ? startDate.Value.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"),
+            //    end = endDate != null ? endDate.Value.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"),
+            //    url = "/Requests/Request/" + reqId
+            //};
             var cal = new CalendarEvent
             {
                 title = eventName,
-                start = startDate != null ? startDate.Value.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"),
-                end = endDate != null ? endDate.Value.ToString("yyyy-MM-dd") : DateTime.Now.ToString("yyyy-MM-dd"),
+                start = startDate != null ? startDate.Value.ToString("yyyy-MM-dd") : eventDate.ToString("yyyy-MM-dd"),
+                end = endDate != null ? endDate.Value.ToString("yyyy-MM-dd") : eventDate.ToString("yyyy-MM-dd"),
                 url = "/Requests/Request/" + reqId
             };
-
             cevents.Add(cal);
 
             var json = new JavaScriptSerializer().Serialize(cevents);
@@ -450,7 +458,10 @@ namespace MATO.NET.Services
                 Declined = false,
                 ManagerApproval = false,
                 AuthorNotesBySalesRep = model.AuthorNotesBySalesRep,
-                NonAuthorNotesBySalesRep = model.NonAuthorNotesBySalesRep
+                NonAuthorNotesBySalesRep = model.NonAuthorNotesBySalesRep,
+                SessionDescription=model.SessionDescription,
+                LocalAuthorContact=model.LocalAuthorContact
+
             };
 
             context.Requests.Add(req);

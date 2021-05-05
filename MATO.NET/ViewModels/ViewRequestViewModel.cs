@@ -61,5 +61,11 @@ namespace MATO.NET.ViewModels
         public DateTime? DeclinedDate { get; set; }
 
         public DateTime SubmitDate { get; set; }
+
+
+        [Display(Name = "Session Description")]
+        public string SessionDescription { get; set; }
+        [Display(Name = "Local Author Contact")]
+        public string LocalAuthorContact { get; set; }
     }
 }

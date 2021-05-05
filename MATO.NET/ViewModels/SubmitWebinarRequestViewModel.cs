@@ -34,5 +34,10 @@ namespace MATO.NET.ViewModels
 
         [Display(Name = "Author Not-visible Notes")]
         public string NonAuthorNotesBySalesRep { get; set; }
+
+        [Display(Name = "Session Description")]
+        public string SessionDescription { get; set; }
+        [Display(Name = "Local Author Contact")]
+        public string LocalAuthorContact { get; set; }
     }
 }

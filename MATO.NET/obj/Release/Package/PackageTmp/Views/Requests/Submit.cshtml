@@ -61,6 +61,15 @@
                             @Html.LabelFor(m => m.TitlePromotedId)
                             <br>
                             @Html.DropDownListFor(m => m.TitlePromotedId, new SelectList(Model.PromotedTitle, "Id", "Name"), "", new { @class = "form-control", @onchange = "showForecasts(this.value)", id = "titleSelected" })
+                            <br />
+                            @Html.LabelFor(m => m.LocalAuthorContact)
+                            <br>
+                            @Html.TextBoxFor(model => Model.LocalAuthorContact, null, new { @class = "form-control", @id = "LocalAuthorContact" })
+                            <br>
+                            @Html.LabelFor(m => m.SessionDescription)
+                            <br>
+                            @Html.TextAreaFor(m => m.SessionDescription, new { @class = "form-control", @id = "SessionDescription" })
+                            <br>
                         </div>
 
                         <div class="form-group col-md-6">
@@ -414,6 +423,15 @@
                             @Html.LabelFor(m => m.TitlePromotedId)
                             <br>
                             @Html.DropDownListFor(m => m.TitlePromotedId, new SelectList(Model.PromotedTitle, "Id", "Name"), "", new { @class = "form-control", @onchange = "showForecastsWebinar(this.value)", id = "titleSelectedWebinar" })
+                            <br />
+                            @Html.LabelFor(m => m.LocalAuthorContact)
+                            <br>
+                            @Html.TextBoxFor(model => Model.LocalAuthorContact, null, new { @class = "form-control", @id = "LocalAuthorContactWebinar" })
+                            <br />
+                            @Html.LabelFor(m => m.SessionDescription)
+                            <br>
+                            @Html.TextAreaFor(m => m.SessionDescription, new { @class = "form-control", @id = "SessionDescriptionWebinar" })
+                            <br>
                         </div>
 
                         <div class="form-group col-md-6">
@@ -520,6 +538,8 @@
                             <br>
                         </div>
                     </div>
+
+
                 </div>
             </fieldset>
             @if (Model.CurrentUser.Region != 0 && Model.UserRegion.RegionalManagerId != null)
@@ -535,6 +555,7 @@
 
     <script>
         $('#newRequest').submit(function () {
+            debugger;
             if ($.trim($("#authorSelect").val()) === "") {
                 $.toast({
                     heading: 'Error',
@@ -543,14 +564,14 @@
                     icon: 'error'
                 });
                 return false;
-            //} else if ($.trim($("#authorSelectWebinar").val()) === "") {
-            //    $.toast({
-            //        heading: 'Error',
-            //        text: 'No Author selected',
-            //        showHideTransition: 'fade',
-            //        icon: 'error'
-            //    });
-            //    return false;
+                //} else if ($.trim($("#authorSelectWebinar").val()) === "") {
+                //    $.toast({
+                //        heading: 'Error',
+                //        text: 'No Author selected',
+                //        showHideTransition: 'fade',
+                //        icon: 'error'
+                //    });
+                //    return false;
             } else if ($.trim($("#titleSelected").val()) === "") {
                 $.toast({
                     heading: 'Error',
@@ -559,7 +580,23 @@
                     icon: 'error'
                 });
                 return false;
-            } else if ($.trim($("#forecast1").val()) === "" ||
+            }else if ($.trim($("#LocalAuthorContact").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Local Author Contact must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            }else if ($.trim($("#SessionDescription").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Session Description must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+             }else if ($.trim($("#forecast1").val()) === "" ||
                 $.trim($("#forecast2").val()) === "" ||
                 $.trim($("#forecast3").val()) === "") {
                 $.toast({
@@ -821,14 +858,14 @@
                     icon: 'error'
                 });
                 return false;
-            //} else if ($.trim($("#titleSelected").val()) === "") {
-            //    $.toast({
-            //        heading: 'Error',
-            //        text: 'No title to be promoted has been chosen',
-            //        showHideTransition: 'fade',
-            //        icon: 'error'
-            //    });
-            //    return false;
+                //} else if ($.trim($("#titleSelected").val()) === "") {
+                //    $.toast({
+                //        heading: 'Error',
+                //        text: 'No title to be promoted has been chosen',
+                //        showHideTransition: 'fade',
+                //        icon: 'error'
+                //    });
+                //    return false;
             } else if ($.trim($("#titleSelectedWebinar").val()) === "") {
                 $.toast({
                     heading: 'Error',
@@ -837,7 +874,24 @@
                     icon: 'error'
                 });
                 return false;
-            } else if ($.trim($("#forecast1Webinar").val()) === "" ||
+            } else if ($.trim($("#LocalAuthorContactWebinar").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Local Author Contact must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+
+            }else if ($.trim($("#SessionDescriptionWebinar").val()) === "") {
+                $.toast({
+                    heading: 'Error',
+                    text: 'Session Description must be populated',
+                    showHideTransition: 'fade',
+                    icon: 'error'
+                });
+                return false;
+            }else if ($.trim($("#forecast1Webinar").val()) === "" ||
                 $.trim($("#forecast2Webinar").val()) === "" ||
                 $.trim($("#forecast3Webinar").val()) === "") {
                 $.toast({
@@ -1121,7 +1175,7 @@
             });
         });
     </script>
-
+    @*nikita*@
     <script>
         function updateDetails(author) {
             $.ajax({

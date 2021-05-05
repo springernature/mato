@@ -140,3 +140,4 @@ C:\MATO Application\MATO\MATO.Classes\obj\Debug\MATO.Classes.csproj.CoreCompileI
 C:\MATO Application\MATO\MATO.Classes\obj\Debug\MATO.Classes.csproj.CopyComplete
 C:\MATO Application\MATO\MATO.Classes\obj\Debug\MATO.Classes.dll
 C:\MATO Application\MATO\MATO.Classes\obj\Debug\MATO.Classes.pdb
+C:\MATO Application\MATO\MATO.Classes\obj\Debug\MATO.Classes.csprojAssemblyReference.cache

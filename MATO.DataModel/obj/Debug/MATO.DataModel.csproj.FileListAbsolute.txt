@@ -368,3 +368,5 @@ C:\MATO Application\MATO\MATO.DataModel\obj\Debug\MATO.DataModel.dll
 C:\MATO Application\MATO\MATO.DataModel\obj\Debug\MATO.DataModel.pdb
 C:\MATO Application\MATO\MATO.DataModel\obj\Debug\MATO.DataModel.Migrations.AddPaymentTypetable.resources
 C:\MATO Application\MATO\MATO.DataModel\obj\Debug\MATO.DataModel.Migrations.AddPaymentType_IdIntas.resources
+C:\MATO Application\MATO\MATO.DataModel\obj\Debug\MATO.DataModel.Migrations.AddedSessionDescription.resources
+C:\MATO Application\MATO\MATO.DataModel\obj\Debug\MATO.DataModel.Migrations.AddLocalAuthorContact.resources

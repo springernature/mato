@@ -43,7 +43,9 @@ namespace MATO.NET.Interfaces
         TitleForecast GetTitleForecastById(int id);
 
         Calendar AddRequestToAuthorCalendar(string id, string eventName, DateTime? startDate, DateTime? endDate,
-            int reqId);
+            int reqId, DateTime eventDate);
+
+
 
         List<Requests> GetRequestsForAuthor(AppUser author);
         List<Requests> GetRequestsByYear(string year);

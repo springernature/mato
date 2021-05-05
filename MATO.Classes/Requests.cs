@@ -46,5 +46,7 @@ namespace MATO.Classes
         public bool Complete { get; set; }
 
         public string TentativeReason { get; set; }
+        public string SessionDescription { get; set; }
+        public string LocalAuthorContact { get; set; }
     }
 }

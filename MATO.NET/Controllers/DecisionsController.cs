@@ -46,7 +46,7 @@ namespace MATO.NET.Controllers
             return View(model);
         }
 
-        public ActionResult Decision(int id)
+        public ActionResult Decision(int id)//manager
         {
             var request = _unitOfWork.RequestsService.GetRequestById(id);
             var loggedIn = User.Identity.GetUserId();
@@ -86,7 +86,9 @@ namespace MATO.NET.Controllers
                     WhoSubmit = request.SubmitBy,
                     SubmitDate = request.SubmitDate,
                     AuthorNotesBySalesRep = request.AuthorNotesBySalesRep,
-                    NonAuthorNotesBySalesRep = request.NonAuthorNotesBySalesRep
+                    NonAuthorNotesBySalesRep = request.NonAuthorNotesBySalesRep,
+                    SessionDescription = request.SessionDescription,
+                    LocalAuthorContact=request.LocalAuthorContact
                 };
 
                 return View(model);
@@ -95,7 +97,7 @@ namespace MATO.NET.Controllers
             return HttpNotFound();
         }
 
-        public ActionResult AdminDecision(int id)
+        public ActionResult AdminDecision(int id)//Admin
         {
             var request = _unitOfWork.RequestsService.GetRequestById(id);
             var loggedIn = User.Identity.GetUserId();
@@ -134,7 +136,9 @@ namespace MATO.NET.Controllers
                 ManagerApproved = request.ManagerApproval,
                 ManagerApprovalDate = request.ManagerApprovalDate,
                 AuthorNotesBySalesRep = request.AuthorNotesBySalesRep,
-                NonAuthorNotesBySalesRep = request.NonAuthorNotesBySalesRep
+                NonAuthorNotesBySalesRep = request.NonAuthorNotesBySalesRep,
+                SessionDescription = request.SessionDescription,
+                LocalAuthorContact=request.LocalAuthorContact
             };
 
             return View(model);
@@ -176,7 +180,10 @@ namespace MATO.NET.Controllers
                 EventThree = request.EventThree,
                 WhoSubmit = request.SubmitBy,
                 SubmitDate = request.SubmitDate,
-                AuthorNotesBySalesRep = request.AuthorNotesBySalesRep
+                AuthorNotesBySalesRep = request.AuthorNotesBySalesRep,
+                SessionDescription = request.SessionDescription,
+                LocalAuthorContact=request.LocalAuthorContact
+
             };
 
             return View(model);
@@ -184,7 +191,7 @@ namespace MATO.NET.Controllers
 
         [HttpPost]
         [ButtonHelper.MultipleButtonAttribute(Name = "action", Argument = "Approve")]
-        public ActionResult Approve(ViewRequestViewModel model)
+        public ActionResult Approve(ViewRequestViewModel model)//manager approve
         {
             _unitOfWork.DecisionsService.ApproveRequest(model.Id);
             _unitOfWork.Complete();
@@ -224,7 +231,8 @@ namespace MATO.NET.Controllers
             var manager = _unitOfWork.UserService.GetUserById(region.RegionalManagerId);
             var author = _unitOfWork.UserService.GetUserById(request.RequestedAuthor.Id);
 
-            _unitOfWork.RequestsService.AddRequestToAuthorCalendar(request.RequestedAuthor.Id, request.EventOne.EventName, request.OutboundDate, request.InboundDate, request.Id);
+           
+            _unitOfWork.RequestsService.AddRequestToAuthorCalendar(request.RequestedAuthor.Id, request.EventOne.EventName, request.OutboundDate, request.InboundDate, request.Id,request.EventOne.EventDate);
             _unitOfWork.Complete();
 
             _unitOfWork.EmailService.SendMail(manager, 4, request); // Regional Manager
